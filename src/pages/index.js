@@ -1,0 +1,6 @@
+export { default as HomePage } from './HomePage'
+export { default as CoursesPage } from './CoursesPage'
+export { default as CourseDetailPage } from './CourseDetailPage'
+export { default as ELearningPage } from './ELearningPage'
+export { default as WebinarsPage } from './WebinarsPage'
+export { default as BookingPage } from './BookingPage'

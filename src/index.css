@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Miad brand color */
+:root {
+  --miad-green: #13d8a0;
+  --miad-green-dark: #0fb88a;
+  --miad-green-light: #2eeab5;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-900 text-gray-100 antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    background: linear-gradient(to right, var(--miad-green), #10b981);
+    @apply text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(to right, var(--miad-green-dark), #059669);
+  }
+
+  .btn-secondary {
+    border-color: var(--miad-green);
+    color: var(--miad-green);
+    @apply border-2 px-6 py-3 rounded-lg font-semibold transition-all duration-200;
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(19, 216, 160, 0.1);
+  }
+
+  .card {
+    @apply bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6;
+  }
+
+  .card-hover {
+    @apply bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 p-6 hover:shadow-lg transition-all duration-300;
+    --tw-border-opacity: 1;
+  }
+
+  .card-hover:hover {
+    border-color: var(--miad-green);
+    box-shadow: 0 10px 15px -3px rgba(19, 216, 160, 0.1);
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all;
+    --tw-ring-color: var(--miad-green);
+  }
+
+  .input-field:focus {
+    border-color: var(--miad-green);
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold;
+    color: var(--miad-green);
+  }
+
+  .text-miad {
+    color: var(--miad-green);
+  }
+
+  .bg-miad {
+    background-color: var(--miad-green);
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* White scrollbar utility class */
+.scrollbar-white::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.scrollbar-white::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(6, 182, 212, 0.5); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
