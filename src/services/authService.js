@@ -55,8 +55,8 @@ export async function requestOTP(email) {
     success: true,
     message: 'OTP sent to your email',
     expiresIn: OTP_EXPIRY_MINUTES * 60, // seconds
-    // Include OTP in dev mode for testing
-    ...(import.meta.env?.DEV && { _devOtp: otp }),
+    // Include OTP for demo/prototype (remove in production with real email)
+    _devOtp: otp,
   }
 }
 
@@ -141,8 +141,8 @@ export async function adminLogin(username, password) {
     requiresTwoFactor: true,
     adminId: admin.id,
     message: '2FA code sent to your registered device',
-    // Include code in dev mode for testing
-    ...(import.meta.env?.DEV && { _devCode: twoFactorCode }),
+    // Include code for demo/prototype (remove in production with real 2FA)
+    _devCode: twoFactorCode,
   }
 }
 
