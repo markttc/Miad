@@ -29,7 +29,7 @@ info:
     - OTP: Max 3 attempts, 10 minute expiry
     - 2FA: Max 3 attempts, 5 minute expiry
 
-  version: 1.0.0
+  version: 1.0.1
   contact:
     name: Miad Training Portal
     url: https://miad.ttcgroup.com
