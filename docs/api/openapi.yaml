@@ -1,0 +1,3043 @@
+openapi: 3.0.3
+info:
+  title: Miad Healthcare Training Portal API
+  description: |
+    B2C healthcare training booking platform API for Miad (part of TTC Group).
+
+    This API enables:
+    - Healthcare professionals to book live webinar training
+    - Purchase e-learning courses with instant access
+    - Automated booking confirmations and Zoom joining instructions
+    - Stripe payment processing
+    - Admin management of courses, bookings, and customer accounts
+
+    ## Authentication
+
+    ### Booker Authentication (OTP)
+    Bookers authenticate via one-time passcode sent to email:
+    1. Request OTP via `POST /auth/otp/request`
+    2. Verify OTP via `POST /auth/otp/verify`
+    3. Session valid for 24 hours
+
+    ### Admin Authentication (2FA)
+    Admins authenticate via username/password + 2FA code:
+    1. Login via `POST /auth/admin/login`
+    2. Verify 2FA via `POST /auth/admin/verify-2fa`
+    3. Session valid for 8 hours
+
+    ## Rate Limits
+    - OTP: Max 3 attempts, 10 minute expiry
+    - 2FA: Max 3 attempts, 5 minute expiry
+
+  version: 1.0.0
+  contact:
+    name: Miad Training Portal
+    url: https://miad.ttcgroup.com
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://api.miad.ttcgroup.com/v1
+    description: Production server
+  - url: https://api-staging.miad.ttcgroup.com/v1
+    description: Staging server
+  - url: http://localhost:3000/api/v1
+    description: Development server
+
+tags:
+  - name: Authentication
+    description: User authentication (OTP for bookers, 2FA for admins)
+  - name: Courses
+    description: Course catalog and session management
+  - name: Bookings
+    description: Booking creation, management, and cancellation
+  - name: Payments
+    description: Stripe payment processing
+  - name: Zoom
+    description: Zoom meeting integration
+  - name: Notifications
+    description: Email notifications and reminders
+  - name: Customer Accounts
+    description: Purchase Order billing accounts
+  - name: Trainers
+    description: Trainer management
+  - name: Venues
+    description: Venue management
+  - name: Audit
+    description: Event audit trail
+
+paths:
+  # ==================== AUTHENTICATION ====================
+  /auth/otp/request:
+    post:
+      tags:
+        - Authentication
+      summary: Request OTP for booker login
+      description: Sends a 6-digit one-time passcode to the provided email address. Valid for 10 minutes.
+      operationId: requestOTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: john.smith@nhs.uk
+      responses:
+        '200':
+          description: OTP sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: OTP sent to john.smith@nhs.uk
+                  expiresIn:
+                    type: integer
+                    description: Seconds until OTP expires
+                    example: 600
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  /auth/otp/verify:
+    post:
+      tags:
+        - Authentication
+      summary: Verify OTP and create session
+      description: Verifies the OTP and creates a user session valid for 24 hours.
+      operationId: verifyOTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - otp
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: john.smith@nhs.uk
+                otp:
+                  type: string
+                  pattern: '^\d{6}$'
+                  example: '123456'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  user:
+                    $ref: '#/components/schemas/BookerUser'
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '401':
+          description: Invalid or expired OTP
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/admin/login:
+    post:
+      tags:
+        - Authentication
+      summary: Admin login (step 1)
+      description: Validates admin credentials and sends 2FA code if successful.
+      operationId: adminLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  example: admin
+                password:
+                  type: string
+                  format: password
+                  example: password123
+      responses:
+        '200':
+          description: Credentials valid, 2FA code sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  requiresTwoFactor:
+                    type: boolean
+                    example: true
+                  adminId:
+                    type: string
+                    example: admin-001
+                  message:
+                    type: string
+                    example: 2FA code sent to your registered email
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/admin/verify-2fa:
+    post:
+      tags:
+        - Authentication
+      summary: Verify admin 2FA code (step 2)
+      description: Verifies the 2FA code and creates an admin session valid for 8 hours.
+      operationId: verifyTwoFactor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - adminId
+                - code
+              properties:
+                adminId:
+                  type: string
+                  example: admin-001
+                code:
+                  type: string
+                  pattern: '^\d{6}$'
+                  example: '123456'
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  user:
+                    $ref: '#/components/schemas/AdminUser'
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '401':
+          description: Invalid or expired 2FA code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/session:
+    get:
+      tags:
+        - Authentication
+      summary: Get current session
+      description: Returns the current user session if authenticated.
+      operationId: getCurrentSession
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Session information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    oneOf:
+                      - $ref: '#/components/schemas/BookerUser'
+                      - $ref: '#/components/schemas/AdminUser'
+                  token:
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /auth/logout:
+    post:
+      tags:
+        - Authentication
+      summary: Logout current user
+      description: Invalidates the current session.
+      operationId: logout
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Logged out successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+
+  # ==================== COURSES ====================
+  /courses:
+    get:
+      tags:
+        - Courses
+      summary: List all courses
+      description: Returns all available training courses, optionally filtered by category or delivery method.
+      operationId: listCourses
+      parameters:
+        - name: category
+          in: query
+          description: Filter by category
+          schema:
+            type: string
+            enum:
+              - mandatory
+              - clinical
+              - leadership
+              - safeguarding
+              - mental-health
+              - infection-control
+        - name: deliveryMethod
+          in: query
+          description: Filter by delivery method
+          schema:
+            type: string
+            enum:
+              - webinar
+              - elearning
+              - blended
+              - classroom
+      responses:
+        '200':
+          description: List of courses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+
+  /courses/{courseId}:
+    get:
+      tags:
+        - Courses
+      summary: Get course details
+      description: Returns detailed information about a specific course.
+      operationId: getCourse
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+          example: bls
+      responses:
+        '200':
+          description: Course details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /courses/{courseId}/sessions:
+    get:
+      tags:
+        - Courses
+      summary: Get available sessions for a course
+      description: Returns all upcoming sessions for a specific course.
+      operationId: getCourseSessions
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+          example: bls
+        - name: fromDate
+          in: query
+          description: Filter sessions from this date
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          description: Filter sessions until this date
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: List of sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ==================== BOOKINGS ====================
+  /bookings:
+    post:
+      tags:
+        - Bookings
+      summary: Create a new booking
+      description: Creates a new booking for a webinar session or e-learning course. Processes payment, creates Zoom meeting (for webinars), and sends confirmation email.
+      operationId: createBooking
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBookingRequest'
+      responses:
+        '201':
+          description: Booking created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      bookingId:
+                        type: string
+                        example: bk_abc123
+                      bookingRef:
+                        type: string
+                        example: MIAD-12345
+                      booking:
+                        $ref: '#/components/schemas/Booking'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '402':
+          description: Payment failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    get:
+      tags:
+        - Bookings
+      summary: Get bookings by email
+      description: Returns all bookings for the authenticated user's email address.
+      operationId: getMyBookings
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /bookings/{bookingRef}:
+    get:
+      tags:
+        - Bookings
+      summary: Get booking by reference
+      description: Returns booking details by the MIAD-XXXXX reference number.
+      operationId: getBookingByRef
+      parameters:
+        - name: bookingRef
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '^MIAD-\d{5}$'
+          example: MIAD-12345
+      responses:
+        '200':
+          description: Booking details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /bookings/{bookingId}/cancel:
+    post:
+      tags:
+        - Bookings
+      summary: Cancel a booking
+      description: Cancels an existing booking. Optionally issues a refund.
+      operationId: cancelBooking
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: bookingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reason
+              properties:
+                reason:
+                  type: string
+                  example: Unable to attend
+                issueRefund:
+                  type: boolean
+                  default: false
+                refundAmount:
+                  type: number
+                  description: Partial refund amount (optional)
+                  example: 50.00
+      responses:
+        '200':
+          description: Booking cancelled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  booking:
+                    $ref: '#/components/schemas/Booking'
+                  refund:
+                    $ref: '#/components/schemas/Refund'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /bookings/{bookingId}/resend-instructions:
+    post:
+      tags:
+        - Bookings
+      summary: Resend joining instructions
+      description: Resends the Zoom joining instructions email for a webinar booking.
+      operationId: resendJoiningInstructions
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: bookingId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instructions resent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        '400':
+          description: Not a webinar booking
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /admin/bookings:
+    post:
+      tags:
+        - Bookings
+      summary: Create admin booking (offline)
+      description: |
+        Creates a booking via admin panel. Supports:
+        - Card payment (processed offline)
+        - Purchase Order (charged to customer account)
+      operationId: createAdminBooking
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAdminBookingRequest'
+      responses:
+        '201':
+          description: Booking created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      bookingId:
+                        type: string
+                      bookingRef:
+                        type: string
+                      booking:
+                        $ref: '#/components/schemas/Booking'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    get:
+      tags:
+        - Bookings
+      summary: List all bookings (admin)
+      description: Returns all bookings with optional filtering. Admin only.
+      operationId: listAllBookings
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - confirmed
+              - cancelled
+        - name: fromDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: toDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: courseId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /admin/bookings/export:
+    get:
+      tags:
+        - Bookings
+      summary: Export all bookings
+      description: Exports all bookings for reporting. Admin only.
+      operationId: exportBookings
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum:
+              - json
+              - csv
+            default: json
+      responses:
+        '200':
+          description: Booking export
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+            text/csv:
+              schema:
+                type: string
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # ==================== PAYMENTS ====================
+  /payments/intent:
+    post:
+      tags:
+        - Payments
+      summary: Create payment intent
+      description: Creates a Stripe payment intent for the specified amount.
+      operationId: createPaymentIntent
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - amount
+              properties:
+                amount:
+                  type: number
+                  description: Amount in GBP
+                  example: 95.00
+                currency:
+                  type: string
+                  default: gbp
+                  example: gbp
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: Payment intent created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      clientSecret:
+                        type: string
+                        example: pi_xxx_secret_xxx
+                      paymentIntentId:
+                        type: string
+                        example: pi_xxx
+                      amount:
+                        type: number
+                        example: 95.00
+                      currency:
+                        type: string
+                        example: gbp
+                      status:
+                        type: string
+                        example: requires_payment_method
+
+  /payments/process:
+    post:
+      tags:
+        - Payments
+      summary: Process card payment
+      description: Processes a card payment using the provided client secret and card details.
+      operationId: processCardPayment
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clientSecret
+                - cardDetails
+                - billingDetails
+              properties:
+                clientSecret:
+                  type: string
+                  example: pi_xxx_secret_xxx
+                cardDetails:
+                  $ref: '#/components/schemas/CardDetails'
+                billingDetails:
+                  $ref: '#/components/schemas/BillingDetails'
+      responses:
+        '200':
+          description: Payment processed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      paymentId:
+                        type: string
+                        example: pi_xxx
+                      status:
+                        type: string
+                        enum:
+                          - succeeded
+                          - processing
+                          - failed
+                        example: succeeded
+                      amount:
+                        type: number
+                        example: 95.00
+                      receiptUrl:
+                        type: string
+                        format: uri
+                      processedAt:
+                        type: string
+                        format: date-time
+        '402':
+          description: Payment failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  error:
+                    type: string
+                    example: Card declined
+
+  /payments/{paymentIntentId}:
+    get:
+      tags:
+        - Payments
+      summary: Get payment status
+      description: Returns the current status of a payment intent.
+      operationId: getPaymentStatus
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: paymentIntentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      status:
+                        type: string
+                      amount:
+                        type: number
+                      currency:
+                        type: string
+                      receiptEmail:
+                        type: string
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /payments/{paymentIntentId}/refund:
+    post:
+      tags:
+        - Payments
+      summary: Process refund
+      description: Issues a full or partial refund for a payment. Admin only.
+      operationId: processRefund
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: paymentIntentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  description: Partial refund amount (optional, full refund if omitted)
+                reason:
+                  type: string
+                  example: Customer requested cancellation
+      responses:
+        '200':
+          description: Refund processed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    $ref: '#/components/schemas/Refund'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /payments/validate/card:
+    post:
+      tags:
+        - Payments
+      summary: Validate card number
+      description: Validates a card number using the Luhn algorithm and identifies the card type.
+      operationId: validateCardNumber
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - number
+              properties:
+                number:
+                  type: string
+                  example: '4242424242424242'
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                    example: true
+                  cardType:
+                    type: string
+                    enum:
+                      - visa
+                      - mastercard
+                      - amex
+                      - discover
+                      - unknown
+                    example: visa
+                  error:
+                    type: string
+
+  # ==================== ZOOM ====================
+  /zoom/meetings:
+    post:
+      tags:
+        - Zoom
+      summary: Create Zoom meeting
+      description: Creates a new Zoom meeting for a webinar session. Internal use.
+      operationId: createMeeting
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - topic
+                - startTime
+                - duration
+              properties:
+                topic:
+                  type: string
+                  example: Basic Life Support Training
+                startTime:
+                  type: string
+                  format: date-time
+                  example: '2026-02-15T09:00:00Z'
+                duration:
+                  type: integer
+                  description: Duration in minutes
+                  example: 240
+                hostEmail:
+                  type: string
+                  format: email
+      responses:
+        '201':
+          description: Meeting created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/ZoomMeeting'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /zoom/meetings/{meetingId}:
+    get:
+      tags:
+        - Zoom
+      summary: Get meeting details
+      description: Returns details of a Zoom meeting.
+      operationId: getMeeting
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Meeting details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/ZoomMeeting'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags:
+        - Zoom
+      summary: Update meeting
+      description: Updates an existing Zoom meeting.
+      operationId: updateMeeting
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                startTime:
+                  type: string
+                  format: date-time
+                duration:
+                  type: integer
+      responses:
+        '200':
+          description: Meeting updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    $ref: '#/components/schemas/ZoomMeeting'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags:
+        - Zoom
+      summary: Delete meeting
+      description: Cancels and deletes a Zoom meeting.
+      operationId: deleteMeeting
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Meeting deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /zoom/meetings/{meetingId}/registrants:
+    post:
+      tags:
+        - Zoom
+      summary: Add meeting registrant
+      description: Registers an attendee for a Zoom meeting.
+      operationId: addRegistrant
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - firstName
+                - lastName
+              properties:
+                email:
+                  type: string
+                  format: email
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+      responses:
+        '201':
+          description: Registrant added
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      meetingId:
+                        type: string
+                      email:
+                        type: string
+                      firstName:
+                        type: string
+                      lastName:
+                        type: string
+                      joinUrl:
+                        type: string
+                        format: uri
+                      registrantCreatedAt:
+                        type: string
+                        format: date-time
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /zoom/account/status:
+    get:
+      tags:
+        - Zoom
+      summary: Get Zoom account status
+      description: Returns Zoom account usage statistics. Admin only.
+      operationId: getAccountStatus
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Account status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      accountId:
+                        type: string
+                      status:
+                        type: string
+                        example: active
+                      plan:
+                        type: string
+                        example: Pro
+                      meetingsToday:
+                        type: integer
+                      meetingsThisMonth:
+                        type: integer
+                      participantsThisMonth:
+                        type: integer
+                      storageUsed:
+                        type: string
+                        example: 2.5 GB
+                      storageLimit:
+                        type: string
+                        example: 10 GB
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # ==================== NOTIFICATIONS ====================
+  /notifications/booking-confirmation:
+    post:
+      tags:
+        - Notifications
+      summary: Send booking confirmation
+      description: Sends booking confirmation email. Usually called automatically after booking creation.
+      operationId: sendBookingConfirmation
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - attendee
+                - course
+                - bookingRef
+              properties:
+                attendee:
+                  $ref: '#/components/schemas/Attendee'
+                course:
+                  $ref: '#/components/schemas/Course'
+                session:
+                  $ref: '#/components/schemas/Session'
+                bookingRef:
+                  type: string
+                isElearning:
+                  type: boolean
+      responses:
+        '200':
+          description: Email sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /notifications/joining-instructions:
+    post:
+      tags:
+        - Notifications
+      summary: Send joining instructions
+      description: Sends Zoom joining instructions email with meeting details.
+      operationId: sendJoiningInstructions
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - bookingData
+                - meetingData
+              properties:
+                bookingData:
+                  $ref: '#/components/schemas/Booking'
+                meetingData:
+                  $ref: '#/components/schemas/ZoomMeeting'
+      responses:
+        '200':
+          description: Email sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailResponse'
+
+  /notifications/reminder:
+    post:
+      tags:
+        - Notifications
+      summary: Send reminder
+      description: Sends session reminder email (24h or 1h before).
+      operationId: sendReminder
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - bookingData
+                - meetingData
+                - reminderType
+              properties:
+                bookingData:
+                  $ref: '#/components/schemas/Booking'
+                meetingData:
+                  $ref: '#/components/schemas/ZoomMeeting'
+                reminderType:
+                  type: string
+                  enum:
+                    - 24h
+                    - 1h
+      responses:
+        '200':
+          description: Reminder sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailResponse'
+
+  /notifications/elearning-access:
+    post:
+      tags:
+        - Notifications
+      summary: Send e-learning access
+      description: Sends e-learning enrollment link with 2FA setup instructions.
+      operationId: sendElearningAccess
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - attendee
+                - course
+                - bookingRef
+              properties:
+                attendee:
+                  $ref: '#/components/schemas/Attendee'
+                course:
+                  $ref: '#/components/schemas/Course'
+                bookingRef:
+                  type: string
+      responses:
+        '200':
+          description: Access email sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailResponse'
+
+  # ==================== CUSTOMER ACCOUNTS ====================
+  /customer-accounts:
+    get:
+      tags:
+        - Customer Accounts
+      summary: List customer accounts
+      description: Returns all customer credit accounts. Admin only.
+      operationId: listCustomerAccounts
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - active
+              - suspended
+        - name: search
+          in: query
+          description: Search by organisation name, contact name, or email
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerAccount'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      tags:
+        - Customer Accounts
+      summary: Create customer account
+      description: Creates a new customer credit account. Admin only.
+      operationId: createCustomerAccount
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerAccountRequest'
+      responses:
+        '201':
+          description: Account created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAccount'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /customer-accounts/{accountId}:
+    get:
+      tags:
+        - Customer Accounts
+      summary: Get customer account
+      description: Returns customer account details by ID. Admin only.
+      operationId: getCustomerAccount
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAccount'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags:
+        - Customer Accounts
+      summary: Update customer account
+      description: Updates customer account details. Admin only.
+      operationId: updateCustomerAccount
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomerAccountRequest'
+      responses:
+        '200':
+          description: Account updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAccount'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /customer-accounts/{accountId}/credit-check:
+    get:
+      tags:
+        - Customer Accounts
+      summary: Check credit availability
+      description: Checks if account has sufficient credit for a booking.
+      operationId: checkCreditAvailability
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: amount
+          in: query
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Credit check result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available:
+                    type: boolean
+                  availableCredit:
+                    type: number
+                  reason:
+                    type: string
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /customer-accounts/{accountId}/transactions:
+    get:
+      tags:
+        - Customer Accounts
+      summary: Get account transactions
+      description: Returns transaction history for a customer account. Admin only.
+      operationId: getAccountTransactions
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transaction history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountTransaction'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /customer-accounts/{accountId}/debit:
+    post:
+      tags:
+        - Customer Accounts
+      summary: Debit account
+      description: Debits the account for a booking. Admin only.
+      operationId: debitAccount
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - amount
+                - bookingRef
+                - description
+              properties:
+                amount:
+                  type: number
+                bookingRef:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Account debited
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account:
+                    $ref: '#/components/schemas/CustomerAccount'
+                  transaction:
+                    $ref: '#/components/schemas/AccountTransaction'
+        '400':
+          description: Insufficient credit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /customer-accounts/{accountId}/suspend:
+    post:
+      tags:
+        - Customer Accounts
+      summary: Suspend account
+      description: Suspends a customer account. Admin only.
+      operationId: suspendAccount
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reason
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Account suspended
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAccount'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /customer-accounts/{accountId}/reactivate:
+    post:
+      tags:
+        - Customer Accounts
+      summary: Reactivate account
+      description: Reactivates a suspended customer account. Admin only.
+      operationId: reactivateAccount
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Account reactivated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAccount'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ==================== TRAINERS ====================
+  /trainers:
+    get:
+      tags:
+        - Trainers
+      summary: List trainers
+      description: Returns all trainers. Admin only.
+      operationId: listTrainers
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - active
+              - pending
+              - inactive
+      responses:
+        '200':
+          description: List of trainers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trainer'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      tags:
+        - Trainers
+      summary: Create trainer
+      description: Creates a new trainer record. Admin only.
+      operationId: createTrainer
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTrainerRequest'
+      responses:
+        '201':
+          description: Trainer created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /trainers/{trainerId}:
+    get:
+      tags:
+        - Trainers
+      summary: Get trainer
+      description: Returns trainer details by ID. Admin only.
+      operationId: getTrainer
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: trainerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Trainer details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags:
+        - Trainers
+      summary: Update trainer
+      description: Updates trainer details. Admin only.
+      operationId: updateTrainer
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: trainerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTrainerRequest'
+      responses:
+        '200':
+          description: Trainer updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ==================== VENUES ====================
+  /venues:
+    get:
+      tags:
+        - Venues
+      summary: List venues
+      description: Returns all venues. Admin only.
+      operationId: listVenues
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - active
+              - expiring
+              - expired
+      responses:
+        '200':
+          description: List of venues
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Venue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      tags:
+        - Venues
+      summary: Create venue
+      description: Creates a new venue record. Admin only.
+      operationId: createVenue
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVenueRequest'
+      responses:
+        '201':
+          description: Venue created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /venues/{venueId}:
+    get:
+      tags:
+        - Venues
+      summary: Get venue
+      description: Returns venue details by ID. Admin only.
+      operationId: getVenue
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: venueId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Venue details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags:
+        - Venues
+      summary: Update venue
+      description: Updates venue details. Admin only.
+      operationId: updateVenue
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: venueId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVenueRequest'
+      responses:
+        '200':
+          description: Venue updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ==================== AUDIT ====================
+  /audit/sessions/{sessionId}:
+    get:
+      tags:
+        - Audit
+      summary: Get session audit trail
+      description: Returns audit trail for a specific session. Admin only.
+      operationId: getSessionAuditTrail
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Audit trail
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditEntry'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /audit/sessions/{sessionId}/summary:
+    get:
+      tags:
+        - Audit
+      summary: Get audit summary
+      description: Returns summary statistics for a session's audit trail. Admin only.
+      operationId: getAuditSummary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Audit summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalEntries:
+                    type: integer
+                  lastUpdated:
+                    type: string
+                    format: date-time
+                  actionCounts:
+                    type: object
+                    additionalProperties:
+                      type: integer
+                  recentActivity:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditEntry'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    # ==================== USER SCHEMAS ====================
+    BookerUser:
+      type: object
+      properties:
+        id:
+          type: string
+          example: user_abc123
+        email:
+          type: string
+          format: email
+          example: john.smith@nhs.uk
+        role:
+          type: string
+          enum:
+            - booker
+        loginMethod:
+          type: string
+          enum:
+            - otp
+        loginAt:
+          type: string
+          format: date-time
+
+    AdminUser:
+      type: object
+      properties:
+        id:
+          type: string
+          example: admin-001
+        username:
+          type: string
+          example: admin
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+          example: Admin User
+        role:
+          type: string
+          enum:
+            - admin
+        loginMethod:
+          type: string
+          enum:
+            - 2fa
+        loginAt:
+          type: string
+          format: date-time
+
+    # ==================== COURSE SCHEMAS ====================
+    Course:
+      type: object
+      properties:
+        id:
+          type: string
+          example: bls
+        name:
+          type: string
+          example: Basic Life Support
+        category:
+          type: string
+          enum:
+            - mandatory
+            - clinical
+            - leadership
+            - safeguarding
+            - mental-health
+            - infection-control
+        description:
+          type: string
+        duration:
+          type: string
+          example: 4 hours
+        certification:
+          type: string
+          example: Resuscitation Council UK
+        validityPeriod:
+          type: string
+          example: 12 months
+        price:
+          type: number
+          example: 95.00
+        deliveryMethods:
+          type: array
+          items:
+            type: string
+            enum:
+              - webinar
+              - elearning
+              - blended
+              - classroom
+        learningObjectives:
+          type: array
+          items:
+            type: string
+        accreditation:
+          type: string
+
+    Session:
+      type: object
+      properties:
+        id:
+          type: string
+          example: bls-session-1
+        courseId:
+          type: string
+          example: bls
+        date:
+          type: string
+          format: date
+          example: '2026-02-15'
+        time:
+          type: string
+          example: '09:00 - 13:00'
+        deliveryMethod:
+          type: string
+          enum:
+            - webinar
+            - elearning
+            - blended
+            - classroom
+        trainer:
+          type: string
+          example: Dr. Sarah Mitchell
+        spotsTotal:
+          type: integer
+          example: 20
+        spotsRemaining:
+          type: integer
+          example: 15
+        zoomLink:
+          type: string
+          format: uri
+          nullable: true
+        price:
+          type: number
+          example: 95.00
+
+    # ==================== BOOKING SCHEMAS ====================
+    Attendee:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        email:
+          type: string
+          format: email
+          example: john.smith@nhs.uk
+        phone:
+          type: string
+          nullable: true
+          example: '+44 7700 900000'
+        organisation:
+          type: string
+          nullable: true
+          example: NHS Trust
+        jobTitle:
+          type: string
+          nullable: true
+          example: Staff Nurse
+        marketingOptIn:
+          type: boolean
+          default: false
+
+    Booking:
+      type: object
+      properties:
+        id:
+          type: string
+          example: bk_abc123
+        bookingRef:
+          type: string
+          example: MIAD-12345
+        status:
+          type: string
+          enum:
+            - confirmed
+            - cancelled
+        createdAt:
+          type: string
+          format: date-time
+        courseId:
+          type: string
+        courseName:
+          type: string
+        coursePrice:
+          type: number
+        sessionId:
+          type: string
+          nullable: true
+        sessionDate:
+          type: string
+          format: date
+        sessionTime:
+          type: string
+        trainer:
+          type: string
+        isElearning:
+          type: boolean
+        deliveryMethod:
+          type: string
+          enum:
+            - webinar
+            - elearning
+        attendee:
+          $ref: '#/components/schemas/Attendee'
+        payment:
+          $ref: '#/components/schemas/PaymentInfo'
+        zoomMeeting:
+          $ref: '#/components/schemas/ZoomMeeting'
+        notifications:
+          type: object
+          properties:
+            confirmationSent:
+              type: boolean
+            joiningInstructionsSent:
+              type: boolean
+            reminder24hSent:
+              type: boolean
+            reminder1hSent:
+              type: boolean
+        source:
+          type: string
+          enum:
+            - online
+            - admin_offline
+        createdBy:
+          type: object
+          nullable: true
+          properties:
+            type:
+              type: string
+            adminName:
+              type: string
+        cancelledAt:
+          type: string
+          format: date-time
+          nullable: true
+        cancellationReason:
+          type: string
+          nullable: true
+
+    CreateBookingRequest:
+      type: object
+      required:
+        - course
+        - attendee
+        - paymentData
+      properties:
+        course:
+          $ref: '#/components/schemas/Course'
+        session:
+          $ref: '#/components/schemas/Session'
+        attendee:
+          $ref: '#/components/schemas/Attendee'
+        paymentData:
+          type: object
+          properties:
+            paymentIntentId:
+              type: string
+            amount:
+              type: number
+        isElearning:
+          type: boolean
+          default: false
+
+    CreateAdminBookingRequest:
+      type: object
+      required:
+        - course
+        - attendee
+        - paymentMethod
+      properties:
+        course:
+          $ref: '#/components/schemas/Course'
+        session:
+          $ref: '#/components/schemas/Session'
+        attendee:
+          $ref: '#/components/schemas/Attendee'
+        paymentMethod:
+          type: string
+          enum:
+            - card
+            - purchase_order
+        paymentData:
+          type: object
+          properties:
+            cardDetails:
+              $ref: '#/components/schemas/CardDetails'
+            poNumber:
+              type: string
+              description: Purchase order number
+            customerAccountId:
+              type: string
+              description: Customer account ID for PO billing
+
+    # ==================== PAYMENT SCHEMAS ====================
+    PaymentInfo:
+      type: object
+      properties:
+        amount:
+          type: number
+          example: 95.00
+        currency:
+          type: string
+          example: GBP
+        status:
+          type: string
+          enum:
+            - completed
+            - refunded
+            - partial_refund
+        method:
+          type: string
+          enum:
+            - stripe
+            - card
+            - purchase_order
+        processedAt:
+          type: string
+          format: date-time
+        purchaseOrder:
+          type: object
+          nullable: true
+          properties:
+            poNumber:
+              type: string
+            customerAccountId:
+              type: string
+            customerAccountName:
+              type: string
+        refund:
+          $ref: '#/components/schemas/Refund'
+
+    CardDetails:
+      type: object
+      required:
+        - number
+        - expMonth
+        - expYear
+        - cvc
+      properties:
+        number:
+          type: string
+          example: '4242424242424242'
+        expMonth:
+          type: integer
+          minimum: 1
+          maximum: 12
+          example: 12
+        expYear:
+          type: integer
+          example: 2027
+        cvc:
+          type: string
+          example: '123'
+
+    BillingDetails:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Smith
+        email:
+          type: string
+          format: email
+        address:
+          type: object
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            city:
+              type: string
+            postcode:
+              type: string
+            country:
+              type: string
+              default: GB
+
+    Refund:
+      type: object
+      nullable: true
+      properties:
+        refundId:
+          type: string
+        paymentIntentId:
+          type: string
+        amount:
+          type: number
+        status:
+          type: string
+          enum:
+            - pending
+            - succeeded
+            - failed
+        reason:
+          type: string
+        processedAt:
+          type: string
+          format: date-time
+        processedBy:
+          type: string
+
+    # ==================== ZOOM SCHEMAS ====================
+    ZoomMeeting:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+          example: 123456789
+        topic:
+          type: string
+          example: Basic Life Support Training
+        startTime:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          description: Duration in minutes
+          example: 240
+        timezone:
+          type: string
+          example: Europe/London
+        joinUrl:
+          type: string
+          format: uri
+          example: https://zoom.us/j/123456789?pwd=xxx
+        password:
+          type: string
+          example: abc123
+        dialIn:
+          type: object
+          properties:
+            uk:
+              type: string
+              example: '+44 330 088 5830'
+            us:
+              type: string
+              example: '+1 646 876 9923'
+        meetingId:
+          type: string
+          example: '123 456 789'
+
+    # ==================== CUSTOMER ACCOUNT SCHEMAS ====================
+    CustomerAccount:
+      type: object
+      properties:
+        id:
+          type: string
+          example: acc_abc123
+        organisationName:
+          type: string
+          example: NHS Foundation Trust
+        accountNumber:
+          type: string
+          example: ACC-NHS-001
+        creditLimit:
+          type: number
+          example: 5000.00
+        currentBalance:
+          type: number
+          description: Amount used
+          example: 1250.00
+        availableCredit:
+          type: number
+          example: 3750.00
+        status:
+          type: string
+          enum:
+            - active
+            - suspended
+        primaryContact:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+            phone:
+              type: string
+        billingAddress:
+          type: object
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            city:
+              type: string
+            postcode:
+              type: string
+        paymentTerms:
+          type: integer
+          description: Days (e.g., 30)
+          example: 30
+        createdAt:
+          type: string
+          format: date-time
+        notes:
+          type: string
+
+    CreateCustomerAccountRequest:
+      type: object
+      required:
+        - organisationName
+        - creditLimit
+        - primaryContact
+        - billingAddress
+      properties:
+        organisationName:
+          type: string
+        creditLimit:
+          type: number
+        primaryContact:
+          type: object
+          required:
+            - name
+            - email
+            - phone
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+            phone:
+              type: string
+        billingAddress:
+          type: object
+          required:
+            - line1
+            - city
+            - postcode
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            city:
+              type: string
+            postcode:
+              type: string
+        paymentTerms:
+          type: integer
+          default: 30
+        notes:
+          type: string
+
+    UpdateCustomerAccountRequest:
+      type: object
+      properties:
+        organisationName:
+          type: string
+        creditLimit:
+          type: number
+        primaryContact:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+              format: email
+            phone:
+              type: string
+        billingAddress:
+          type: object
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            city:
+              type: string
+            postcode:
+              type: string
+        paymentTerms:
+          type: integer
+        notes:
+          type: string
+
+    AccountTransaction:
+      type: object
+      properties:
+        id:
+          type: string
+        accountId:
+          type: string
+        type:
+          type: string
+          enum:
+            - debit
+            - credit
+            - refund
+        amount:
+          type: number
+        bookingRef:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+
+    # ==================== TRAINER SCHEMAS ====================
+    Trainer:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        status:
+          type: string
+          enum:
+            - active
+            - pending
+            - inactive
+        address:
+          type: object
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            city:
+              type: string
+            postcode:
+              type: string
+        deliveryPreference:
+          type: string
+          enum:
+            - digital
+            - classroom
+            - both
+        workingRadius:
+          type: integer
+          description: Miles
+        qualifications:
+          type: array
+          items:
+            type: object
+            properties:
+              typeId:
+                type: string
+              obtainedDate:
+                type: string
+                format: date-time
+              expiryDate:
+                type: string
+                format: date-time
+              certificateRef:
+                type: string
+        availability:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        billing:
+          type: object
+          properties:
+            vatRegistered:
+              type: boolean
+            companyType:
+              type: string
+            accountName:
+              type: string
+            sortCode:
+              type: string
+            accountNumber:
+              type: string
+        notes:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    CreateTrainerRequest:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+        - phone
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          type: object
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            city:
+              type: string
+            postcode:
+              type: string
+        deliveryPreference:
+          type: string
+          enum:
+            - digital
+            - classroom
+            - both
+        workingRadius:
+          type: integer
+        qualifications:
+          type: array
+          items:
+            type: object
+            properties:
+              typeId:
+                type: string
+              obtainedDate:
+                type: string
+                format: date-time
+              expiryDate:
+                type: string
+                format: date-time
+              certificateRef:
+                type: string
+        billing:
+          type: object
+          properties:
+            vatRegistered:
+              type: boolean
+            companyType:
+              type: string
+            accountName:
+              type: string
+            sortCode:
+              type: string
+            accountNumber:
+              type: string
+        notes:
+          type: string
+
+    UpdateTrainerRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        status:
+          type: string
+          enum:
+            - active
+            - pending
+            - inactive
+        address:
+          type: object
+        deliveryPreference:
+          type: string
+        workingRadius:
+          type: integer
+        qualifications:
+          type: array
+          items:
+            type: object
+        billing:
+          type: object
+        notes:
+          type: string
+
+    # ==================== VENUE SCHEMAS ====================
+    Venue:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        contactName:
+          type: string
+        contactEmail:
+          type: string
+          format: email
+        contactPhone:
+          type: string
+        venueFee:
+          type: number
+          description: GBP per session
+        expiryDate:
+          type: string
+          format: date
+          description: Contract expiry
+        address:
+          type: object
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            city:
+              type: string
+            postcode:
+              type: string
+        trainerNotes:
+          type: string
+          description: Parking, equipment, access info
+        maxCapacity:
+          type: integer
+        status:
+          type: string
+          enum:
+            - active
+            - expiring
+            - expired
+        createdAt:
+          type: string
+          format: date-time
+
+    CreateVenueRequest:
+      type: object
+      required:
+        - name
+        - contactName
+        - contactEmail
+        - contactPhone
+        - address
+        - venueFee
+        - maxCapacity
+      properties:
+        name:
+          type: string
+        contactName:
+          type: string
+        contactEmail:
+          type: string
+          format: email
+        contactPhone:
+          type: string
+        venueFee:
+          type: number
+        expiryDate:
+          type: string
+          format: date
+        address:
+          type: object
+          required:
+            - line1
+            - city
+            - postcode
+          properties:
+            line1:
+              type: string
+            line2:
+              type: string
+            city:
+              type: string
+            postcode:
+              type: string
+        trainerNotes:
+          type: string
+        maxCapacity:
+          type: integer
+
+    UpdateVenueRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        contactName:
+          type: string
+        contactEmail:
+          type: string
+          format: email
+        contactPhone:
+          type: string
+        venueFee:
+          type: number
+        expiryDate:
+          type: string
+          format: date
+        address:
+          type: object
+        trainerNotes:
+          type: string
+        maxCapacity:
+          type: integer
+
+    # ==================== AUDIT SCHEMAS ====================
+    AuditEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        sessionId:
+          type: string
+        action:
+          type: string
+          enum:
+            - EVENT_CREATED
+            - EVENT_UPDATED
+            - EVENT_CANCELLED
+            - EVENT_RESCHEDULED
+            - TRAINER_CHANGED
+            - CAPACITY_CHANGED
+            - PRICE_CHANGED
+            - BOOKING_ADDED
+            - BOOKING_CANCELLED
+            - ATTENDEE_TRANSFERRED
+            - ZOOM_LINK_ADDED
+            - ZOOM_LINK_UPDATED
+            - NOTES_ADDED
+        timestamp:
+          type: string
+          format: date-time
+        performedBy:
+          type: string
+        details:
+          type: object
+        previousValue:
+          type: string
+        newValue:
+          type: string
+
+    # ==================== NOTIFICATION SCHEMAS ====================
+    EmailResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        messageId:
+          type: string
+          example: msg_abc123
+        to:
+          type: string
+          format: email
+        subject:
+          type: string
+        template:
+          type: string
+        sentAt:
+          type: string
+          format: date-time
+
+    # ==================== ERROR SCHEMAS ====================
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+        reason:
+          type: string
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            error: Invalid request
+            reason: Missing required field 'email'
+
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            error: Unauthorized
+            reason: Invalid or expired token
+
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            error: Forbidden
+            reason: Admin access required
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            error: Not found
+            reason: Resource does not exist
+
+    TooManyRequests:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            success: false
+            error: Too many requests
+            reason: Rate limit exceeded, please try again later

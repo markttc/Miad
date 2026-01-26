@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miad Healthcare Training Portal - API Documentation</title>
+  <meta name="description" content="API documentation for Miad Healthcare Training Portal by TTC Group">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css">
+  <link rel="icon" type="image/png" href="https://miad.ttcgroup.com/favicon.png">
+  <style>
+    html {
+      box-sizing: border-box;
+      overflow: -moz-scrollbars-vertical;
+      overflow-y: scroll;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    body {
+      margin: 0;
+      background: #fafafa;
+    }
+
+    /* Custom header */
+    .topbar-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .topbar-wrapper img {
+      height: 40px;
+    }
+
+    /* Custom branding colors */
+    .swagger-ui .topbar {
+      background-color: #0891b2;
+    }
+
+    .swagger-ui .info .title {
+      color: #0891b2;
+    }
+
+    .swagger-ui .opblock.opblock-get .opblock-summary-method {
+      background: #0891b2;
+    }
+
+    .swagger-ui .opblock.opblock-post .opblock-summary-method {
+      background: #2563eb;
+    }
+
+    .swagger-ui .opblock.opblock-put .opblock-summary-method {
+      background: #f59e0b;
+    }
+
+    .swagger-ui .opblock.opblock-delete .opblock-summary-method {
+      background: #dc2626;
+    }
+
+    .swagger-ui .btn.authorize {
+      border-color: #0891b2;
+      color: #0891b2;
+    }
+
+    .swagger-ui .btn.authorize svg {
+      fill: #0891b2;
+    }
+
+    .swagger-ui .btn.execute {
+      background-color: #0891b2;
+      border-color: #0891b2;
+    }
+
+    .swagger-ui .btn.execute:hover {
+      background-color: #0e7490;
+    }
+
+    /* Tag styling */
+    .swagger-ui .opblock-tag {
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .swagger-ui .opblock-tag:hover {
+      background: #f0fdfa;
+    }
+
+    /* Custom banner */
+    .custom-banner {
+      background: linear-gradient(135deg, #0891b2 0%, #2563eb 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .custom-banner h1 {
+      margin: 0 0 10px 0;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .custom-banner p {
+      margin: 0;
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    .custom-banner .links {
+      margin-top: 15px;
+    }
+
+    .custom-banner .links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .custom-banner .links a:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    /* Loading state */
+    .loading {
+      text-align: center;
+      padding: 50px;
+      color: #666;
+    }
+
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #0891b2;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="custom-banner">
+    <h1>Miad Healthcare Training Portal</h1>
+    <p>API Documentation - Version 1.0.0</p>
+    <div class="links">
+      <a href="https://github.com/ttcgroup/miad-api-docs" target="_blank">GitHub Repository</a>
+      <a href="./openapi.yaml" download>Download OpenAPI Spec</a>
+      <a href="https://miad.ttcgroup.com" target="_blank">Visit Portal</a>
+    </div>
+  </div>
+
+  <div id="swagger-ui">
+    <div class="loading">Loading API Documentation</div>
+  </div>
+
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js" crossorigin></script>
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js" crossorigin></script>
+  <script>
+    window.onload = function() {
+      const ui = SwaggerUIBundle({
+        url: "./openapi.yaml",
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout",
+        validatorUrl: null,
+        supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+        defaultModelsExpandDepth: 1,
+        defaultModelExpandDepth: 1,
+        displayRequestDuration: true,
+        filter: true,
+        showExtensions: true,
+        showCommonExtensions: true,
+        syntaxHighlight: {
+          activate: true,
+          theme: "monokai"
+        },
+        tryItOutEnabled: false,
+        persistAuthorization: true,
+        tagsSorter: "alpha",
+        operationsSorter: "alpha"
+      });
+
+      window.ui = ui;
+    };
+  </script>
+</body>
+</html>
