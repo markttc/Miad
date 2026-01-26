@@ -2,6 +2,7 @@
 
 [![OpenAPI](https://img.shields.io/badge/OpenAPI-3.0.3-green.svg)](https://swagger.io/specification/)
 [![License](https://img.shields.io/badge/license-Proprietary-blue.svg)]()
+[![API Docs](https://img.shields.io/badge/docs-Swagger%20UI-85EA2D.svg)](https://markttc.github.io/Miad/)
 
 Complete API documentation for the Miad Healthcare Training Portal - a B2C healthcare training booking platform by TTC Group.
 
