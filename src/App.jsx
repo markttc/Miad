@@ -21,6 +21,7 @@ import {
   TrainersAdminPage,
   TrainingRegisterPage,
   VenuesAdminPage,
+  SystemConfigPage,
 } from './pages/admin'
 
 // Protected route wrapper for authenticated users
@@ -216,6 +217,16 @@ function AppRoutes() {
           <ProtectedRoute requireAdmin>
             <AdminLayout>
               <VenuesAdminPage />
+            </AdminLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/system"
+        element={
+          <ProtectedRoute requireAdmin>
+            <AdminLayout>
+              <SystemConfigPage />
             </AdminLayout>
           </ProtectedRoute>
         }

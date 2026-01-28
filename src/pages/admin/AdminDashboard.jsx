@@ -14,6 +14,7 @@ import {
   PoundSterling,
   LogOut,
   Building,
+  Settings,
 } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import { bookingService } from '../../services'
@@ -159,6 +160,13 @@ function AdminDashboard() {
             icon={Building}
             link="/admin/venues"
             color="cyan"
+          />
+          <QuickActionCard
+            title="System Configuration"
+            description="Integrations, comms & features"
+            icon={Settings}
+            link="/admin/system"
+            color="purple"
           />
         </div>
 
