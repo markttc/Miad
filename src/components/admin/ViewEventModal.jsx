@@ -83,7 +83,7 @@ function ViewEventModal({ session, onClose, onEdit }) {
       amber: 'bg-amber-900/50 text-amber-400 border-amber-800',
       purple: 'bg-purple-900/50 text-purple-400 border-purple-800',
       cyan: 'bg-cyan-900/50 text-cyan-400 border-cyan-800',
-      gray: 'bg-gray-900/50 text-gray-400 border-gray-800',
+      gray: 'bg-gray-900/50 text-gray-300 border-gray-800',
     }
     return colorMap[color] || colorMap.gray
   }
@@ -112,13 +112,13 @@ function ViewEventModal({ session, onClose, onEdit }) {
         <div className="flex items-center justify-between p-6 border-b border-purple-800/50">
           <div>
             <h2 className="text-xl font-bold text-white">Event Details</h2>
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-gray-300 mt-1">
               {isUpcoming ? 'Upcoming Event' : 'Past Event'}
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -134,15 +134,15 @@ function ViewEventModal({ session, onClose, onEdit }) {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-white">{course?.name}</h3>
-                <p className="text-sm text-gray-400 mt-1">{course?.description}</p>
+                <p className="text-sm text-gray-300 mt-1">{course?.description}</p>
                 <div className="flex flex-wrap gap-3 mt-3">
                   <span className="px-2 py-1 bg-purple-900/50 text-purple-300 rounded text-xs">
                     {category?.name}
                   </span>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-gray-300">
                     Duration: {course?.duration}
                   </span>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-gray-300">
                     Certification: {course?.certification}
                   </span>
                 </div>
@@ -153,7 +153,7 @@ function ViewEventModal({ session, onClose, onEdit }) {
           {/* Event Details Grid */}
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="bg-gray-900/50 rounded-lg p-4">
-              <div className="flex items-center gap-2 text-gray-400 mb-2">
+              <div className="flex items-center gap-2 text-gray-300 mb-2">
                 <Calendar className="w-4 h-4" />
                 <span className="text-sm">Date</span>
               </div>
@@ -168,7 +168,7 @@ function ViewEventModal({ session, onClose, onEdit }) {
             </div>
 
             <div className="bg-gray-900/50 rounded-lg p-4">
-              <div className="flex items-center gap-2 text-gray-400 mb-2">
+              <div className="flex items-center gap-2 text-gray-300 mb-2">
                 <Clock className="w-4 h-4" />
                 <span className="text-sm">Time</span>
               </div>
@@ -176,7 +176,7 @@ function ViewEventModal({ session, onClose, onEdit }) {
             </div>
 
             <div className="bg-gray-900/50 rounded-lg p-4">
-              <div className="flex items-center gap-2 text-gray-400 mb-2">
+              <div className="flex items-center gap-2 text-gray-300 mb-2">
                 <User className="w-4 h-4" />
                 <span className="text-sm">Trainer</span>
               </div>
@@ -184,7 +184,7 @@ function ViewEventModal({ session, onClose, onEdit }) {
             </div>
 
             <div className="bg-gray-900/50 rounded-lg p-4">
-              <div className="flex items-center gap-2 text-gray-400 mb-2">
+              <div className="flex items-center gap-2 text-gray-300 mb-2">
                 <Tag className="w-4 h-4" />
                 <span className="text-sm">Price</span>
               </div>
@@ -195,7 +195,7 @@ function ViewEventModal({ session, onClose, onEdit }) {
           {/* Bookings */}
           <div className="bg-gray-900/50 rounded-xl p-4 mb-6">
             <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2 text-gray-300">
                 <Users className="w-4 h-4" />
                 <span className="text-sm">Bookings</span>
               </div>
@@ -224,14 +224,14 @@ function ViewEventModal({ session, onClose, onEdit }) {
               </div>
               <div className="text-right">
                 <p className="text-white font-semibold">{booked} / {session.spotsTotal}</p>
-                <p className="text-xs text-gray-500">{session.spotsRemaining} spots remaining</p>
+                <p className="text-xs text-gray-300">{session.spotsRemaining} spots remaining</p>
               </div>
             </div>
           </div>
 
           {/* Delivery Method */}
           <div className="bg-gray-900/50 rounded-xl p-4 mb-6">
-            <div className="flex items-center gap-2 text-gray-400 mb-2">
+            <div className="flex items-center gap-2 text-gray-300 mb-2">
               <Video className="w-4 h-4" />
               <span className="text-sm">Delivery Method</span>
             </div>
@@ -254,7 +254,7 @@ function ViewEventModal({ session, onClose, onEdit }) {
               onClick={() => setShowAuditTrail(!showAuditTrail)}
               className="w-full flex items-center justify-between p-4 hover:bg-gray-800/50 transition-colors"
             >
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2 text-gray-300">
                 <History className="w-4 h-4" />
                 <span className="text-sm font-medium">Audit Trail</span>
                 <span className="px-2 py-0.5 bg-gray-700 text-gray-300 text-xs rounded-full">
@@ -262,16 +262,16 @@ function ViewEventModal({ session, onClose, onEdit }) {
                 </span>
               </div>
               {showAuditTrail ? (
-                <ChevronUp className="w-5 h-5 text-gray-400" />
+                <ChevronUp className="w-5 h-5 text-gray-300" />
               ) : (
-                <ChevronDown className="w-5 h-5 text-gray-400" />
+                <ChevronDown className="w-5 h-5 text-gray-300" />
               )}
             </button>
 
             {showAuditTrail && (
               <div className="border-t border-gray-800">
                 {auditEntries.length === 0 ? (
-                  <div className="p-4 text-center text-gray-500 text-sm">
+                  <div className="p-4 text-center text-gray-300 text-sm">
                     No audit entries found for this event
                   </div>
                 ) : (
@@ -291,7 +291,7 @@ function ViewEventModal({ session, onClose, onEdit }) {
                                 <p className="text-white font-medium text-sm">
                                   {actionLabels[entry.action] || entry.action}
                                 </p>
-                                <span className="text-xs text-gray-500 whitespace-nowrap">
+                                <span className="text-xs text-gray-300 whitespace-nowrap">
                                   {formatAuditTimestamp(entry.timestamp)}
                                 </span>
                               </div>
@@ -314,7 +314,7 @@ function ViewEventModal({ session, onClose, onEdit }) {
 
                               {/* Details */}
                               {entry.details && Object.keys(entry.details).length > 0 && (
-                                <div className="mt-1 text-xs text-gray-500">
+                                <div className="mt-1 text-xs text-gray-300">
                                   {entry.details.attendeeName && (
                                     <span>Attendee: {entry.details.attendeeName}</span>
                                   )}
@@ -364,7 +364,7 @@ function ViewEventModal({ session, onClose, onEdit }) {
         <div className="flex items-center justify-end gap-3 p-6 border-t border-purple-800/50">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+            className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
           >
             Close
           </button>

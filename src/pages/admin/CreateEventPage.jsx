@@ -178,7 +178,7 @@ function CreateEventPage() {
             <CheckCircle className="w-10 h-10 text-white" />
           </div>
           <h2 className="text-2xl font-bold text-white mb-2">Event Created!</h2>
-          <p className="text-gray-400">Redirecting to events list...</p>
+          <p className="text-gray-300">Redirecting to events list...</p>
         </div>
       </div>
     )
@@ -194,7 +194,7 @@ function CreateEventPage() {
               <img src={MiadLogo} alt="Miad Healthcare" className="h-7" />
             </Link>
             <div className="border-l border-gray-700 pl-6">
-              <div className="flex items-center gap-2 text-sm text-gray-400 mb-1">
+              <div className="flex items-center gap-2 text-sm text-gray-300 mb-1">
                 <Link to="/admin" className="hover:text-white">Dashboard</Link>
                 <ChevronRight className="w-4 h-4" />
                 <Link to="/admin/events" className="hover:text-white">Events</Link>
@@ -249,11 +249,11 @@ function CreateEventPage() {
 
               {selectedCourse && (
                 <div className="p-4 bg-gray-900/50 rounded-lg">
-                  <p className="text-sm text-gray-400">{selectedCourse.description}</p>
+                  <p className="text-sm text-gray-300">{selectedCourse.description}</p>
                   <div className="flex flex-wrap gap-4 mt-2 text-sm">
-                    <span className="text-gray-500">Duration: {selectedCourse.duration}</span>
-                    <span className="text-gray-500">Certification: {selectedCourse.certification}</span>
-                    <span className="text-gray-500">Valid: {selectedCourse.validityPeriod}</span>
+                    <span className="text-gray-300">Duration: {selectedCourse.duration}</span>
+                    <span className="text-gray-300">Certification: {selectedCourse.certification}</span>
+                    <span className="text-gray-300">Valid: {selectedCourse.validityPeriod}</span>
                   </div>
                 </div>
               )}
@@ -281,7 +281,7 @@ function CreateEventPage() {
                   </div>
                 }
               >
-                <HelpCircle className="w-4 h-4 text-gray-500 hover:text-purple-400 transition-colors" />
+                <HelpCircle className="w-4 h-4 text-gray-300 hover:text-purple-400 transition-colors" />
               </Tooltip>
             </h2>
 
@@ -325,10 +325,10 @@ function CreateEventPage() {
                           </div>
                         }
                       >
-                        <HelpCircle className="w-3.5 h-3.5 text-gray-500" />
+                        <HelpCircle className="w-3.5 h-3.5 text-gray-300" />
                       </Tooltip>
                     </div>
-                    <p className="text-sm text-gray-400 mt-1">
+                    <p className="text-sm text-gray-300 mt-1">
                       Publicly available for individual bookings
                     </p>
                   </div>
@@ -386,10 +386,10 @@ function CreateEventPage() {
                           </div>
                         }
                       >
-                        <HelpCircle className="w-3.5 h-3.5 text-gray-500" />
+                        <HelpCircle className="w-3.5 h-3.5 text-gray-300" />
                       </Tooltip>
                     </div>
-                    <p className="text-sm text-gray-400 mt-1">
+                    <p className="text-sm text-gray-300 mt-1">
                       Private session for a specific client
                     </p>
                   </div>
@@ -553,7 +553,7 @@ function CreateEventPage() {
                   Price per Delegate <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">£</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300">£</span>
                   <input
                     type="number"
                     name="price"
@@ -592,7 +592,7 @@ function CreateEventPage() {
           <div className="flex items-center justify-between">
             <Link
               to="/admin/events"
-              className="text-gray-400 hover:text-white flex items-center gap-2"
+              className="text-gray-300 hover:text-white flex items-center gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
               Cancel

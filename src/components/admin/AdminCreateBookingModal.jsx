@@ -215,28 +215,28 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
               <CheckCircle className="w-10 h-10 text-white" />
             </div>
             <h2 className="text-2xl font-bold text-white mb-2">Booking Created!</h2>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-300 mb-4">
               The booking has been successfully created.
             </p>
 
             <div className="bg-gray-900/50 rounded-lg p-4 mb-6">
-              <p className="text-sm text-gray-500 mb-1">Booking Reference</p>
+              <p className="text-sm text-gray-300 mb-1">Booking Reference</p>
               <p className="text-2xl font-mono font-bold text-[#13d8a0]">{bookingResult.bookingRef}</p>
             </div>
 
             <div className="text-left space-y-2 text-sm mb-6">
               <div className="flex justify-between">
-                <span className="text-gray-400">Attendee</span>
+                <span className="text-gray-300">Attendee</span>
                 <span className="text-white">
                   {getCustomerData().firstName} {getCustomerData().lastName}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-400">Course</span>
+                <span className="text-gray-300">Course</span>
                 <span className="text-white">{selectedCourse?.name}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-400">Payment</span>
+                <span className="text-gray-300">Payment</span>
                 <span className="text-white">
                   £{price} via {paymentMethod === 'card' ? 'Card' : 'PO'}
                 </span>
@@ -260,11 +260,11 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
         <div className="flex items-center justify-between p-6 border-b border-gray-700">
           <div>
             <h2 className="text-xl font-bold text-white">Create Booking</h2>
-            <p className="text-sm text-gray-400">Admin offline booking</p>
+            <p className="text-sm text-gray-300">Admin offline booking</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg"
+            className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg"
           >
             <X className="w-5 h-5" />
           </button>
@@ -279,13 +279,13 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                     index <= currentStep
                       ? 'bg-[#13d8a0] text-white'
-                      : 'bg-gray-700 text-gray-400'
+                      : 'bg-gray-700 text-gray-300'
                   }`}
                 >
                   {index < currentStep ? <CheckCircle className="w-5 h-5" /> : index + 1}
                 </div>
                 <span className={`ml-2 text-sm hidden sm:inline ${
-                  index <= currentStep ? 'text-white' : 'text-gray-500'
+                  index <= currentStep ? 'text-white' : 'text-gray-300'
                 }`}>
                   {label}
                 </span>
@@ -311,7 +311,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                   className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
                     customerMode === 'search'
                       ? 'bg-[#13d8a0] text-white'
-                      : 'bg-gray-700 text-gray-400 hover:text-white'
+                      : 'bg-gray-700 text-gray-300 hover:text-white'
                   }`}
                 >
                   <Search className="w-4 h-4" />
@@ -322,7 +322,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                   className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
                     customerMode === 'new'
                       ? 'bg-[#13d8a0] text-white'
-                      : 'bg-gray-700 text-gray-400 hover:text-white'
+                      : 'bg-gray-700 text-gray-300 hover:text-white'
                   }`}
                 >
                   <UserPlus className="w-4 h-4" />
@@ -334,13 +334,13 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                 <div>
                   {/* Search Input */}
                   <div className="relative mb-4">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
                     <input
                       type="text"
                       value={customerSearch}
                       onChange={(e) => handleCustomerSearch(e.target.value)}
                       placeholder="Search by name, email or organisation..."
-                      className="w-full pl-12 pr-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#13d8a0]"
+                      className="w-full pl-12 pr-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#13d8a0]"
                     />
                   </div>
 
@@ -363,18 +363,18 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                         >
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
-                              <User className="w-5 h-5 text-gray-400" />
+                              <User className="w-5 h-5 text-gray-300" />
                             </div>
                             <div>
                               <p className="text-white font-medium">
                                 {customer.firstName} {customer.lastName}
                               </p>
-                              <p className="text-sm text-gray-400">{customer.email}</p>
+                              <p className="text-sm text-gray-300">{customer.email}</p>
                               {customer.organisation && (
-                                <p className="text-xs text-gray-500">{customer.organisation}</p>
+                                <p className="text-xs text-gray-300">{customer.organisation}</p>
                               )}
                             </div>
-                            <div className="ml-auto text-xs text-gray-500">
+                            <div className="ml-auto text-xs text-gray-300">
                               {customer.bookingCount} booking{customer.bookingCount !== 1 ? 's' : ''}
                             </div>
                           </div>
@@ -390,7 +390,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                         <span className="text-sm font-medium text-[#13d8a0]">Selected Customer</span>
                         <button
                           onClick={() => setSelectedCustomer(null)}
-                          className="text-gray-400 hover:text-white"
+                          className="text-gray-300 hover:text-white"
                         >
                           <X className="w-4 h-4" />
                         </button>
@@ -398,12 +398,12 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                       <p className="text-white font-medium">
                         {selectedCustomer.firstName} {selectedCustomer.lastName}
                       </p>
-                      <p className="text-sm text-gray-400">{selectedCustomer.email}</p>
+                      <p className="text-sm text-gray-300">{selectedCustomer.email}</p>
                     </div>
                   )}
 
                   {!selectedCustomer && customerSearch.length < 2 && (
-                    <p className="text-center text-gray-500 py-8">
+                    <p className="text-center text-gray-300 py-8">
                       Enter at least 2 characters to search
                     </p>
                   )}
@@ -441,7 +441,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                       Email <span className="text-red-400">*</span>
                     </label>
                     <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
                       <input
                         type="email"
                         value={newCustomer.email}
@@ -454,7 +454,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-1">Phone</label>
                     <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
                       <input
                         type="tel"
                         value={newCustomer.phone}
@@ -467,7 +467,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-1">Organisation</label>
                     <div className="relative">
-                      <Building className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                      <Building className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
                       <input
                         type="text"
                         value={newCustomer.organisation}
@@ -480,7 +480,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-1">Job Title</label>
                     <div className="relative">
-                      <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                      <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
                       <input
                         type="text"
                         value={newCustomer.jobTitle}
@@ -539,8 +539,8 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                 <>
                   <div className="p-4 bg-gray-900/50 rounded-lg mb-6">
                     <h3 className="font-medium text-white mb-2">{selectedCourse.name}</h3>
-                    <p className="text-sm text-gray-400 mb-3">{selectedCourse.description}</p>
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                    <p className="text-sm text-gray-300 mb-3">{selectedCourse.description}</p>
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-300">
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
                         {selectedCourse.duration}
@@ -562,7 +562,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                             className={`flex-1 py-3 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${
                               deliveryType === 'webinar'
                                 ? 'border-[#13d8a0] bg-[#13d8a0]/10 text-[#13d8a0]'
-                                : 'border-gray-700 text-gray-400 hover:border-gray-600'
+                                : 'border-gray-700 text-gray-300 hover:border-gray-600'
                             }`}
                           >
                             <Video className="w-4 h-4" />
@@ -578,7 +578,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                             className={`flex-1 py-3 px-4 rounded-lg border transition-colors flex items-center justify-center gap-2 ${
                               deliveryType === 'elearning'
                                 ? 'border-green-500 bg-green-500/10 text-green-400'
-                                : 'border-gray-700 text-gray-400 hover:border-gray-600'
+                                : 'border-gray-700 text-gray-300 hover:border-gray-600'
                             }`}
                           >
                             <Monitor className="w-4 h-4" />
@@ -614,7 +614,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                               <div className="flex items-center justify-between">
                                 <div>
                                   <div className="flex items-center gap-2 mb-1">
-                                    <Calendar className="w-4 h-4 text-gray-500" />
+                                    <Calendar className="w-4 h-4 text-gray-300" />
                                     <span className="text-white font-medium">
                                       {new Date(session.date).toLocaleDateString('en-GB', {
                                         weekday: 'short',
@@ -622,9 +622,9 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                                         month: 'short',
                                       })}
                                     </span>
-                                    <span className="text-gray-400">{session.time}</span>
+                                    <span className="text-gray-300">{session.time}</span>
                                   </div>
-                                  <div className="flex items-center gap-4 text-sm text-gray-500">
+                                  <div className="flex items-center gap-4 text-sm text-gray-300">
                                     <span className="flex items-center gap-1">
                                       <Users className="w-3.5 h-3.5" />
                                       {session.trainer}
@@ -648,7 +648,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                         <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                         <div>
                           <h4 className="font-medium text-white">Instant Access</h4>
-                          <p className="text-sm text-gray-400">
+                          <p className="text-sm text-gray-300">
                             The attendee will receive access instructions immediately after booking.
                           </p>
                         </div>
@@ -666,7 +666,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
               {/* Price Summary */}
               <div className="p-4 bg-gray-900/50 rounded-lg mb-6">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-400">Amount to charge</span>
+                  <span className="text-gray-300">Amount to charge</span>
                   <span className="text-2xl font-bold text-white">£{price}</span>
                 </div>
               </div>
@@ -685,8 +685,8 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                         : 'border-gray-700 hover:border-gray-600'
                     }`}
                   >
-                    <CreditCard className={`w-6 h-6 ${paymentMethod === 'card' ? 'text-green-400' : 'text-gray-400'}`} />
-                    <span className={paymentMethod === 'card' ? 'text-white' : 'text-gray-400'}>
+                    <CreditCard className={`w-6 h-6 ${paymentMethod === 'card' ? 'text-green-400' : 'text-gray-300'}`} />
+                    <span className={paymentMethod === 'card' ? 'text-white' : 'text-gray-300'}>
                       Card Payment
                     </span>
                   </button>
@@ -698,8 +698,8 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                         : 'border-gray-700 hover:border-gray-600'
                     }`}
                   >
-                    <FileText className={`w-6 h-6 ${paymentMethod === 'purchase_order' ? 'text-amber-400' : 'text-gray-400'}`} />
-                    <span className={paymentMethod === 'purchase_order' ? 'text-white' : 'text-gray-400'}>
+                    <FileText className={`w-6 h-6 ${paymentMethod === 'purchase_order' ? 'text-amber-400' : 'text-gray-300'}`} />
+                    <span className={paymentMethod === 'purchase_order' ? 'text-white' : 'text-gray-300'}>
                       Purchase Order
                     </span>
                   </button>
@@ -728,7 +728,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                       value={poNumber}
                       onChange={(e) => setPONumber(e.target.value)}
                       placeholder="e.g., PO-2026-001234"
-                      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#13d8a0]"
+                      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#13d8a0]"
                     />
                   </div>
 
@@ -754,19 +754,19 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
 
               {/* Customer */}
               <div className="p-4 bg-gray-900/50 rounded-lg">
-                <h4 className="text-sm font-medium text-gray-400 mb-2">Customer</h4>
+                <h4 className="text-sm font-medium text-gray-300 mb-2">Customer</h4>
                 <p className="text-white font-medium">
                   {getCustomerData().firstName} {getCustomerData().lastName}
                 </p>
-                <p className="text-sm text-gray-400">{getCustomerData().email}</p>
+                <p className="text-sm text-gray-300">{getCustomerData().email}</p>
                 {getCustomerData().organisation && (
-                  <p className="text-sm text-gray-500">{getCustomerData().organisation}</p>
+                  <p className="text-sm text-gray-300">{getCustomerData().organisation}</p>
                 )}
               </div>
 
               {/* Course */}
               <div className="p-4 bg-gray-900/50 rounded-lg">
-                <h4 className="text-sm font-medium text-gray-400 mb-2">Course</h4>
+                <h4 className="text-sm font-medium text-gray-300 mb-2">Course</h4>
                 <p className="text-white font-medium">{selectedCourse?.name}</p>
                 <div className="flex items-center gap-2 mt-1">
                   {deliveryType === 'webinar' ? (
@@ -780,7 +780,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                   )}
                 </div>
                 {selectedSession && (
-                  <p className="text-sm text-gray-400 mt-2">
+                  <p className="text-sm text-gray-300 mt-2">
                     {new Date(selectedSession.date).toLocaleDateString('en-GB', {
                       weekday: 'long',
                       day: 'numeric',
@@ -792,7 +792,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
 
               {/* Payment */}
               <div className="p-4 bg-gray-900/50 rounded-lg">
-                <h4 className="text-sm font-medium text-gray-400 mb-2">Payment</h4>
+                <h4 className="text-sm font-medium text-gray-300 mb-2">Payment</h4>
                 <div className="flex items-center justify-between">
                   <div>
                     <span className={`inline-flex items-center gap-1 px-2 py-1 text-xs rounded ${
@@ -807,7 +807,7 @@ function AdminCreateBookingModal({ onClose, onSuccess, adminUser = 'TTC Admin' }
                       )}
                     </span>
                     {paymentMethod === 'purchase_order' && poNumber && (
-                      <p className="text-sm text-gray-400 mt-1">PO: {poNumber}</p>
+                      <p className="text-sm text-gray-300 mt-1">PO: {poNumber}</p>
                     )}
                   </div>
                   <span className="text-2xl font-bold text-white">£{price}</span>

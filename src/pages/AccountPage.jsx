@@ -76,7 +76,7 @@ function AccountPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
             <h1 className="text-2xl font-bold text-white">My Account</h1>
-            <p className="text-gray-400 mt-1">
+            <p className="text-gray-300 mt-1">
               Welcome back! Manage your bookings and course access.
             </p>
           </div>
@@ -99,7 +99,7 @@ function AccountPage() {
               <h2 className="text-lg font-semibold text-white">
                 {user?.firstName ? `${user.firstName} ${user.lastName}` : 'Booker Account'}
               </h2>
-              <p className="text-gray-400 flex items-center gap-2">
+              <p className="text-gray-300 flex items-center gap-2">
                 <Mail className="w-4 h-4" />
                 {user?.email}
               </p>
@@ -112,17 +112,17 @@ function AccountPage() {
           <div className="card text-center">
             <Calendar className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
             <div className="text-2xl font-bold text-white">{upcomingBookings.length}</div>
-            <div className="text-sm text-gray-400">Upcoming Sessions</div>
+            <div className="text-sm text-gray-300">Upcoming Sessions</div>
           </div>
           <div className="card text-center">
             <Monitor className="w-8 h-8 text-green-400 mx-auto mb-2" />
             <div className="text-2xl font-bold text-white">{elearningBookings.length}</div>
-            <div className="text-sm text-gray-400">E-Learning Courses</div>
+            <div className="text-sm text-gray-300">E-Learning Courses</div>
           </div>
           <div className="card text-center">
             <Award className="w-8 h-8 text-purple-400 mx-auto mb-2" />
             <div className="text-2xl font-bold text-white">{pastBookings.length}</div>
-            <div className="text-sm text-gray-400">Completed</div>
+            <div className="text-sm text-gray-300">Completed</div>
           </div>
         </div>
 
@@ -139,7 +139,7 @@ function AccountPage() {
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 activeTab === tab.id
                   ? 'bg-cyan-600 text-white'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                  : 'text-gray-300 hover:text-white hover:bg-gray-800'
               }`}
             >
               {tab.label}
@@ -165,7 +165,7 @@ function AccountPage() {
                 {upcomingBookings.length === 0 ? (
                   <div className="card text-center py-12">
                     <Calendar className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-                    <p className="text-gray-400 mb-4">No upcoming sessions</p>
+                    <p className="text-gray-300 mb-4">No upcoming sessions</p>
                     <Link to="/webinars" className="btn-primary inline-flex items-center gap-2">
                       Browse Webinars
                       <ChevronRight className="w-4 h-4" />
@@ -190,7 +190,7 @@ function AccountPage() {
                 {elearningBookings.length === 0 ? (
                   <div className="card text-center py-12">
                     <Monitor className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-                    <p className="text-gray-400 mb-4">No e-learning courses purchased</p>
+                    <p className="text-gray-300 mb-4">No e-learning courses purchased</p>
                     <Link to="/elearning" className="btn-primary inline-flex items-center gap-2">
                       Browse E-Learning
                       <ChevronRight className="w-4 h-4" />
@@ -210,7 +210,7 @@ function AccountPage() {
                 {pastBookings.length === 0 ? (
                   <div className="card text-center py-12">
                     <BookOpen className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-                    <p className="text-gray-400">No past bookings</p>
+                    <p className="text-gray-300">No past bookings</p>
                   </div>
                 ) : (
                   pastBookings.map((booking) => (
@@ -245,7 +245,7 @@ function BookingCard({ booking, onCopy, copiedId }) {
 
           <h3 className="text-lg font-semibold text-white mb-2">{booking.courseName}</h3>
 
-          <div className="space-y-1 text-sm text-gray-400">
+          <div className="space-y-1 text-sm text-gray-300">
             {sessionDate && (
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
@@ -274,11 +274,11 @@ function BookingCard({ booking, onCopy, copiedId }) {
           {/* Booking Reference */}
           <div className="mt-3 pt-3 border-t border-gray-700">
             <div className="flex items-center gap-2 text-sm">
-              <span className="text-gray-500">Reference:</span>
+              <span className="text-gray-300">Reference:</span>
               <code className="text-cyan-400 font-mono">{booking.bookingRef}</code>
               <button
                 onClick={() => onCopy(booking.bookingRef, booking.id)}
-                className="text-gray-400 hover:text-white"
+                className="text-gray-300 hover:text-white"
               >
                 {copiedId === booking.id ? (
                   <CheckCircle className="w-4 h-4 text-green-400" />
@@ -322,15 +322,15 @@ function BookingCard({ booking, onCopy, copiedId }) {
           </summary>
           <div className="mt-3 p-4 bg-gray-900 rounded-lg text-sm space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-gray-400">Meeting ID:</span>
+              <span className="text-gray-300">Meeting ID:</span>
               <code className="text-white font-mono">{booking.zoomMeeting.meetingId}</code>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-gray-400">Password:</span>
+              <span className="text-gray-300">Password:</span>
               <code className="text-white font-mono">{booking.zoomMeeting.password}</code>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-gray-400">Join Link:</span>
+              <span className="text-gray-300">Join Link:</span>
               <a
                 href={booking.zoomMeeting.joinUrl}
                 target="_blank"
@@ -367,7 +367,7 @@ function ElearningCard({ booking }) {
 
           <h3 className="text-lg font-semibold text-white mb-2">{booking.courseName}</h3>
 
-          <div className="text-sm text-gray-400">
+          <div className="text-sm text-gray-300">
             <p>Purchased: {new Date(booking.createdAt).toLocaleDateString('en-GB')}</p>
             <p>Access expires: {new Date(new Date(booking.createdAt).getTime() + 365 * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB')}</p>
           </div>
@@ -375,7 +375,7 @@ function ElearningCard({ booking }) {
           {/* Progress (mock) */}
           <div className="mt-3">
             <div className="flex items-center justify-between text-sm mb-1">
-              <span className="text-gray-400">Progress</span>
+              <span className="text-gray-300">Progress</span>
               <span className="text-white">0%</span>
             </div>
             <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
@@ -415,14 +415,14 @@ function PastBookingCard({ booking }) {
             }`}>
               {booking.isElearning ? 'E-Learning' : 'Webinar'}
             </span>
-            <span className="px-2 py-1 bg-gray-700 text-gray-400 text-xs font-medium rounded">
+            <span className="px-2 py-1 bg-gray-700 text-gray-300 text-xs font-medium rounded">
               {booking.status === 'cancelled' ? 'Cancelled' : 'Completed'}
             </span>
           </div>
 
           <h3 className="text-lg font-semibold text-white mb-1">{booking.courseName}</h3>
 
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-300">
             {booking.sessionDate && (
               <span>
                 {new Date(booking.sessionDate).toLocaleDateString('en-GB', {

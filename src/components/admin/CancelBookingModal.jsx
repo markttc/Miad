@@ -81,7 +81,7 @@ function CancelBookingModal({ booking, onClose, onCancel }) {
               <CheckCircle className="w-8 h-8 text-green-400" />
             </div>
             <h2 className="text-xl font-bold text-white mb-2">Booking Cancelled</h2>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-300 mb-4">
               Booking <span className="text-white font-mono">{booking.bookingRef}</span> has been cancelled.
             </p>
             {issueRefund && (
@@ -111,7 +111,7 @@ function CancelBookingModal({ booking, onClose, onCancel }) {
           <div className="text-center py-8">
             <Loader2 className="w-12 h-12 text-[#13d8a0] animate-spin mx-auto mb-4" />
             <h2 className="text-xl font-bold text-white mb-2">Processing Cancellation</h2>
-            <p className="text-gray-400">Please wait...</p>
+            <p className="text-gray-300">Please wait...</p>
           </div>
         </div>
       </div>
@@ -130,12 +130,12 @@ function CancelBookingModal({ booking, onClose, onCancel }) {
             </div>
             <div>
               <h2 className="text-lg font-bold text-white">Cancel Booking</h2>
-              <p className="text-sm text-gray-400">{booking.bookingRef}</p>
+              <p className="text-sm text-gray-300">{booking.bookingRef}</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg"
+            className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg"
           >
             <X className="w-5 h-5" />
           </button>
@@ -143,22 +143,22 @@ function CancelBookingModal({ booking, onClose, onCancel }) {
 
         {/* Booking Summary */}
         <div className="bg-gray-900/50 rounded-lg p-4 mb-6">
-          <h3 className="text-sm font-medium text-gray-400 mb-3">Booking Summary</h3>
+          <h3 className="text-sm font-medium text-gray-300 mb-3">Booking Summary</h3>
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm">
-              <User className="w-4 h-4 text-gray-500" />
+              <User className="w-4 h-4 text-gray-300" />
               <span className="text-white">
                 {booking.attendee?.firstName} {booking.attendee?.lastName}
               </span>
-              <span className="text-gray-500">({booking.attendee?.email})</span>
+              <span className="text-gray-300">({booking.attendee?.email})</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <FileText className="w-4 h-4 text-gray-500" />
+              <FileText className="w-4 h-4 text-gray-300" />
               <span className="text-white">{booking.courseName}</span>
             </div>
             {booking.sessionDate && (
               <div className="flex items-center gap-2 text-sm">
-                <Calendar className="w-4 h-4 text-gray-500" />
+                <Calendar className="w-4 h-4 text-gray-300" />
                 <span className="text-white">
                   {new Date(booking.sessionDate).toLocaleDateString('en-GB', {
                     weekday: 'short',
@@ -171,7 +171,7 @@ function CancelBookingModal({ booking, onClose, onCancel }) {
               </div>
             )}
             <div className="flex items-center gap-2 text-sm">
-              <DollarSign className="w-4 h-4 text-gray-500" />
+              <DollarSign className="w-4 h-4 text-gray-300" />
               <span className="text-white">£{fullAmount}</span>
               <span className={`px-2 py-0.5 text-xs rounded ${
                 isCardPayment ? 'bg-green-900/50 text-green-400' : 'bg-amber-900/50 text-amber-400'
@@ -205,7 +205,7 @@ function CancelBookingModal({ booking, onClose, onCancel }) {
               value={customReason}
               onChange={(e) => setCustomReason(e.target.value)}
               placeholder="Please provide details..."
-              className="mt-3 w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#13d8a0]"
+              className="mt-3 w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#13d8a0]"
               rows={3}
             />
           )}
@@ -233,7 +233,7 @@ function CancelBookingModal({ booking, onClose, onCancel }) {
               <span className="text-white">
                 {isCardPayment ? 'Issue refund to card' : 'Credit customer account'}
               </span>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-300 mt-1">
                 {isCardPayment
                   ? 'Refund will be processed via Stripe (3-5 business days)'
                   : 'Amount will be credited back to the customer credit account'}
@@ -267,7 +267,7 @@ function CancelBookingModal({ booking, onClose, onCancel }) {
 
               {isPartialRefund && (
                 <div className="mt-3 flex items-center gap-2">
-                  <span className="text-gray-400">£</span>
+                  <span className="text-gray-300">£</span>
                   <input
                     type="number"
                     value={refundAmount}
@@ -277,7 +277,7 @@ function CancelBookingModal({ booking, onClose, onCancel }) {
                     step="0.01"
                     className="w-32 px-3 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#13d8a0]"
                   />
-                  <span className="text-sm text-gray-500">of £{fullAmount}</span>
+                  <span className="text-sm text-gray-300">of £{fullAmount}</span>
                 </div>
               )}
             </div>

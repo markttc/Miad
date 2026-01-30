@@ -45,7 +45,7 @@ function Header() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/cart"
-              className="relative p-2 text-gray-400 hover:text-white transition-colors"
+              className="relative p-2 text-gray-300 hover:text-white transition-colors"
             >
               <ShoppingCart className="w-5 h-5" />
               <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#13d8a0] rounded-full text-xs flex items-center justify-center text-white font-medium">
@@ -70,7 +70,7 @@ function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-gray-400 hover:text-white"
+            className="md:hidden p-2 text-gray-300 hover:text-white"
           >
             {mobileMenuOpen ? (
               <X className="w-6 h-6" />

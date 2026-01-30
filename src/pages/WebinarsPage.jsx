@@ -185,12 +185,12 @@ function WebinarsPage() {
               </span>
             </h1>
 
-            <p className="text-xl text-gray-400 mb-6">
+            <p className="text-xl text-gray-300 mb-6">
               Join expert-led live sessions via Zoom. Ask questions, interact with trainers,
               and learn alongside other healthcare professionals.
             </p>
 
-            <div className="inline-flex items-center gap-2 text-sm text-gray-400">
+            <div className="inline-flex items-center gap-2 text-sm text-gray-300">
               <MapPin className="w-4 h-4 text-[#13d8a0]" />
               All sessions delivered via Zoom
             </div>
@@ -204,17 +204,17 @@ function WebinarsPage() {
           <div className="flex flex-wrap justify-center gap-8 text-center">
             <div>
               <p className="text-2xl font-bold text-white">{stats.total}</p>
-              <p className="text-xs text-gray-400">Sessions Available</p>
+              <p className="text-xs text-gray-300">Sessions Available</p>
             </div>
             <div className="w-px bg-gray-700" />
             <div>
               <p className="text-2xl font-bold text-[#13d8a0]">{stats.availableSpots}</p>
-              <p className="text-xs text-gray-400">Places Remaining</p>
+              <p className="text-xs text-gray-300">Places Remaining</p>
             </div>
             <div className="w-px bg-gray-700" />
             <div>
               <p className="text-2xl font-bold text-amber-400">{stats.lowAvailability}</p>
-              <p className="text-xs text-gray-400">Filling Fast</p>
+              <p className="text-xs text-gray-300">Filling Fast</p>
             </div>
           </div>
         </div>
@@ -224,7 +224,7 @@ function WebinarsPage() {
       <section className="py-4 border-b border-gray-800 sticky top-16 bg-gray-900/95 backdrop-blur-md z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-4">
-            <div className="flex items-center gap-2 text-gray-400">
+            <div className="flex items-center gap-2 text-gray-300">
               <Filter className="w-4 h-4" />
               <span className="text-sm">Filter:</span>
             </div>
@@ -276,7 +276,7 @@ function WebinarsPage() {
           {filteredSessions.length === 0 ? (
             <div className="text-center py-16">
               <Video className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-400 text-lg mb-4">No webinars found matching your filters</p>
+              <p className="text-gray-300 text-lg mb-4">No webinars found matching your filters</p>
               <button
                 onClick={() => {
                   setSelectedCategory('all')
@@ -295,14 +295,14 @@ function WebinarsPage() {
                 <div className="flex items-center justify-between mb-6">
                   <button
                     onClick={goToPreviousMonth}
-                    className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+                    className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <h2 className="text-xl font-semibold text-white">{monthYear}</h2>
                   <button
                     onClick={goToNextMonth}
-                    className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+                    className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>
@@ -313,7 +313,7 @@ function WebinarsPage() {
                   {/* Week Headers */}
                   <div className="grid grid-cols-7 gap-2 mb-2">
                     {weekDays.map((day) => (
-                      <div key={day} className="text-center text-xs text-gray-500 font-medium py-2">
+                      <div key={day} className="text-center text-xs text-gray-300 font-medium py-2">
                         {day}
                       </div>
                     ))}
@@ -353,7 +353,7 @@ function WebinarsPage() {
                               ? 'text-gray-700 cursor-not-allowed bg-gray-800/50'
                               : hasSession
                               ? `${colors?.bg} hover:opacity-90 text-white cursor-pointer`
-                              : 'bg-gray-900/50 text-gray-500 cursor-default'
+                              : 'bg-gray-900/50 text-gray-300 cursor-default'
                           } ${today ? 'ring-2 ring-[#13d8a0]' : ''}`}
                         >
                           <span className="text-base">{date.getDate()}</span>
@@ -370,19 +370,19 @@ function WebinarsPage() {
 
                 {/* Legend */}
                 <div className="mt-4 flex flex-wrap justify-center gap-4 text-xs">
-                  <div className="flex items-center gap-1.5 text-gray-400">
+                  <div className="flex items-center gap-1.5 text-gray-300">
                     <div className="w-4 h-4 rounded bg-green-600" />
                     <span>Available</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-gray-400">
+                  <div className="flex items-center gap-1.5 text-gray-300">
                     <div className="w-4 h-4 rounded bg-cyan-600" />
                     <span>Filling</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-gray-400">
+                  <div className="flex items-center gap-1.5 text-gray-300">
                     <div className="w-4 h-4 rounded bg-amber-600" />
                     <span>Low Availability</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-gray-400">
+                  <div className="flex items-center gap-1.5 text-gray-300">
                     <div className="w-4 h-4 rounded bg-red-600" />
                     <span>Full</span>
                   </div>
@@ -413,7 +413,7 @@ function WebinarsPage() {
                               <div className="text-lg font-bold text-white">
                                 {new Date(session.date).getDate()}
                               </div>
-                              <div className="text-[10px] text-gray-400">
+                              <div className="text-[10px] text-gray-300">
                                 {new Date(session.date).toLocaleDateString('en-GB', { month: 'short' })}
                               </div>
                             </div>
@@ -421,7 +421,7 @@ function WebinarsPage() {
                               <p className="text-sm text-white font-medium truncate">
                                 {session.course.name}
                               </p>
-                              <p className="text-xs text-gray-400">{session.time}</p>
+                              <p className="text-xs text-gray-300">{session.time}</p>
                               <p className={`text-xs ${colors.text} mt-1`}>
                                 {session.spotsRemaining} spots left
                               </p>
@@ -433,7 +433,7 @@ function WebinarsPage() {
                   </div>
 
                   {filteredSessions.length > 8 && (
-                    <p className="text-xs text-gray-500 text-center mt-3 pt-3 border-t border-gray-700">
+                    <p className="text-xs text-gray-300 text-center mt-3 pt-3 border-t border-gray-700">
                       +{filteredSessions.length - 8} more sessions
                     </p>
                   )}
@@ -459,7 +459,7 @@ function WebinarsPage() {
                           <div className="text-lg font-bold text-white">
                             {new Date(session.date).getDate()}
                           </div>
-                          <div className="text-[10px] text-gray-400">
+                          <div className="text-[10px] text-gray-300">
                             {new Date(session.date).toLocaleDateString('en-GB', { month: 'short' })}
                           </div>
                         </div>
@@ -481,17 +481,17 @@ function WebinarsPage() {
                       {session.course.name}
                     </h3>
 
-                    <div className="space-y-1.5 text-sm text-gray-400 mb-4">
+                    <div className="space-y-1.5 text-sm text-gray-300 mb-4">
                       <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-gray-500" />
+                        <Clock className="w-4 h-4 text-gray-300" />
                         {session.time}
                       </div>
                       <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 text-gray-500" />
+                        <Users className="w-4 h-4 text-gray-300" />
                         {session.trainer}
                       </div>
                       <div className="flex items-center gap-2">
-                        <Award className="w-4 h-4 text-gray-500" />
+                        <Award className="w-4 h-4 text-gray-300" />
                         {session.course.certification}
                       </div>
                     </div>
@@ -501,7 +501,7 @@ function WebinarsPage() {
                       to={`/book/${session.courseId}?session=${session.id}`}
                       className={`w-full py-2.5 rounded-lg font-medium text-sm text-center transition-colors flex items-center justify-center gap-2 ${
                         session.spotsRemaining === 0
-                          ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                          ? 'bg-gray-700 text-gray-300 cursor-not-allowed'
                           : `${colors.bg} hover:opacity-90 text-white`
                       }`}
                     >
@@ -529,7 +529,7 @@ function WebinarsPage() {
           <div className="relative bg-gray-800 rounded-xl border border-[#13d8a0]/30 p-6 max-w-lg w-full">
             <button
               onClick={() => setSelectedSession(null)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white"
+              className="absolute top-4 right-4 text-gray-300 hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
@@ -543,32 +543,32 @@ function WebinarsPage() {
                 <div className="text-2xl font-bold text-white">
                   {new Date(selectedSession.date).getDate()}
                 </div>
-                <div className="text-xs text-gray-400">
+                <div className="text-xs text-gray-300">
                   {new Date(selectedSession.date).toLocaleDateString('en-GB', { month: 'short' })}
                 </div>
               </div>
               <div>
                 <h2 className="text-xl font-bold text-white">{selectedSession.course.name}</h2>
-                <p className="text-gray-400">{selectedSession.time}</p>
+                <p className="text-gray-300">{selectedSession.time}</p>
               </div>
             </div>
 
             {/* Details */}
             <div className="space-y-3 mb-6">
               <div className="flex items-center justify-between p-3 bg-gray-900/50 rounded-lg">
-                <span className="text-gray-400">Trainer</span>
+                <span className="text-gray-300">Trainer</span>
                 <span className="text-white font-medium">{selectedSession.trainer}</span>
               </div>
               <div className="flex items-center justify-between p-3 bg-gray-900/50 rounded-lg">
-                <span className="text-gray-400">Duration</span>
+                <span className="text-gray-300">Duration</span>
                 <span className="text-white font-medium">{selectedSession.course.duration}</span>
               </div>
               <div className="flex items-center justify-between p-3 bg-gray-900/50 rounded-lg">
-                <span className="text-gray-400">Certification</span>
+                <span className="text-gray-300">Certification</span>
                 <span className="text-white font-medium">{selectedSession.course.certification}</span>
               </div>
               <div className="flex items-center justify-between p-3 bg-gray-900/50 rounded-lg">
-                <span className="text-gray-400">Places</span>
+                <span className="text-gray-300">Places</span>
                 <span className={`font-medium ${
                   selectedSession.spotsRemaining < 5 ? 'text-amber-400' : 'text-green-400'
                 }`}>
@@ -580,7 +580,7 @@ function WebinarsPage() {
             {/* Price & Action */}
             <div className="flex items-center justify-between pt-4 border-t border-gray-700">
               <div>
-                <p className="text-sm text-gray-400">Price per delegate</p>
+                <p className="text-sm text-gray-300">Price per delegate</p>
                 <p className="text-2xl font-bold text-white">£{selectedSession.price}</p>
               </div>
               <Link
@@ -605,7 +605,7 @@ function WebinarsPage() {
                 <Video className="w-6 h-6 text-[#13d8a0]" />
               </div>
               <h3 className="font-semibold text-white mb-2">Zoom Delivery</h3>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-300">
                 Joining instructions and Zoom link sent automatically before your session.
                 No software installation required.
               </p>
@@ -615,7 +615,7 @@ function WebinarsPage() {
                 <Users className="w-6 h-6 text-[#13d8a0]" />
               </div>
               <h3 className="font-semibold text-white mb-2">Interactive Sessions</h3>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-300">
                 Ask questions, participate in discussions, and interact with expert trainers
                 and fellow learners.
               </p>
@@ -625,7 +625,7 @@ function WebinarsPage() {
                 <CheckCircle className="w-6 h-6 text-[#13d8a0]" />
               </div>
               <h3 className="font-semibold text-white mb-2">Instant Certification</h3>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-gray-300">
                 Receive your certificate immediately upon successful completion of the training session.
               </p>
             </div>

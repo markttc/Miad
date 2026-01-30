@@ -184,19 +184,19 @@ function AvailabilityCalendar({ availability = {}, onChange }) {
         <div className="flex items-center justify-between mb-4">
           <button
             onClick={goToPreviousMonth}
-            className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <div className="text-center">
             <h3 className="text-lg font-semibold text-white">{monthYear}</h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-gray-300">
               {availableDaysCount} day{availableDaysCount !== 1 ? 's' : ''} marked available
             </p>
           </div>
           <button
             onClick={goToNextMonth}
-            className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
@@ -207,7 +207,7 @@ function AvailabilityCalendar({ availability = {}, onChange }) {
           {/* Week day headers */}
           <div className="grid grid-cols-7 gap-1 mb-1">
             {weekDays.map((day) => (
-              <div key={day} className="text-center text-xs text-gray-500 font-medium py-2">
+              <div key={day} className="text-center text-xs text-gray-300 font-medium py-2">
                 {day}
               </div>
             ))}
@@ -274,7 +274,7 @@ function AvailabilityCalendar({ availability = {}, onChange }) {
               </h4>
               <button
                 onClick={() => setSelectedDate(null)}
-                className="p-1 text-gray-400 hover:text-white rounded"
+                className="p-1 text-gray-300 hover:text-white rounded"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -293,7 +293,7 @@ function AvailabilityCalendar({ availability = {}, onChange }) {
                     className={`p-3 rounded-lg border-2 text-center transition-all ${
                       isActive
                         ? `${colors.border} ${colors.bg} text-white`
-                        : 'border-gray-700 bg-gray-800 text-gray-400 hover:border-gray-600 hover:text-white'
+                        : 'border-gray-700 bg-gray-800 text-gray-300 hover:border-gray-600 hover:text-white'
                     }`}
                   >
                     <Icon className={`w-6 h-6 mx-auto mb-1 ${isActive ? 'text-white' : colors.text}`} />
@@ -321,7 +321,7 @@ function AvailabilityCalendar({ availability = {}, onChange }) {
             const Icon = slot.icon
             const colors = colorClasses[slot.color]
             return (
-              <div key={slot.id} className="flex items-center gap-1.5 text-gray-400">
+              <div key={slot.id} className="flex items-center gap-1.5 text-gray-300">
                 <div className={`w-4 h-4 rounded ${colors.legendBg} flex items-center justify-center`}>
                   <Icon className="w-2.5 h-2.5 text-white" />
                 </div>
@@ -341,7 +341,7 @@ function AvailabilityCalendar({ availability = {}, onChange }) {
           </h4>
 
           {upcomingAvailability.length === 0 ? (
-            <p className="text-xs text-gray-500 text-center py-4">
+            <p className="text-xs text-gray-300 text-center py-4">
               No availability set yet.
               <br />
               Click dates to add.
@@ -381,7 +381,7 @@ function AvailabilityCalendar({ availability = {}, onChange }) {
           )}
 
           {upcomingAvailability.length > 0 && (
-            <p className="text-xs text-gray-500 text-center mt-3 pt-3 border-t border-gray-800">
+            <p className="text-xs text-gray-300 text-center mt-3 pt-3 border-t border-gray-800">
               Click to edit
             </p>
           )}

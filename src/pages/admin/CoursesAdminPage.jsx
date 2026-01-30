@@ -185,7 +185,7 @@ function CoursesAdminPage() {
               <img src={MiadLogo} alt="Miad Healthcare" className="h-7" />
             </Link>
             <div className="border-l border-gray-700 pl-6">
-              <div className="flex items-center gap-2 text-sm text-gray-400 mb-1">
+              <div className="flex items-center gap-2 text-sm text-gray-300 mb-1">
                 <Link to="/admin" className="hover:text-white">Dashboard</Link>
                 <ChevronRight className="w-4 h-4" />
                 <span className="text-white">Course Administration</span>
@@ -200,19 +200,19 @@ function CoursesAdminPage() {
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Total Courses</p>
+            <p className="text-sm text-gray-300">Total Courses</p>
             <p className="text-2xl font-bold text-white">{stats.total}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Active</p>
+            <p className="text-sm text-gray-300">Active</p>
             <p className="text-2xl font-bold text-green-400">{stats.active}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Inactive</p>
+            <p className="text-sm text-gray-300">Inactive</p>
             <p className="text-2xl font-bold text-red-400">{stats.inactive}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Categories</p>
+            <p className="text-sm text-gray-300">Categories</p>
             <p className="text-2xl font-bold text-purple-400">{stats.categories}</p>
           </div>
         </div>
@@ -220,13 +220,13 @@ function CoursesAdminPage() {
         {/* Filters */}
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
             <input
               type="text"
               placeholder="Search by name, ID, or finance code..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-purple-800/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-purple-800/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
           </div>
 
@@ -259,13 +259,13 @@ function CoursesAdminPage() {
           {filteredCourses.length === 0 ? (
             <div className="text-center py-12">
               <BookOpen className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-400">No courses found</p>
+              <p className="text-gray-300">No courses found</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="text-left text-sm text-gray-400 border-b border-gray-700">
+                  <tr className="text-left text-sm text-gray-300 border-b border-gray-700">
                     <th className="px-4 py-3 font-medium">Status</th>
                     <th className="px-4 py-3 font-medium">Course</th>
                     <th className="px-4 py-3 font-medium">Finance ID</th>
@@ -312,7 +312,7 @@ function CoursesAdminPage() {
                         <td className="px-4 py-3">
                           <div>
                             <p className="text-white font-medium">{course.name}</p>
-                            <p className="text-xs text-gray-500 font-mono">{course.id}</p>
+                            <p className="text-xs text-gray-300 font-mono">{course.id}</p>
                           </div>
                         </td>
 
@@ -343,7 +343,7 @@ function CoursesAdminPage() {
                         {/* Duration */}
                         <td className="px-4 py-3">
                           <span className="text-gray-300 flex items-center gap-1 text-sm">
-                            <Clock className="w-3.5 h-3.5 text-gray-500" />
+                            <Clock className="w-3.5 h-3.5 text-gray-300" />
                             {course.duration}
                           </span>
                         </td>
@@ -371,7 +371,7 @@ function CoursesAdminPage() {
                         <td className="px-4 py-3">
                           {isEditing ? (
                             <div className="relative w-24">
-                              <span className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-500 text-sm">£</span>
+                              <span className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-300 text-sm">£</span>
                               <input
                                 type="number"
                                 value={editForm.price}
@@ -402,7 +402,7 @@ function CoursesAdminPage() {
                                 </button>
                                 <button
                                   onClick={cancelEdit}
-                                  className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors"
+                                  className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded transition-colors"
                                   title="Cancel"
                                 >
                                   <X className="w-4 h-4" />
@@ -411,7 +411,7 @@ function CoursesAdminPage() {
                             ) : (
                               <button
                                 onClick={() => startEditing(course)}
-                                className="p-2 text-gray-400 hover:text-purple-400 hover:bg-gray-700 rounded transition-colors"
+                                className="p-2 text-gray-300 hover:text-purple-400 hover:bg-gray-700 rounded transition-colors"
                                 title="Edit"
                               >
                                 <Edit2 className="w-4 h-4" />
@@ -429,7 +429,7 @@ function CoursesAdminPage() {
         </div>
 
         {/* Legend */}
-        <div className="mt-6 flex flex-wrap gap-6 text-sm text-gray-400">
+        <div className="mt-6 flex flex-wrap gap-6 text-sm text-gray-300">
           <div className="flex items-center gap-2">
             <div className="p-1.5 bg-cyan-900/50 rounded">
               <Video className="w-3.5 h-3.5 text-cyan-400" />

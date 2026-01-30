@@ -103,11 +103,11 @@ function AddTrainerModal({ onClose, onSave }) {
         <div className="flex items-center justify-between p-6 border-b border-purple-800/50">
           <div>
             <h2 className="text-xl font-bold text-white">Add New Trainer</h2>
-            <p className="text-sm text-gray-400 mt-1">Onboard a new trainer to the platform</p>
+            <p className="text-sm text-gray-300 mt-1">Onboard a new trainer to the platform</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -124,7 +124,7 @@ function AddTrainerModal({ onClose, onSave }) {
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">First Name *</label>
+                  <label className="block text-sm text-gray-300 mb-1">First Name *</label>
                   <input
                     type="text"
                     name="firstName"
@@ -137,7 +137,7 @@ function AddTrainerModal({ onClose, onSave }) {
                   {errors.firstName && <p className="text-xs text-red-400 mt-1">{errors.firstName}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Last Name *</label>
+                  <label className="block text-sm text-gray-300 mb-1">Last Name *</label>
                   <input
                     type="text"
                     name="lastName"
@@ -160,7 +160,7 @@ function AddTrainerModal({ onClose, onSave }) {
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Email *</label>
+                  <label className="block text-sm text-gray-300 mb-1">Email *</label>
                   <input
                     type="email"
                     name="email"
@@ -173,7 +173,7 @@ function AddTrainerModal({ onClose, onSave }) {
                   {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Phone *</label>
+                  <label className="block text-sm text-gray-300 mb-1">Phone *</label>
                   <input
                     type="tel"
                     name="phone"
@@ -255,7 +255,7 @@ function AddTrainerModal({ onClose, onSave }) {
                     className={`p-3 rounded-lg border text-sm flex flex-col items-center gap-2 transition-colors ${
                       formData.deliveryPreference === pref.id
                         ? 'border-purple-500 bg-purple-900/30 text-purple-300'
-                        : 'border-gray-700 text-gray-400 hover:border-gray-600'
+                        : 'border-gray-700 text-gray-300 hover:border-gray-600'
                     }`}
                   >
                     <DeliveryIcon type={pref.id} />
@@ -282,7 +282,7 @@ function AddTrainerModal({ onClose, onSave }) {
                   />
                   <span className="text-white font-medium w-16 text-right">{formData.workingRadius} mi</span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-300 mt-1">
                   How far the trainer is willing to travel from their home address for classroom courses
                 </p>
               </div>
@@ -297,7 +297,7 @@ function AddTrainerModal({ onClose, onSave }) {
 
               {/* VAT Registered */}
               <div className="mb-4">
-                <label className="block text-sm text-gray-400 mb-2">VAT Registered</label>
+                <label className="block text-sm text-gray-300 mb-2">VAT Registered</label>
                 <div className="flex gap-3">
                   <button
                     type="button"
@@ -305,7 +305,7 @@ function AddTrainerModal({ onClose, onSave }) {
                     className={`px-4 py-2 rounded-lg border text-sm transition-colors ${
                       formData.billing.vatRegistered === true
                         ? 'border-purple-500 bg-purple-900/30 text-purple-300'
-                        : 'border-gray-700 text-gray-400 hover:border-gray-600'
+                        : 'border-gray-700 text-gray-300 hover:border-gray-600'
                     }`}
                   >
                     Yes
@@ -316,7 +316,7 @@ function AddTrainerModal({ onClose, onSave }) {
                     className={`px-4 py-2 rounded-lg border text-sm transition-colors ${
                       formData.billing.vatRegistered === false
                         ? 'border-purple-500 bg-purple-900/30 text-purple-300'
-                        : 'border-gray-700 text-gray-400 hover:border-gray-600'
+                        : 'border-gray-700 text-gray-300 hover:border-gray-600'
                     }`}
                   >
                     No
@@ -326,7 +326,7 @@ function AddTrainerModal({ onClose, onSave }) {
 
               {/* Company Type */}
               <div className="mb-4">
-                <label className="block text-sm text-gray-400 mb-1">Company Type</label>
+                <label className="block text-sm text-gray-300 mb-1">Company Type</label>
                 <input
                   type="text"
                   name="billing.companyType"
@@ -339,10 +339,10 @@ function AddTrainerModal({ onClose, onSave }) {
 
               {/* Bank Details */}
               <div className="mt-4 pt-4 border-t border-gray-700">
-                <label className="block text-sm text-gray-400 mb-3">Bank Details</label>
+                <label className="block text-sm text-gray-300 mb-3">Bank Details</label>
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-xs text-gray-500 mb-1">Account Name</label>
+                    <label className="block text-xs text-gray-300 mb-1">Account Name</label>
                     <input
                       type="text"
                       name="billing.accountName"
@@ -354,7 +354,7 @@ function AddTrainerModal({ onClose, onSave }) {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs text-gray-500 mb-1">Sort Code</label>
+                      <label className="block text-xs text-gray-300 mb-1">Sort Code</label>
                       <input
                         type="text"
                         name="billing.sortCode"
@@ -365,7 +365,7 @@ function AddTrainerModal({ onClose, onSave }) {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-gray-500 mb-1">Account Number</label>
+                      <label className="block text-xs text-gray-300 mb-1">Account Number</label>
                       <input
                         type="text"
                         name="billing.accountNumber"
@@ -382,7 +382,7 @@ function AddTrainerModal({ onClose, onSave }) {
 
             {/* Notes */}
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Notes (optional)</label>
+              <label className="block text-sm text-gray-300 mb-1">Notes (optional)</label>
               <textarea
                 name="notes"
                 value={formData.notes}
@@ -399,7 +399,7 @@ function AddTrainerModal({ onClose, onSave }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+              className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
             >
               Cancel
             </button>

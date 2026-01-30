@@ -193,10 +193,10 @@ function DateTimeSlicer({
             }}
             className="p-0.5 hover:bg-white/20 rounded"
           >
-            <X className="w-3.5 h-3.5 text-gray-400" />
+            <X className="w-3.5 h-3.5 text-gray-300" />
           </button>
         ) : (
-          <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`w-4 h-4 text-gray-300 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         )}
       </button>
 
@@ -205,7 +205,7 @@ function DateTimeSlicer({
         <div className="absolute z-50 mt-2 w-80 bg-gray-800 border border-white/30 rounded-xl shadow-xl overflow-hidden">
           {/* Presets */}
           <div className="p-3 border-b border-gray-700">
-            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
+            <p className="text-xs font-medium text-gray-300 uppercase tracking-wide mb-2">
               Quick Select
             </p>
             <div className="grid grid-cols-2 gap-2">
@@ -227,12 +227,12 @@ function DateTimeSlicer({
 
           {/* Custom Range */}
           <div className="p-3 border-b border-gray-700">
-            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-2">
+            <p className="text-xs font-medium text-gray-300 uppercase tracking-wide mb-2">
               Custom Range
             </p>
             <div className="flex gap-2 items-center">
               <div className="flex-1">
-                <label className="block text-xs text-gray-500 mb-1">From</label>
+                <label className="block text-xs text-gray-300 mb-1">From</label>
                 <input
                   type="date"
                   value={customRange.start}
@@ -240,9 +240,9 @@ function DateTimeSlicer({
                   className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white text-sm focus:outline-none focus:ring-1 focus:ring-white"
                 />
               </div>
-              <div className="text-gray-500 pt-5">→</div>
+              <div className="text-gray-300 pt-5">→</div>
               <div className="flex-1">
-                <label className="block text-xs text-gray-500 mb-1">To</label>
+                <label className="block text-xs text-gray-300 mb-1">To</label>
                 <input
                   type="date"
                   value={customRange.end}
@@ -257,13 +257,13 @@ function DateTimeSlicer({
           {/* Time Filter (optional) */}
           {showTimeFilter && (
             <div className="p-3 border-b border-gray-700">
-              <p className="text-xs font-medium text-gray-400 uppercase tracking-wide mb-2 flex items-center gap-1">
+              <p className="text-xs font-medium text-gray-300 uppercase tracking-wide mb-2 flex items-center gap-1">
                 <Clock className="w-3 h-3" />
                 Time Filter
               </p>
               <div className="flex gap-2 items-center">
                 <div className="flex-1">
-                  <label className="block text-xs text-gray-500 mb-1">Start Time</label>
+                  <label className="block text-xs text-gray-300 mb-1">Start Time</label>
                   <input
                     type="time"
                     value={timeRange.start}
@@ -271,9 +271,9 @@ function DateTimeSlicer({
                     className="w-full px-3 py-2 bg-gray-900 border border-gray-700 rounded-lg text-white text-sm focus:outline-none focus:ring-1 focus:ring-white"
                   />
                 </div>
-                <div className="text-gray-500 pt-5">→</div>
+                <div className="text-gray-300 pt-5">→</div>
                 <div className="flex-1">
-                  <label className="block text-xs text-gray-500 mb-1">End Time</label>
+                  <label className="block text-xs text-gray-300 mb-1">End Time</label>
                   <input
                     type="time"
                     value={timeRange.end}
@@ -289,7 +289,7 @@ function DateTimeSlicer({
           <div className="p-3 flex justify-between">
             <button
               onClick={clearFilter}
-              className="px-3 py-1.5 text-sm text-gray-400 hover:text-white transition-colors"
+              className="px-3 py-1.5 text-sm text-gray-300 hover:text-white transition-colors"
             >
               Clear
             </button>

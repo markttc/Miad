@@ -125,7 +125,7 @@ function TrainingRegisterPage() {
               <img src={MiadLogo} alt="Miad Healthcare" className="h-7" />
             </Link>
             <div className="border-l border-gray-700 pl-6">
-              <div className="flex items-center gap-2 text-sm text-gray-400 mb-1">
+              <div className="flex items-center gap-2 text-sm text-gray-300 mb-1">
                 <Link to="/admin" className="hover:text-white">Dashboard</Link>
                 <ChevronRight className="w-4 h-4" />
                 <Link to="/admin/trainers" className="hover:text-white">Trainers</Link>
@@ -170,7 +170,7 @@ function TrainingRegisterPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                   <h3 className="text-xl font-bold text-white">{selectedSession.course?.name}</h3>
-                  <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-400">
+                  <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-300">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
                       {new Date(selectedSession.date).toLocaleDateString('en-GB', {
@@ -200,36 +200,36 @@ function TrainingRegisterPage() {
             {/* Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-6">
               <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-                <p className="text-sm text-gray-400">Total</p>
+                <p className="text-sm text-gray-300">Total</p>
                 <p className="text-2xl font-bold text-white">{stats?.total || 0}</p>
               </div>
               <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
-                <p className="text-sm text-gray-400">Pending</p>
-                <p className="text-2xl font-bold text-gray-400">{stats?.pending || 0}</p>
+                <p className="text-sm text-gray-300">Pending</p>
+                <p className="text-2xl font-bold text-gray-300">{stats?.pending || 0}</p>
               </div>
               <div className="bg-gray-800 rounded-lg p-4 border border-green-800/50">
-                <p className="text-sm text-gray-400">Completed</p>
+                <p className="text-sm text-gray-300">Completed</p>
                 <p className="text-2xl font-bold text-green-400">{stats?.completed || 0}</p>
               </div>
               <div className="bg-gray-800 rounded-lg p-4 border border-red-800/50">
-                <p className="text-sm text-gray-400">No Show</p>
+                <p className="text-sm text-gray-300">No Show</p>
                 <p className="text-2xl font-bold text-red-400">{stats?.noShow || 0}</p>
               </div>
               <div className="bg-gray-800 rounded-lg p-4 border border-amber-800/50">
-                <p className="text-sm text-gray-400">Incomplete</p>
+                <p className="text-sm text-gray-300">Incomplete</p>
                 <p className="text-2xl font-bold text-amber-400">{stats?.incomplete || 0}</p>
               </div>
             </div>
 
             {/* Search */}
             <div className="relative mb-6">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
               <input
                 type="text"
                 placeholder="Search attendees..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-purple-800/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-purple-800/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
 
@@ -238,7 +238,7 @@ function TrainingRegisterPage() {
               {filteredBookings.length === 0 ? (
                 <div className="text-center py-12">
                   <Users className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-                  <p className="text-gray-400">
+                  <p className="text-gray-300">
                     {bookings.length === 0 ? 'No bookings for this session' : 'No matching attendees found'}
                   </p>
                 </div>
@@ -246,7 +246,7 @@ function TrainingRegisterPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="text-left text-sm text-gray-400 border-b border-gray-700">
+                      <tr className="text-left text-sm text-gray-300 border-b border-gray-700">
                         <th className="px-4 py-3 font-medium">Reference</th>
                         <th className="px-4 py-3 font-medium">Attendee</th>
                         <th className="px-4 py-3 font-medium">Organisation</th>
@@ -274,17 +274,17 @@ function TrainingRegisterPage() {
                             </td>
                             <td className="px-4 py-3">
                               <span className="text-gray-300 text-sm flex items-center gap-1">
-                                <Building className="w-4 h-4 text-gray-500" />
+                                <Building className="w-4 h-4 text-gray-300" />
                                 {booking.attendee?.organisation || '-'}
                               </span>
                             </td>
                             <td className="px-4 py-3">
                               <div className="space-y-1">
-                                <p className="text-xs text-gray-400 flex items-center gap-1">
+                                <p className="text-xs text-gray-300 flex items-center gap-1">
                                   <Mail className="w-3 h-3" />
                                   {booking.attendee?.email}
                                 </p>
-                                <p className="text-xs text-gray-400 flex items-center gap-1">
+                                <p className="text-xs text-gray-300 flex items-center gap-1">
                                   <Phone className="w-3 h-3" />
                                   {booking.attendee?.phone}
                                 </p>
@@ -296,7 +296,7 @@ function TrainingRegisterPage() {
                                 statusConfig.color === 'red' ? 'bg-red-900/50 text-red-400' :
                                 statusConfig.color === 'amber' ? 'bg-amber-900/50 text-amber-400' :
                                 statusConfig.color === 'blue' ? 'bg-blue-900/50 text-blue-400' :
-                                'bg-gray-700 text-gray-400'
+                                'bg-gray-700 text-gray-300'
                               }`}>
                                 {statusConfig.label}
                               </span>
@@ -308,7 +308,7 @@ function TrainingRegisterPage() {
                                   className={`p-2 rounded transition-colors ${
                                     currentStatus === 'arrived'
                                       ? 'bg-blue-900/50 text-blue-400'
-                                      : 'text-gray-400 hover:text-blue-400 hover:bg-gray-700'
+                                      : 'text-gray-300 hover:text-blue-400 hover:bg-gray-700'
                                   }`}
                                   title="Mark as Arrived"
                                 >
@@ -319,7 +319,7 @@ function TrainingRegisterPage() {
                                   className={`p-2 rounded transition-colors ${
                                     currentStatus === 'completed'
                                       ? 'bg-green-900/50 text-green-400'
-                                      : 'text-gray-400 hover:text-green-400 hover:bg-gray-700'
+                                      : 'text-gray-300 hover:text-green-400 hover:bg-gray-700'
                                   }`}
                                   title="Mark as Completed"
                                 >
@@ -330,7 +330,7 @@ function TrainingRegisterPage() {
                                   className={`p-2 rounded transition-colors ${
                                     currentStatus === 'no-show'
                                       ? 'bg-red-900/50 text-red-400'
-                                      : 'text-gray-400 hover:text-red-400 hover:bg-gray-700'
+                                      : 'text-gray-300 hover:text-red-400 hover:bg-gray-700'
                                   }`}
                                   title="Mark as No Show"
                                 >
@@ -341,7 +341,7 @@ function TrainingRegisterPage() {
                                   className={`p-2 rounded transition-colors ${
                                     currentStatus === 'incomplete'
                                       ? 'bg-amber-900/50 text-amber-400'
-                                      : 'text-gray-400 hover:text-amber-400 hover:bg-gray-700'
+                                      : 'text-gray-300 hover:text-amber-400 hover:bg-gray-700'
                                   }`}
                                   title="Mark as Did Not Complete"
                                 >
@@ -359,7 +359,7 @@ function TrainingRegisterPage() {
             </div>
 
             {/* Legend */}
-            <div className="mt-6 flex flex-wrap gap-6 text-sm text-gray-400">
+            <div className="mt-6 flex flex-wrap gap-6 text-sm text-gray-300">
               <div className="flex items-center gap-2">
                 <UserCheck className="w-4 h-4 text-blue-400" />
                 <span>Arrived</span>
@@ -383,7 +383,7 @@ function TrainingRegisterPage() {
         {!selectedSession && (
           <div className="bg-gray-800 rounded-xl border border-purple-800/50 p-12 text-center">
             <Calendar className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400">Select a session above to view and manage the training register</p>
+            <p className="text-gray-300">Select a session above to view and manage the training register</p>
           </div>
         )}
       </div>

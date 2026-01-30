@@ -149,7 +149,7 @@ function VenuesAdminPage() {
                 <img src={MiadLogo} alt="Miad Healthcare" className="h-7" />
               </Link>
               <div className="border-l border-gray-700 pl-6">
-                <div className="flex items-center gap-2 text-sm text-gray-400 mb-1">
+                <div className="flex items-center gap-2 text-sm text-gray-300 mb-1">
                   <Link to="/admin" className="hover:text-white">Dashboard</Link>
                   <ChevronRight className="w-4 h-4" />
                   <span className="text-white">Venue Management</span>
@@ -172,19 +172,19 @@ function VenuesAdminPage() {
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Total Venues</p>
+            <p className="text-sm text-gray-300">Total Venues</p>
             <p className="text-2xl font-bold text-white">{stats.total}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Active</p>
+            <p className="text-sm text-gray-300">Active</p>
             <p className="text-2xl font-bold text-green-400">{stats.active}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Expiring Soon</p>
+            <p className="text-sm text-gray-300">Expiring Soon</p>
             <p className="text-2xl font-bold text-amber-400">{stats.expiring}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Total Capacity</p>
+            <p className="text-sm text-gray-300">Total Capacity</p>
             <p className="text-2xl font-bold text-cyan-400">{stats.totalCapacity}</p>
           </div>
         </div>
@@ -192,13 +192,13 @@ function VenuesAdminPage() {
         {/* Filters */}
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
             <input
               type="text"
               placeholder="Search by name, city, or contact..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-purple-800/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-purple-800/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
           </div>
 
@@ -218,7 +218,7 @@ function VenuesAdminPage() {
         {filteredVenues.length === 0 ? (
           <div className="bg-gray-800 rounded-xl border border-purple-800/50 p-12 text-center">
             <Building className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400">No venues found</p>
+            <p className="text-gray-300">No venues found</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -238,7 +238,7 @@ function VenuesAdminPage() {
                       </div>
                       <div>
                         <h3 className="text-white font-semibold">{venue.name}</h3>
-                        <p className="text-xs text-gray-400 flex items-center gap-1">
+                        <p className="text-xs text-gray-300 flex items-center gap-1">
                           <MapPin className="w-3 h-3" />
                           {venue.address?.city}
                         </p>
@@ -266,11 +266,11 @@ function VenuesAdminPage() {
 
                   {/* Contact */}
                   <div className="space-y-2 mb-4">
-                    <p className="text-sm text-gray-400 flex items-center gap-2">
+                    <p className="text-sm text-gray-300 flex items-center gap-2">
                       <Phone className="w-4 h-4" />
                       {venue.contactPhone}
                     </p>
-                    <p className="text-sm text-gray-400 flex items-center gap-2">
+                    <p className="text-sm text-gray-300 flex items-center gap-2">
                       <Mail className="w-4 h-4" />
                       <span className="truncate">{venue.contactEmail}</span>
                     </p>
@@ -290,7 +290,7 @@ function VenuesAdminPage() {
 
                   {/* Expiry */}
                   <div className="mb-4">
-                    <p className="text-xs text-gray-500 flex items-center gap-1">
+                    <p className="text-xs text-gray-300 flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       Expires: {new Date(venue.expiryDate).toLocaleDateString('en-GB')}
                     </p>
@@ -307,7 +307,7 @@ function VenuesAdminPage() {
                     </button>
                     <button
                       onClick={() => setSelectedVenue(venue)}
-                      className="flex-1 py-2 text-sm text-gray-400 hover:bg-gray-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-lg transition-colors flex items-center justify-center gap-2"
                     >
                       <Edit2 className="w-4 h-4" />
                       Edit
@@ -349,13 +349,13 @@ function VenuesAdminPage() {
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowDeleteConfirm(null)} />
           <div className="relative bg-gray-800 rounded-xl border border-red-800/50 p-6 max-w-md w-full">
             <h3 className="text-lg font-bold text-white mb-2">Delete Venue</h3>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-300 mb-4">
               Are you sure you want to delete <span className="text-white font-medium">{showDeleteConfirm.name}</span>? This action cannot be undone.
             </p>
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setShowDeleteConfirm(null)}
-                className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+                className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
               >
                 Cancel
               </button>

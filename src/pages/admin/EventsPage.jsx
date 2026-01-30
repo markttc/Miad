@@ -491,7 +491,7 @@ function EventsPage() {
                 <img src={MiadLogo} alt="Miad Healthcare" className="h-7" />
               </Link>
               <div className="border-l border-gray-700 pl-6">
-                <div className="flex items-center gap-2 text-sm text-gray-400 mb-1">
+                <div className="flex items-center gap-2 text-sm text-gray-300 mb-1">
                   <Link to="/admin" className="hover:text-white">Dashboard</Link>
                   <ChevronRight className="w-4 h-4" />
                   <span className="text-white">Events</span>
@@ -515,14 +515,14 @@ function EventsPage() {
         <div className="mb-6">
           <div className="relative">
             <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-              <Sparkles className={`w-5 h-5 ${isAISearchActive ? 'text-purple-400' : 'text-gray-500'}`} />
+              <Sparkles className={`w-5 h-5 ${isAISearchActive ? 'text-purple-400' : 'text-gray-300'}`} />
             </div>
             <input
               type="text"
               placeholder='AI Search: Try "open courses with 10+ spots" or "safeguarding this week"...'
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className={`w-full pl-12 pr-10 py-3 bg-gray-800 border rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 transition-all ${
+              className={`w-full pl-12 pr-10 py-3 bg-gray-800 border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all ${
                 isAISearchActive
                   ? 'border-purple-500 focus:ring-purple-500'
                   : 'border-purple-800/50 focus:ring-purple-500'
@@ -531,7 +531,7 @@ function EventsPage() {
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-white transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-gray-300 hover:text-white transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -598,7 +598,7 @@ function EventsPage() {
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2"
+              className="px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors flex items-center gap-2"
             >
               <X className="w-4 h-4" />
               Clear Filters
@@ -609,17 +609,17 @@ function EventsPage() {
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Matching Events</p>
+            <p className="text-sm text-gray-300">Matching Events</p>
             <p className="text-2xl font-bold text-white">{filteredSessions.length}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Open</p>
+            <p className="text-sm text-gray-300">Open</p>
             <p className="text-2xl font-bold text-green-400">
               {filteredSessions.filter((s) => s.spotsRemaining > 0).length}
             </p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Low Availability</p>
+            <p className="text-sm text-gray-300">Low Availability</p>
             <p className="text-2xl font-bold text-amber-400">
               {filteredSessions.filter((s) => {
                 const pct = (s.spotsRemaining / s.spotsTotal) * 100
@@ -628,7 +628,7 @@ function EventsPage() {
             </p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-400">Full</p>
+            <p className="text-sm text-gray-300">Full</p>
             <p className="text-2xl font-bold text-red-400">
               {filteredSessions.filter((s) => s.spotsRemaining === 0).length}
             </p>
@@ -640,7 +640,7 @@ function EventsPage() {
           {filteredSessions.length === 0 ? (
             <div className="text-center py-12">
               <Calendar className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-400 mb-2">No events found</p>
+              <p className="text-gray-300 mb-2">No events found</p>
               {hasActiveFilters && (
                 <button
                   onClick={clearFilters}
@@ -654,7 +654,7 @@ function EventsPage() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="text-left text-sm text-gray-400 border-b border-gray-700">
+                  <tr className="text-left text-sm text-gray-300 border-b border-gray-700">
                     <th className="px-4 py-3 font-medium">Session ID</th>
                     <th className="px-4 py-3 font-medium">Date</th>
                     <th className="px-4 py-3 font-medium">Course</th>
@@ -680,7 +680,7 @@ function EventsPage() {
                             </code>
                             <button
                               onClick={() => copySessionId(session.id, formatSessionId(session))}
-                              className="p-1 text-gray-500 hover:text-cyan-400 transition-colors"
+                              className="p-1 text-gray-300 hover:text-cyan-400 transition-colors"
                               title="Copy ID"
                             >
                               {copiedId === session.id ? (
@@ -701,7 +701,7 @@ function EventsPage() {
                                 {new Date(session.date).toLocaleDateString('en-GB', { month: 'short' })}
                               </div>
                             </div>
-                            <span className="text-sm text-gray-400">
+                            <span className="text-sm text-gray-300">
                               {new Date(session.date).toLocaleDateString('en-GB', { weekday: 'short' })}
                             </span>
                           </div>
@@ -709,14 +709,14 @@ function EventsPage() {
                         <td className="px-4 py-3">
                           <div>
                             <p className="text-white font-medium">{session.course?.name}</p>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-gray-300">
                               {courseCategories.find((c) => c.id === session.course?.category)?.name}
                             </p>
                           </div>
                         </td>
                         <td className="px-4 py-3">
                           <span className="text-gray-300 flex items-center gap-1">
-                            <Clock className="w-4 h-4 text-gray-500" />
+                            <Clock className="w-4 h-4 text-gray-300" />
                             {session.time}
                           </span>
                         </td>
@@ -736,7 +736,7 @@ function EventsPage() {
                                 style={{ width: `${(booked / session.spotsTotal) * 100}%` }}
                               />
                             </div>
-                            <span className="text-sm text-gray-400">
+                            <span className="text-sm text-gray-300">
                               {booked}/{session.spotsTotal}
                             </span>
                           </div>
@@ -752,7 +752,7 @@ function EventsPage() {
                               {availability.label}
                             </span>
                           ) : (
-                            <span className="px-2 py-1 bg-gray-700 text-gray-400 rounded text-xs font-medium">
+                            <span className="px-2 py-1 bg-gray-700 text-gray-300 rounded text-xs font-medium">
                               Completed
                             </span>
                           )}
@@ -761,28 +761,28 @@ function EventsPage() {
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() => setViewingSession(session)}
-                              className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded transition-colors"
+                              className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded transition-colors"
                               title="View Details"
                             >
                               <Eye className="w-4 h-4" />
                             </button>
                             <Link
                               to={`/admin/training-register?session=${session.id}`}
-                              className="p-2 text-gray-400 hover:text-cyan-400 hover:bg-gray-700 rounded transition-colors"
+                              className="p-2 text-gray-300 hover:text-cyan-400 hover:bg-gray-700 rounded transition-colors"
                               title="View Training Register"
                             >
                               <ClipboardList className="w-4 h-4" />
                             </Link>
                             <button
                               onClick={() => setEditingSession(session)}
-                              className="p-2 text-gray-400 hover:text-purple-400 hover:bg-gray-700 rounded transition-colors"
+                              className="p-2 text-gray-300 hover:text-purple-400 hover:bg-gray-700 rounded transition-colors"
                               title="Edit"
                             >
                               <Edit2 className="w-4 h-4" />
                             </button>
                             {isUpcoming && booked === 0 && (
                               <button
-                                className="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded transition-colors"
+                                className="p-2 text-gray-300 hover:text-red-400 hover:bg-gray-700 rounded transition-colors"
                                 title="Delete"
                               >
                                 <Trash2 className="w-4 h-4" />
@@ -805,7 +805,7 @@ function EventsPage() {
             <Sparkles className="w-5 h-5 text-purple-400 mt-0.5" />
             <div>
               <h3 className="font-medium text-white mb-2">AI Search Examples</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-400">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-300">
                 <div>
                   <span className="text-purple-400">"open courses"</span> - Shows courses with available spots
                 </div>

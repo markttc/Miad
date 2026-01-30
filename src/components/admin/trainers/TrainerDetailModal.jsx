@@ -149,18 +149,18 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                       ? 'bg-green-900/50 text-green-400'
                       : trainer.status === 'pending'
                       ? 'bg-amber-900/50 text-amber-400'
-                      : 'bg-gray-700 text-gray-400'
+                      : 'bg-gray-700 text-gray-300'
                   }`}
                 >
                   {trainer.status}
                 </span>
-                <span className="text-sm text-gray-400">{trainer.address?.city}</span>
+                <span className="text-sm text-gray-300">{trainer.address?.city}</span>
               </div>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -173,7 +173,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
             className={`px-6 py-3 text-sm font-medium transition-colors ${
               activeTab === 'details'
                 ? 'text-purple-400 border-b-2 border-purple-400'
-                : 'text-gray-400 hover:text-white'
+                : 'text-gray-300 hover:text-white'
             }`}
           >
             Details
@@ -183,7 +183,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
             className={`px-6 py-3 text-sm font-medium transition-colors ${
               activeTab === 'qualifications'
                 ? 'text-purple-400 border-b-2 border-purple-400'
-                : 'text-gray-400 hover:text-white'
+                : 'text-gray-300 hover:text-white'
             }`}
           >
             Qualifications ({formData.qualifications?.length || 0})
@@ -193,7 +193,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
             className={`px-6 py-3 text-sm font-medium transition-colors ${
               activeTab === 'availability'
                 ? 'text-purple-400 border-b-2 border-purple-400'
-                : 'text-gray-400 hover:text-white'
+                : 'text-gray-300 hover:text-white'
             }`}
           >
             Availability
@@ -203,7 +203,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
             className={`px-6 py-3 text-sm font-medium transition-colors ${
               activeTab === 'billing'
                 ? 'text-purple-400 border-b-2 border-purple-400'
-                : 'text-gray-400 hover:text-white'
+                : 'text-gray-300 hover:text-white'
             }`}
           >
             Billing
@@ -213,7 +213,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
             className={`px-6 py-3 text-sm font-medium transition-colors ${
               activeTab === 'audit'
                 ? 'text-purple-400 border-b-2 border-purple-400'
-                : 'text-gray-400 hover:text-white'
+                : 'text-gray-300 hover:text-white'
             }`}
           >
             Audit
@@ -226,7 +226,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
             <div className="space-y-6">
               {/* Status */}
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Status</label>
+                <label className="block text-sm text-gray-300 mb-2">Status</label>
                 <select
                   name="status"
                   value={formData.status}
@@ -242,7 +242,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
               {/* Personal Info */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">First Name</label>
+                  <label className="block text-sm text-gray-300 mb-1">First Name</label>
                   <input
                     type="text"
                     name="firstName"
@@ -252,7 +252,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Last Name</label>
+                  <label className="block text-sm text-gray-300 mb-1">Last Name</label>
                   <input
                     type="text"
                     name="lastName"
@@ -266,7 +266,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
               {/* Contact */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Email</label>
+                  <label className="block text-sm text-gray-300 mb-1">Email</label>
                   <input
                     type="email"
                     name="email"
@@ -276,7 +276,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-1">Phone</label>
+                  <label className="block text-sm text-gray-300 mb-1">Phone</label>
                   <input
                     type="tel"
                     name="phone"
@@ -289,7 +289,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
 
               {/* Address */}
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Home Address</label>
+                <label className="block text-sm text-gray-300 mb-2">Home Address</label>
                 <div className="space-y-3">
                   <input
                     type="text"
@@ -330,7 +330,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
 
               {/* Delivery Preference */}
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Delivery Preference</label>
+                <label className="block text-sm text-gray-300 mb-2">Delivery Preference</label>
                 <div className="grid grid-cols-3 gap-3">
                   {deliveryPreferences.map((pref) => (
                     <button
@@ -340,7 +340,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                       className={`p-3 rounded-lg border text-sm flex flex-col items-center gap-2 transition-colors ${
                         formData.deliveryPreference === pref.id
                           ? 'border-purple-500 bg-purple-900/30 text-purple-300'
-                          : 'border-gray-700 text-gray-400 hover:border-gray-600'
+                          : 'border-gray-700 text-gray-300 hover:border-gray-600'
                       }`}
                     >
                       <DeliveryIcon type={pref.id} />
@@ -353,7 +353,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
               {/* Working Radius */}
               {formData.deliveryPreference !== 'digital' && (
                 <div>
-                  <label className="block text-sm text-gray-400 mb-2">Working Radius (miles)</label>
+                  <label className="block text-sm text-gray-300 mb-2">Working Radius (miles)</label>
                   <div className="flex items-center gap-4">
                     <input
                       type="range"
@@ -372,7 +372,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
 
               {/* Notes */}
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Notes</label>
+                <label className="block text-sm text-gray-300 mb-1">Notes</label>
                 <textarea
                   name="notes"
                   value={formData.notes || ''}
@@ -418,11 +418,11 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                             </div>
                             <div>
                               <h4 className="text-white font-medium">{qualType?.name || qual.typeId}</h4>
-                              <p className="text-sm text-gray-400 mt-1">
+                              <p className="text-sm text-gray-300 mt-1">
                                 Certificate: {qual.certificateRef || 'N/A'}
                               </p>
                               <div className="flex gap-4 mt-2 text-sm">
-                                <span className="text-gray-500">
+                                <span className="text-gray-300">
                                   Obtained: {new Date(qual.obtainedDate).toLocaleDateString('en-GB')}
                                 </span>
                                 <span className={`text-${color}-400`}>
@@ -433,7 +433,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                           </div>
                           <button
                             onClick={() => removeQualification(index)}
-                            className="p-2 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded transition-colors"
+                            className="p-2 text-gray-300 hover:text-red-400 hover:bg-gray-700 rounded transition-colors"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -443,7 +443,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                   })}
                 </div>
               ) : (
-                <div className="text-center py-8 text-gray-500">
+                <div className="text-center py-8 text-gray-300">
                   <Award className="w-12 h-12 mx-auto mb-2 opacity-50" />
                   <p>No qualifications added yet</p>
                 </div>
@@ -465,7 +465,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                   </select>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs text-gray-400 mb-1">Obtained Date</label>
+                      <label className="block text-xs text-gray-300 mb-1">Obtained Date</label>
                       <input
                         type="date"
                         value={newQual.obtainedDate}
@@ -474,7 +474,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-gray-400 mb-1">Expiry Date</label>
+                      <label className="block text-xs text-gray-300 mb-1">Expiry Date</label>
                       <input
                         type="date"
                         value={newQual.expiryDate}
@@ -500,7 +500,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                     </button>
                     <button
                       onClick={() => setShowAddQual(false)}
-                      className="px-4 py-2 text-gray-400 hover:text-white"
+                      className="px-4 py-2 text-gray-300 hover:text-white"
                     >
                       Cancel
                     </button>
@@ -509,7 +509,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
               ) : (
                 <button
                   onClick={() => setShowAddQual(true)}
-                  className="w-full py-3 border-2 border-dashed border-gray-700 rounded-lg text-gray-400 hover:border-purple-600 hover:text-purple-400 transition-colors flex items-center justify-center gap-2"
+                  className="w-full py-3 border-2 border-dashed border-gray-700 rounded-lg text-gray-300 hover:border-purple-600 hover:text-purple-400 transition-colors flex items-center justify-center gap-2"
                 >
                   <Plus className="w-4 h-4" />
                   Add Qualification
@@ -531,7 +531,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
             <div className="space-y-6">
               {/* VAT Registered */}
               <div>
-                <label className="block text-sm text-gray-400 mb-2">VAT Registered</label>
+                <label className="block text-sm text-gray-300 mb-2">VAT Registered</label>
                 <div className="flex gap-3">
                   <button
                     type="button"
@@ -539,7 +539,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                     className={`px-4 py-2 rounded-lg border text-sm transition-colors ${
                       formData.billing?.vatRegistered === true
                         ? 'border-purple-500 bg-purple-900/30 text-purple-300'
-                        : 'border-gray-700 text-gray-400 hover:border-gray-600'
+                        : 'border-gray-700 text-gray-300 hover:border-gray-600'
                     }`}
                   >
                     Yes
@@ -550,7 +550,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                     className={`px-4 py-2 rounded-lg border text-sm transition-colors ${
                       formData.billing?.vatRegistered === false
                         ? 'border-purple-500 bg-purple-900/30 text-purple-300'
-                        : 'border-gray-700 text-gray-400 hover:border-gray-600'
+                        : 'border-gray-700 text-gray-300 hover:border-gray-600'
                     }`}
                   >
                     No
@@ -560,7 +560,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
 
               {/* Company Type */}
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Company Type</label>
+                <label className="block text-sm text-gray-300 mb-1">Company Type</label>
                 <input
                   type="text"
                   name="billing.companyType"
@@ -579,7 +579,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                 </h3>
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-sm text-gray-400 mb-1">Account Name</label>
+                    <label className="block text-sm text-gray-300 mb-1">Account Name</label>
                     <input
                       type="text"
                       name="billing.accountName"
@@ -591,7 +591,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm text-gray-400 mb-1">Sort Code</label>
+                      <label className="block text-sm text-gray-300 mb-1">Sort Code</label>
                       <input
                         type="text"
                         name="billing.sortCode"
@@ -602,7 +602,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm text-gray-400 mb-1">Account Number</label>
+                      <label className="block text-sm text-gray-300 mb-1">Account Number</label>
                       <input
                         type="text"
                         name="billing.accountNumber"
@@ -622,7 +622,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
             <div className="space-y-4">
               {/* Filters */}
               <div className="flex items-center gap-3 flex-wrap">
-                <div className="flex items-center gap-2 text-sm text-gray-400">
+                <div className="flex items-center gap-2 text-sm text-gray-300">
                   <Filter className="w-4 h-4" />
                   <span>Filter by:</span>
                 </div>
@@ -672,12 +672,12 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                             <span className={`px-2 py-0.5 rounded text-xs font-medium bg-${color}-900/50 text-${color}-400`}>
                               {eventInfo?.label || entry.eventType}
                             </span>
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs text-gray-300">
                               by {entry.user}
                             </span>
                           </div>
                           <p className="text-sm text-gray-300 mt-1">{entry.details}</p>
-                          <p className="text-xs text-gray-500 mt-1">
+                          <p className="text-xs text-gray-300 mt-1">
                             {new Date(entry.timestamp).toLocaleDateString('en-GB', {
                               day: '2-digit',
                               month: 'short',
@@ -692,7 +692,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
                   })}
                 </div>
               ) : (
-                <div className="text-center py-8 text-gray-500">
+                <div className="text-center py-8 text-gray-300">
                   <History className="w-12 h-12 mx-auto mb-2 opacity-50" />
                   <p>No audit entries found</p>
                   {auditFilter !== 'all' && (
@@ -708,7 +708,7 @@ function TrainerDetailModal({ trainer, onClose, onSave }) {
         <div className="flex items-center justify-end gap-3 p-6 border-t border-purple-800/50">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-gray-400 hover:text-white transition-colors"
+            className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
           >
             Cancel
           </button>
