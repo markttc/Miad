@@ -124,7 +124,7 @@ function BookingsPage() {
               <img src={MiadLogo} alt="Miad Healthcare" className="h-7" />
             </Link>
             <div className="border-l border-gray-700 pl-6">
-              <div className="flex items-center gap-2 text-sm text-gray-300 mb-1">
+              <div className="flex items-center gap-2 text-sm text-white mb-1">
                 <Link to="/admin" className="hover:text-white">Dashboard</Link>
                 <ChevronRight className="w-4 h-4" />
                 <span className="text-white">Bookings</span>
@@ -139,19 +139,19 @@ function BookingsPage() {
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Total Bookings</p>
+            <p className="text-sm text-white">Total Bookings</p>
             <p className="text-2xl font-bold text-white">{stats.total}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Webinar Bookings</p>
+            <p className="text-sm text-white">Webinar Bookings</p>
             <p className="text-2xl font-bold text-cyan-400">{stats.webinars}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">E-Learning</p>
+            <p className="text-sm text-white">E-Learning</p>
             <p className="text-2xl font-bold text-green-400">{stats.elearning}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Total Revenue</p>
+            <p className="text-sm text-white">Total Revenue</p>
             <p className="text-2xl font-bold text-amber-400">£{stats.revenue.toLocaleString()}</p>
           </div>
         </div>
@@ -159,7 +159,7 @@ function BookingsPage() {
         {/* Filters */}
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white" />
             <input
               type="text"
               placeholder="Search by name, email, reference..."
@@ -232,13 +232,13 @@ function BookingsPage() {
           ) : filteredBookings.length === 0 ? (
             <div className="text-center py-12">
               <Users className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-300">No bookings found</p>
+              <p className="text-white">No bookings found</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="text-left text-sm text-gray-300 border-b border-gray-700">
+                  <tr className="text-left text-sm text-white border-b border-gray-700">
                     <th className="px-4 py-3 font-medium">Reference</th>
                     <th className="px-4 py-3 font-medium">Attendee</th>
                     <th className="px-4 py-3 font-medium">Course</th>
@@ -263,11 +263,11 @@ function BookingsPage() {
                           <p className="text-white font-medium">
                             {booking.attendee?.firstName} {booking.attendee?.lastName}
                           </p>
-                          <p className="text-xs text-gray-300">{booking.attendee?.email}</p>
+                          <p className="text-xs text-white">{booking.attendee?.email}</p>
                         </div>
                       </td>
                       <td className="px-4 py-3">
-                        <p className="text-gray-300 max-w-[200px] truncate">
+                        <p className="text-white max-w-[200px] truncate">
                           {booking.courseName}
                         </p>
                       </td>
@@ -284,17 +284,17 @@ function BookingsPage() {
                           </span>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-gray-300 text-sm">
+                      <td className="px-4 py-3 text-white text-sm">
                         {booking.sessionDate ? (
                           <div className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5 text-gray-300" />
+                            <Calendar className="w-3.5 h-3.5 text-white" />
                             {new Date(booking.sessionDate).toLocaleDateString('en-GB', {
                               day: 'numeric',
                               month: 'short',
                             })}
                           </div>
                         ) : (
-                          <span className="text-gray-300">Immediate</span>
+                          <span className="text-white">Immediate</span>
                         )}
                       </td>
                       <td className="px-4 py-3">
@@ -332,13 +332,13 @@ function BookingsPage() {
                         <div className="flex items-center gap-1">
                           <button
                             onClick={() => setSelectedBooking(booking)}
-                            className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded transition-colors"
+                            className="p-2 text-white hover:text-white hover:bg-gray-700 rounded transition-colors"
                             title="View Details"
                           >
                             <Eye className="w-4 h-4" />
                           </button>
                           <button
-                            className="p-2 text-gray-300 hover:text-[#13d8a0] hover:bg-gray-700 rounded transition-colors"
+                            className="p-2 text-white hover:text-[#13d8a0] hover:bg-gray-700 rounded transition-colors"
                             title="Resend Confirmation"
                           >
                             <Send className="w-4 h-4" />
@@ -346,7 +346,7 @@ function BookingsPage() {
                           {booking.status === 'confirmed' && (
                             <button
                               onClick={() => setBookingToCancel(booking)}
-                              className="p-2 text-gray-300 hover:text-red-400 hover:bg-gray-700 rounded transition-colors"
+                              className="p-2 text-white hover:text-red-400 hover:bg-gray-700 rounded transition-colors"
                               title="Cancel Booking"
                             >
                               <Ban className="w-4 h-4" />
@@ -419,7 +419,7 @@ function BookingDetailModal({ booking, onClose, onCancel }) {
           <h2 className="text-xl font-bold text-white">Booking Details</h2>
           <button
             onClick={onClose}
-            className="text-gray-300 hover:text-white"
+            className="text-white hover:text-white"
           >
             <XCircle className="w-6 h-6" />
           </button>
@@ -427,43 +427,43 @@ function BookingDetailModal({ booking, onClose, onCancel }) {
 
         {/* Reference */}
         <div className="mb-6 p-4 bg-purple-900/30 rounded-lg border border-purple-800/50">
-          <p className="text-sm text-gray-300">Booking Reference</p>
+          <p className="text-sm text-white">Booking Reference</p>
           <p className="text-2xl font-mono font-bold text-purple-400">{booking.bookingRef}</p>
         </div>
 
         {/* Attendee Info */}
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+          <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
             Attendee Information
           </h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm text-gray-300">Name</p>
+              <p className="text-sm text-white">Name</p>
               <p className="text-white">
                 {booking.attendee?.firstName} {booking.attendee?.lastName}
               </p>
             </div>
             <div>
-              <p className="text-sm text-gray-300">Email</p>
+              <p className="text-sm text-white">Email</p>
               <p className="text-white flex items-center gap-2">
-                <Mail className="w-4 h-4 text-gray-300" />
+                <Mail className="w-4 h-4 text-white" />
                 {booking.attendee?.email}
               </p>
             </div>
             {booking.attendee?.phone && (
               <div>
-                <p className="text-sm text-gray-300">Phone</p>
+                <p className="text-sm text-white">Phone</p>
                 <p className="text-white flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-gray-300" />
+                  <Phone className="w-4 h-4 text-white" />
                   {booking.attendee.phone}
                 </p>
               </div>
             )}
             {booking.attendee?.organisation && (
               <div>
-                <p className="text-sm text-gray-300">Organisation</p>
+                <p className="text-sm text-white">Organisation</p>
                 <p className="text-white flex items-center gap-2">
-                  <Building className="w-4 h-4 text-gray-300" />
+                  <Building className="w-4 h-4 text-white" />
                   {booking.attendee.organisation}
                 </p>
               </div>
@@ -473,12 +473,12 @@ function BookingDetailModal({ booking, onClose, onCancel }) {
 
         {/* Course Info */}
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+          <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
             Course Details
           </h3>
           <div className="p-4 bg-gray-900/50 rounded-lg">
             <p className="text-white font-medium">{booking.courseName}</p>
-            <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-300">
+            <div className="flex flex-wrap gap-4 mt-2 text-sm text-white">
               <span className="flex items-center gap-1">
                 {booking.isElearning ? (
                   <><Monitor className="w-4 h-4" /> E-Learning</>
@@ -505,23 +505,23 @@ function BookingDetailModal({ booking, onClose, onCancel }) {
               )}
             </div>
             {booking.trainer && (
-              <p className="text-sm text-gray-300 mt-2">Trainer: {booking.trainer}</p>
+              <p className="text-sm text-white mt-2">Trainer: {booking.trainer}</p>
             )}
           </div>
         </div>
 
         {/* Payment Info */}
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+          <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
             Payment
           </h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm text-gray-300">Amount</p>
+              <p className="text-sm text-white">Amount</p>
               <p className="text-xl font-bold text-white">£{booking.payment?.amount}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-300">Method</p>
+              <p className="text-sm text-white">Method</p>
               {isPOPayment ? (
                 <span className="px-2 py-1 bg-amber-900/50 text-amber-400 text-xs font-medium rounded inline-flex items-center gap-1">
                   <FileText className="w-3 h-3" />
@@ -535,7 +535,7 @@ function BookingDetailModal({ booking, onClose, onCancel }) {
               )}
             </div>
             <div>
-              <p className="text-sm text-gray-300">Status</p>
+              <p className="text-sm text-white">Status</p>
               <span className={`px-2 py-1 text-xs font-medium rounded ${
                 booking.payment?.status === 'refunded' || booking.payment?.status === 'partial_refund'
                   ? 'bg-red-900/50 text-red-400'
@@ -545,7 +545,7 @@ function BookingDetailModal({ booking, onClose, onCancel }) {
               </span>
             </div>
             <div>
-              <p className="text-sm text-gray-300">Booked</p>
+              <p className="text-sm text-white">Booked</p>
               <p className="text-white text-sm">
                 {new Date(booking.createdAt).toLocaleString('en-GB')}
               </p>
@@ -558,11 +558,11 @@ function BookingDetailModal({ booking, onClose, onCancel }) {
               <p className="text-xs text-amber-400 font-medium mb-2">Purchase Order Details</p>
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
-                  <p className="text-gray-300">PO Number</p>
+                  <p className="text-white">PO Number</p>
                   <p className="text-white font-mono">{booking.payment.purchaseOrder.poNumber}</p>
                 </div>
                 <div>
-                  <p className="text-gray-300">Account</p>
+                  <p className="text-white">Account</p>
                   <p className="text-white">{booking.payment.purchaseOrder.customerAccountName}</p>
                 </div>
               </div>
@@ -575,15 +575,15 @@ function BookingDetailModal({ booking, onClose, onCancel }) {
               <p className="text-xs text-red-400 font-medium mb-2">Refund Information</p>
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
-                  <p className="text-gray-300">Refund Amount</p>
+                  <p className="text-white">Refund Amount</p>
                   <p className="text-white">£{booking.payment.refund.amount}</p>
                 </div>
                 <div>
-                  <p className="text-gray-300">Status</p>
+                  <p className="text-white">Status</p>
                   <p className="text-white capitalize">{booking.payment.refund.status}</p>
                 </div>
                 <div className="col-span-2">
-                  <p className="text-gray-300">Reason</p>
+                  <p className="text-white">Reason</p>
                   <p className="text-white">{booking.payment.refund.reason}</p>
                 </div>
               </div>
@@ -594,17 +594,17 @@ function BookingDetailModal({ booking, onClose, onCancel }) {
         {/* Zoom Info */}
         {booking.zoomMeeting && (
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+            <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
               Zoom Meeting
             </h3>
             <div className="p-4 bg-cyan-900/20 rounded-lg border border-cyan-800/50">
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <p className="text-gray-300">Meeting ID</p>
+                  <p className="text-white">Meeting ID</p>
                   <code className="text-cyan-400">{booking.zoomMeeting.meetingId}</code>
                 </div>
                 <div>
-                  <p className="text-gray-300">Password</p>
+                  <p className="text-white">Password</p>
                   <code className="text-cyan-400">{booking.zoomMeeting.password}</code>
                 </div>
               </div>

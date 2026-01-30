@@ -12,7 +12,7 @@ function Footer() {
             <Link to="/" className="flex items-center mb-4">
               <img src={MiadLogo} alt="Miad Healthcare" className="h-7" />
             </Link>
-            <p className="text-sm text-gray-300">
+            <p className="text-sm text-white">
               Professional healthcare training and development for NHS trusts, care providers, and healthcare professionals.
             </p>
           </div>
@@ -24,27 +24,27 @@ function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/courses" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <Link to="/courses" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   All Courses
                 </Link>
               </li>
               <li>
-                <Link to="/elearning" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <Link to="/elearning" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   E-Learning
                 </Link>
               </li>
               <li>
-                <Link to="/webinars" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <Link to="/webinars" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   Live Webinars
                 </Link>
               </li>
               <li>
-                <Link to="/courses?category=mandatory" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <Link to="/courses?category=mandatory" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   Mandatory Training
                 </Link>
               </li>
               <li>
-                <Link to="/courses?category=clinical" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <Link to="/courses?category=clinical" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   Clinical Skills
                 </Link>
               </li>
@@ -58,27 +58,27 @@ function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/account" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <Link to="/account" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   My Account
                 </Link>
               </li>
               <li>
-                <Link to="/bookings" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <Link to="/bookings" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   My Bookings
                 </Link>
               </li>
               <li>
-                <Link to="/certificates" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <Link to="/certificates" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   Certificates
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <Link to="/faq" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <Link to="/contact" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   Contact Us
                 </Link>
               </li>
@@ -93,19 +93,19 @@ function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
                 <Mail className="w-4 h-4 text-[#13d8a0] mt-0.5" />
-                <a href="mailto:training@miad.co.uk" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <a href="mailto:training@miad.co.uk" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   training@miad.co.uk
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="w-4 h-4 text-[#13d8a0] mt-0.5" />
-                <a href="tel:08001234567" className="text-gray-300 hover:text-[#13d8a0] text-sm transition-colors">
+                <a href="tel:08001234567" className="text-white hover:text-[#13d8a0] text-sm transition-colors">
                   0800 123 4567
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#13d8a0] mt-0.5" />
-                <span className="text-gray-300 text-sm">
+                <span className="text-white text-sm">
                   Miad Healthcare<br />
                   Training Centre<br />
                   London, UK
@@ -117,17 +117,17 @@ function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-300">
+          <p className="text-sm text-white">
             &copy; {new Date().getFullYear()} Miad Healthcare Training. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link to="/privacy" className="text-sm text-gray-300 hover:text-gray-300 transition-colors">
+            <Link to="/privacy" className="text-sm text-white hover:text-[#13d8a0] transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="text-sm text-gray-300 hover:text-gray-300 transition-colors">
+            <Link to="/terms" className="text-sm text-white hover:text-[#13d8a0] transition-colors">
               Terms of Service
             </Link>
-            <Link to="/accessibility" className="text-sm text-gray-300 hover:text-gray-300 transition-colors">
+            <Link to="/accessibility" className="text-sm text-white hover:text-[#13d8a0] transition-colors">
               Accessibility
             </Link>
           </div>

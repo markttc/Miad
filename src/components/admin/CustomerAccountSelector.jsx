@@ -94,15 +94,15 @@ function CustomerAccountSelector({ value, onChange, requiredAmount = 0 }) {
             <Building className="w-5 h-5 text-amber-400 flex-shrink-0" />
             <div className="min-w-0">
               <div className="text-white font-medium truncate">{selectedAccount.organisationName}</div>
-              <div className="text-xs text-gray-300">
+              <div className="text-xs text-white">
                 {selectedAccount.accountNumber} • Credit: £{selectedAccount.availableCredit.toLocaleString()}
               </div>
             </div>
           </div>
         ) : (
-          <span className="text-gray-300">Select a customer account...</span>
+          <span className="text-white">Select a customer account...</span>
         )}
-        <ChevronDown className={`w-5 h-5 text-gray-300 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-5 h-5 text-white transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {/* Insufficient Credit Warning */}
@@ -122,7 +122,7 @@ function CustomerAccountSelector({ value, onChange, requiredAmount = 0 }) {
           {/* Search */}
           <div className="p-3 border-b border-gray-700">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
               <input
                 type="text"
                 value={searchQuery}
@@ -139,7 +139,7 @@ function CustomerAccountSelector({ value, onChange, requiredAmount = 0 }) {
             <>
               <div className="max-h-64 overflow-y-auto">
                 {filteredAccounts.length === 0 ? (
-                  <div className="p-4 text-center text-gray-300">
+                  <div className="p-4 text-center text-white">
                     No accounts found
                   </div>
                 ) : (
@@ -159,7 +159,7 @@ function CustomerAccountSelector({ value, onChange, requiredAmount = 0 }) {
                         <Building className="w-5 h-5 text-amber-400 flex-shrink-0" />
                         <div className="flex-1 min-w-0">
                           <div className="text-white font-medium truncate">{account.organisationName}</div>
-                          <div className="text-xs text-gray-300">
+                          <div className="text-xs text-white">
                             {account.accountNumber}
                           </div>
                           <div className="text-xs mt-1">
@@ -198,7 +198,7 @@ function CustomerAccountSelector({ value, onChange, requiredAmount = 0 }) {
                 <h3 className="text-sm font-medium text-white">New Customer Account</h3>
                 <button
                   onClick={() => setShowCreateForm(false)}
-                  className="p-1 text-gray-300 hover:text-white"
+                  className="p-1 text-white hover:text-white"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -206,7 +206,7 @@ function CustomerAccountSelector({ value, onChange, requiredAmount = 0 }) {
 
               <div className="space-y-3">
                 <div>
-                  <label className="block text-xs text-gray-300 mb-1">Organisation Name *</label>
+                  <label className="block text-xs text-white mb-1">Organisation Name *</label>
                   <input
                     type="text"
                     value={newAccount.organisationName}
@@ -217,7 +217,7 @@ function CustomerAccountSelector({ value, onChange, requiredAmount = 0 }) {
                 </div>
 
                 <div>
-                  <label className="block text-xs text-gray-300 mb-1">Contact Name</label>
+                  <label className="block text-xs text-white mb-1">Contact Name</label>
                   <input
                     type="text"
                     value={newAccount.contactName}
@@ -228,7 +228,7 @@ function CustomerAccountSelector({ value, onChange, requiredAmount = 0 }) {
                 </div>
 
                 <div>
-                  <label className="block text-xs text-gray-300 mb-1">Contact Email</label>
+                  <label className="block text-xs text-white mb-1">Contact Email</label>
                   <input
                     type="email"
                     value={newAccount.contactEmail}
@@ -239,7 +239,7 @@ function CustomerAccountSelector({ value, onChange, requiredAmount = 0 }) {
                 </div>
 
                 <div>
-                  <label className="block text-xs text-gray-300 mb-1">Credit Limit (£)</label>
+                  <label className="block text-xs text-white mb-1">Credit Limit (£)</label>
                   <input
                     type="number"
                     value={newAccount.creditLimit}

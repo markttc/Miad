@@ -100,7 +100,7 @@ function CoursesPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="section-title mb-2">Healthcare Training Courses</h1>
-          <p className="text-gray-300">
+          <p className="text-white">
             Browse our full range of accredited healthcare training programmes
           </p>
         </div>
@@ -109,7 +109,7 @@ function CoursesPage() {
         <div className="flex flex-col lg:flex-row gap-4 mb-8">
           {/* Search */}
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white" />
             <input
               type="text"
               placeholder="Search courses..."
@@ -180,14 +180,14 @@ function CoursesPage() {
           <div className="lg:hidden card mb-6">
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Session Date
                 </label>
                 <DateTimeSlicer onChange={setDateFilter} />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Category
                 </label>
                 <select
@@ -205,7 +205,7 @@ function CoursesPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Delivery Method
                 </label>
                 <select
@@ -234,7 +234,7 @@ function CoursesPage() {
 
         {/* Results Count */}
         <div className="flex items-center justify-between mb-6">
-          <p className="text-gray-300">
+          <p className="text-white">
             Showing <span className="text-white font-medium">{filteredCourses.length}</span> courses
           </p>
         </div>
@@ -242,7 +242,7 @@ function CoursesPage() {
         {/* Course Grid */}
         {filteredCourses.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-gray-300 text-lg mb-4">No courses found matching your criteria</p>
+            <p className="text-white text-lg mb-4">No courses found matching your criteria</p>
             <button onClick={clearFilters} className="btn-secondary">
               Clear Filters
             </button>
@@ -279,12 +279,12 @@ function CoursesPage() {
                   {course.name}
                 </h3>
 
-                <p className="text-sm text-gray-300 mb-4 line-clamp-2 flex-1">
+                <p className="text-sm text-white mb-4 line-clamp-2 flex-1">
                   {course.description}
                 </p>
 
                 {/* Meta Info */}
-                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-300 mb-4">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-white mb-4">
                   <span className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
                     {course.duration}
@@ -303,7 +303,7 @@ function CoursesPage() {
                 {/* Price and CTA */}
                 <div className="flex items-center justify-between pt-4 border-t border-gray-700 mt-auto">
                   <div>
-                    <span className="text-xs text-gray-300">From</span>
+                    <span className="text-xs text-white">From</span>
                     <span className="text-xl font-bold text-white ml-2">£{course.price}</span>
                   </div>
                   <span className="text-[#13d8a0] font-medium flex items-center gap-1 group-hover:gap-2 transition-all">

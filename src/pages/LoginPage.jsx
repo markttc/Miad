@@ -134,7 +134,7 @@ function LoginPage() {
           <h1 className="text-2xl font-bold text-white">
             {loginType === 'admin' ? 'TTC Admin Login' : 'Access Your Account'}
           </h1>
-          <p className="text-gray-300 mt-2">
+          <p className="text-white mt-2">
             {loginType === 'admin'
               ? 'Sign in to manage courses and bookings'
               : 'View your bookings and course access'}
@@ -148,7 +148,7 @@ function LoginPage() {
             className={`flex-1 py-2 px-4 rounded-lg text-center text-sm font-medium transition-colors ${
               loginType === 'booker'
                 ? 'bg-[#13d8a0] text-white'
-                : 'bg-gray-800 text-gray-300 hover:text-white'
+                : 'bg-gray-800 text-white hover:text-white'
             }`}
           >
             Booker Login
@@ -158,7 +158,7 @@ function LoginPage() {
             className={`flex-1 py-2 px-4 rounded-lg text-center text-sm font-medium transition-colors ${
               loginType === 'admin'
                 ? 'bg-[#13d8a0] text-white'
-                : 'bg-gray-800 text-gray-300 hover:text-white'
+                : 'bg-gray-800 text-white hover:text-white'
             }`}
           >
             TTC Admin
@@ -190,11 +190,11 @@ function LoginPage() {
             {step === 'initial' ? (
               <>
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-white mb-2">
                     Email Address
                   </label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white" />
                     <input
                       type="email"
                       value={email}
@@ -204,7 +204,7 @@ function LoginPage() {
                       required
                     />
                   </div>
-                  <p className="text-xs text-gray-300 mt-2">
+                  <p className="text-xs text-white mt-2">
                     We&apos;ll send a one-time login code to this email
                   </p>
                 </div>
@@ -229,19 +229,19 @@ function LoginPage() {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="text-gray-300 hover:text-white flex items-center gap-1 text-sm mb-4"
+                  className="text-white hover:text-white flex items-center gap-1 text-sm mb-4"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Use different email
                 </button>
 
-                <div className="mb-2 text-sm text-gray-300">
+                <div className="mb-2 text-sm text-white">
                   Enter the 6-digit code sent to:
                 </div>
                 <div className="mb-6 font-medium text-white">{email}</div>
 
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-white mb-2">
                     Login Code
                   </label>
                   <input
@@ -292,11 +292,11 @@ function LoginPage() {
             {step === 'initial' ? (
               <>
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-white mb-2">
                     Username
                   </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white" />
                     <input
                       type="text"
                       value={username}
@@ -309,11 +309,11 @@ function LoginPage() {
                 </div>
 
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-white mb-2">
                     Password
                   </label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white" />
                     <input
                       type="password"
                       value={password}
@@ -340,7 +340,7 @@ function LoginPage() {
                   )}
                 </button>
 
-                <p className="text-xs text-gray-300 mt-4 text-center">
+                <p className="text-xs text-white mt-4 text-center">
                   Demo: username <code className="text-[#13d8a0]">ttcadmin</code> / password <code className="text-[#13d8a0]">admin123</code>
                 </p>
               </>
@@ -349,7 +349,7 @@ function LoginPage() {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="text-gray-300 hover:text-white flex items-center gap-1 text-sm mb-4"
+                  className="text-white hover:text-white flex items-center gap-1 text-sm mb-4"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Back to login
@@ -358,7 +358,7 @@ function LoginPage() {
                 <div className="mb-6 text-center">
                   <Shield className="w-12 h-12 text-[#13d8a0] mx-auto mb-2" />
                   <h3 className="text-lg font-semibold text-white">Two-Factor Authentication</h3>
-                  <p className="text-sm text-gray-300 mt-1">
+                  <p className="text-sm text-white mt-1">
                     Enter the 6-digit code from your authenticator
                   </p>
                 </div>
@@ -396,7 +396,7 @@ function LoginPage() {
         )}
 
         {/* Help Text */}
-        <div className="mt-6 text-center text-sm text-gray-300">
+        <div className="mt-6 text-center text-sm text-white">
           {loginType === 'booker' ? (
             <p>
               Need help? Contact{' '}

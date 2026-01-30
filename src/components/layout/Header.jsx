@@ -32,7 +32,7 @@ function Header() {
                   `text-sm font-medium transition-colors ${
                     isActive
                       ? 'text-[#13d8a0]'
-                      : 'text-gray-300 hover:text-white'
+                      : 'text-white hover:text-[#13d8a0]'
                   }`
                 }
               >
@@ -45,7 +45,7 @@ function Header() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/cart"
-              className="relative p-2 text-gray-300 hover:text-white transition-colors"
+              className="relative p-2 text-white hover:text-[#13d8a0] transition-colors"
             >
               <ShoppingCart className="w-5 h-5" />
               <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#13d8a0] rounded-full text-xs flex items-center justify-center text-white font-medium">
@@ -54,7 +54,7 @@ function Header() {
             </Link>
             <Link
               to="/account"
-              className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+              className="flex items-center gap-2 text-white hover:text-[#13d8a0] transition-colors"
             >
               <User className="w-5 h-5" />
               <span className="text-sm font-medium">Account</span>
@@ -70,7 +70,7 @@ function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-gray-300 hover:text-white"
+            className="md:hidden p-2 text-white hover:text-[#13d8a0]"
           >
             {mobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -94,7 +94,7 @@ function Header() {
                   `block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     isActive
                       ? 'bg-[#13d8a0]/10 text-[#13d8a0]'
-                      : 'text-gray-300 hover:bg-gray-800'
+                      : 'text-white hover:bg-gray-800'
                   }`
                 }
               >
@@ -105,7 +105,7 @@ function Header() {
               <Link
                 to="/account"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-2 text-gray-300 hover:text-white"
+                className="block px-4 py-2 text-white hover:text-[#13d8a0]"
               >
                 My Account
               </Link>

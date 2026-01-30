@@ -73,7 +73,7 @@ function AdminDashboard() {
               </Link>
               <div className="border-l border-gray-700 pl-6">
                 <h1 className="text-xl font-bold text-white">Admin Dashboard</h1>
-                <p className="text-sm text-gray-300">Welcome back, {user?.name || 'Admin'}</p>
+                <p className="text-sm text-white">Welcome back, {user?.name || 'Admin'}</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -82,7 +82,7 @@ function AdminDashboard() {
                   logout()
                   navigate('/login?type=admin')
                 }}
-                className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors text-sm"
+                className="flex items-center gap-2 px-4 py-2 text-white hover:text-white hover:bg-gray-700 rounded-lg transition-colors text-sm"
               >
                 <LogOut className="w-4 h-4" />
                 Logout
@@ -185,7 +185,7 @@ function AdminDashboard() {
             </div>
 
             {recentBookings.length === 0 ? (
-              <div className="text-center py-8 text-gray-300">
+              <div className="text-center py-8 text-white">
                 <Users className="w-8 h-8 mx-auto mb-2 opacity-50" />
                 <p>No bookings yet</p>
               </div>
@@ -210,14 +210,14 @@ function AdminDashboard() {
                         <p className="text-sm font-medium text-white">
                           {booking.attendee?.firstName} {booking.attendee?.lastName}
                         </p>
-                        <p className="text-xs text-gray-300">{booking.courseName}</p>
+                        <p className="text-xs text-white">{booking.courseName}</p>
                       </div>
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-medium text-white">
                         £{booking.payment?.amount}
                       </p>
-                      <p className="text-xs text-gray-300">
+                      <p className="text-xs text-white">
                         {new Date(booking.createdAt).toLocaleDateString('en-GB')}
                       </p>
                     </div>
@@ -240,7 +240,7 @@ function AdminDashboard() {
             </div>
 
             {upcomingSessionsList.length === 0 ? (
-              <div className="text-center py-8 text-gray-300">
+              <div className="text-center py-8 text-white">
                 <Calendar className="w-8 h-8 mx-auto mb-2 opacity-50" />
                 <p>No upcoming sessions</p>
               </div>
@@ -264,7 +264,7 @@ function AdminDashboard() {
                         </div>
                         <div>
                           <p className="text-sm font-medium text-white">{course?.name}</p>
-                          <p className="text-xs text-gray-300">
+                          <p className="text-xs text-white">
                             {session.time} • {session.trainer}
                           </p>
                         </div>
@@ -273,7 +273,7 @@ function AdminDashboard() {
                         <p className="text-sm text-white">
                           {session.spotsTotal - session.spotsRemaining} / {session.spotsTotal}
                         </p>
-                        <p className="text-xs text-gray-300">booked</p>
+                        <p className="text-xs text-white">booked</p>
                       </div>
                     </div>
                   )
@@ -318,7 +318,7 @@ function StatCard({ title, value, icon: Icon, color, link }) {
     <div className={`rounded-xl border p-6 ${colorClasses[color]}`}>
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm text-gray-300">{title}</p>
+          <p className="text-sm text-white">{title}</p>
           <p className="text-2xl font-bold text-white mt-1">{value}</p>
         </div>
         <Icon className="w-8 h-8 opacity-50" />
@@ -351,7 +351,7 @@ function QuickActionCard({ title, description, icon: Icon, link, color }) {
       <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
         {title}
       </h3>
-      <p className="text-sm text-gray-300 mt-1">{description}</p>
+      <p className="text-sm text-white mt-1">{description}</p>
       <div className="mt-4 text-purple-400 text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
         Open <ChevronRight className="w-4 h-4" />
       </div>

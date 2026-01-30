@@ -35,7 +35,7 @@ function ProtectedRoute({ children, requireAdmin = false }) {
       <div className="min-h-screen flex items-center justify-center bg-gray-900">
         <div className="text-center">
           <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-300">Loading...</p>
+          <p className="text-white">Loading...</p>
         </div>
       </div>
     )
@@ -322,7 +322,7 @@ function PlaceholderPage({ title }) {
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
         <h1 className="text-3xl font-bold text-white mb-4">{title}</h1>
-        <p className="text-gray-300">This page is under construction</p>
+        <p className="text-white">This page is under construction</p>
       </div>
     </div>
   )

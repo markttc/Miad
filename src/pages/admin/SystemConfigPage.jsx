@@ -257,13 +257,13 @@ function SystemConfigPage() {
                 <div className="flex items-center gap-2">
                   <Link
                     to="/admin"
-                    className="text-gray-300 hover:text-white transition-colors"
+                    className="text-white hover:text-white transition-colors"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </Link>
                   <h1 className="text-xl font-bold text-white">System Configuration</h1>
                 </div>
-                <p className="text-sm text-gray-300">Manage integrations, communications and features</p>
+                <p className="text-sm text-white">Manage integrations, communications and features</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -286,7 +286,7 @@ function SystemConfigPage() {
                   logout()
                   navigate('/login?type=admin')
                 }}
-                className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors text-sm"
+                className="flex items-center gap-2 px-4 py-2 text-white hover:text-white hover:bg-gray-700 rounded-lg transition-colors text-sm"
               >
                 <LogOut className="w-4 h-4" />
                 Logout
@@ -308,7 +308,7 @@ function SystemConfigPage() {
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                   activeTab === tab.id
                     ? 'bg-purple-600 text-white'
-                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                    : 'text-white hover:text-white hover:bg-gray-800'
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -409,7 +409,7 @@ function IntegrationsTab({ config, updateConfig }) {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white">{integration.name}</h3>
-                    <p className="text-sm text-gray-300">{integration.description}</p>
+                    <p className="text-sm text-white">{integration.description}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -419,7 +419,7 @@ function IntegrationsTab({ config, updateConfig }) {
                       Connected
                     </span>
                   ) : (
-                    <span className="flex items-center gap-1 px-2 py-1 bg-gray-700 text-gray-300 rounded text-xs">
+                    <span className="flex items-center gap-1 px-2 py-1 bg-gray-700 text-white rounded text-xs">
                       <XCircle className="w-3 h-3" />
                       Disconnected
                     </span>
@@ -428,7 +428,7 @@ function IntegrationsTab({ config, updateConfig }) {
               </div>
 
               {isConnected && integrationConfig?.lastSync && (
-                <p className="text-xs text-gray-300 mb-4">
+                <p className="text-xs text-white mb-4">
                   Last synced: {new Date(integrationConfig.lastSync).toLocaleString('en-GB')}
                 </p>
               )}
@@ -466,14 +466,14 @@ function IntegrationsTab({ config, updateConfig }) {
           <Key className="w-5 h-5 text-purple-400" />
           <h3 className="text-lg font-semibold text-white">API Keys</h3>
         </div>
-        <p className="text-sm text-gray-300 mb-4">
+        <p className="text-sm text-white mb-4">
           Manage API keys for programmatic access to the Miad platform.
         </p>
         <div className="bg-gray-900/50 rounded-lg p-4 mb-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-white font-medium">Production API Key</p>
-              <p className="text-xs text-gray-300 font-mono mt-1">miad_live_sk_*********************</p>
+              <p className="text-xs text-white font-mono mt-1">miad_live_sk_*********************</p>
             </div>
             <button className="text-purple-400 hover:text-purple-300 text-sm">
               Regenerate
@@ -512,7 +512,7 @@ function CommunicationsTab({ config, updateConfig, toggleNotification }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               Email Provider
             </label>
             <select
@@ -532,7 +532,7 @@ function CommunicationsTab({ config, updateConfig, toggleNotification }) {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               From Address
             </label>
             <input
@@ -548,7 +548,7 @@ function CommunicationsTab({ config, updateConfig, toggleNotification }) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               From Name
             </label>
             <input
@@ -564,7 +564,7 @@ function CommunicationsTab({ config, updateConfig, toggleNotification }) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               Reply-To Address
             </label>
             <input
@@ -611,7 +611,7 @@ function CommunicationsTab({ config, updateConfig, toggleNotification }) {
         {config.communications.sms.enabled && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-white mb-2">
                 SMS Provider
               </label>
               <select
@@ -630,7 +630,7 @@ function CommunicationsTab({ config, updateConfig, toggleNotification }) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-white mb-2">
                 From Number
               </label>
               <input
@@ -665,7 +665,7 @@ function CommunicationsTab({ config, updateConfig, toggleNotification }) {
             >
               <div>
                 <p className="text-white font-medium">{notification.label}</p>
-                <p className="text-sm text-gray-300">{notification.description}</p>
+                <p className="text-sm text-white">{notification.description}</p>
               </div>
               <button
                 onClick={() => toggleNotification(notification.key)}
@@ -702,7 +702,7 @@ function CommunicationsTab({ config, updateConfig, toggleNotification }) {
               className="p-4 bg-gray-900/50 rounded-lg border border-gray-700 hover:border-purple-600 cursor-pointer transition-colors"
             >
               <p className="text-white font-medium mb-1">{template}</p>
-              <p className="text-xs text-gray-300">Last edited: 15 Jan 2026</p>
+              <p className="text-xs text-white">Last edited: 15 Jan 2026</p>
               <button className="text-purple-400 hover:text-purple-300 text-sm mt-2">
                 Edit Template
               </button>
@@ -770,12 +770,12 @@ function FeatureTogglesTab({ config, toggleFeature }) {
                       {feature.enabled ? (
                         <ToggleRight className="w-5 h-5 text-purple-400" />
                       ) : (
-                        <ToggleLeft className="w-5 h-5 text-gray-300" />
+                        <ToggleLeft className="w-5 h-5 text-white" />
                       )}
                     </div>
                     <div>
                       <p className="text-white font-medium">{feature.label}</p>
-                      <p className="text-sm text-gray-300">{feature.description}</p>
+                      <p className="text-sm text-white">{feature.description}</p>
                     </div>
                   </div>
                   <button

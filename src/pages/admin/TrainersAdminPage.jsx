@@ -178,7 +178,7 @@ function TrainersAdminPage() {
                 <img src={MiadLogo} alt="Miad Healthcare" className="h-7" />
               </Link>
               <div className="border-l border-gray-700 pl-6">
-                <div className="flex items-center gap-2 text-sm text-gray-300 mb-1">
+                <div className="flex items-center gap-2 text-sm text-white mb-1">
                   <Link to="/admin" className="hover:text-white">Dashboard</Link>
                   <ChevronRight className="w-4 h-4" />
                   <span className="text-white">Trainers & Supply Chain</span>
@@ -201,19 +201,19 @@ function TrainersAdminPage() {
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Total Trainers</p>
+            <p className="text-sm text-white">Total Trainers</p>
             <p className="text-2xl font-bold text-white">{stats.total}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Active</p>
+            <p className="text-sm text-white">Active</p>
             <p className="text-2xl font-bold text-green-400">{stats.active}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Pending Approval</p>
+            <p className="text-sm text-white">Pending Approval</p>
             <p className="text-2xl font-bold text-amber-400">{stats.pending}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Expiring Certs (30d)</p>
+            <p className="text-sm text-white">Expiring Certs (30d)</p>
             <p className="text-2xl font-bold text-red-400">{stats.expiringQuals}</p>
           </div>
         </div>
@@ -229,7 +229,7 @@ function TrainersAdminPage() {
             </div>
             <div>
               <p className="text-white font-medium">Training Register</p>
-              <p className="text-xs text-gray-300">Mark attendance & completions</p>
+              <p className="text-xs text-white">Mark attendance & completions</p>
             </div>
           </Link>
         </div>
@@ -237,7 +237,7 @@ function TrainersAdminPage() {
         {/* Filters */}
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white" />
             <input
               type="text"
               placeholder="Search by name, email, or location..."
@@ -276,7 +276,7 @@ function TrainersAdminPage() {
         {filteredTrainers.length === 0 ? (
           <div className="bg-gray-800 rounded-xl border border-purple-800/50 p-12 text-center">
             <Users className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-300">No trainers found</p>
+            <p className="text-white">No trainers found</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -302,7 +302,7 @@ function TrainersAdminPage() {
                         <h3 className="text-white font-semibold">
                           {trainer.firstName} {trainer.lastName}
                         </h3>
-                        <p className="text-xs text-gray-300">{trainer.address?.city}</p>
+                        <p className="text-xs text-white">{trainer.address?.city}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
@@ -317,7 +317,7 @@ function TrainersAdminPage() {
                             ? 'bg-green-900/50 text-green-400'
                             : trainer.status === 'pending'
                             ? 'bg-amber-900/50 text-amber-400'
-                            : 'bg-gray-700 text-gray-300'
+                            : 'bg-gray-700 text-white'
                         }`}
                       >
                         {trainer.status}
@@ -327,11 +327,11 @@ function TrainersAdminPage() {
 
                   {/* Contact */}
                   <div className="space-y-2 mb-4">
-                    <p className="text-sm text-gray-300 flex items-center gap-2">
+                    <p className="text-sm text-white flex items-center gap-2">
                       <Mail className="w-4 h-4" />
                       <span className="truncate">{trainer.email}</span>
                     </p>
-                    <p className="text-sm text-gray-300 flex items-center gap-2">
+                    <p className="text-sm text-white flex items-center gap-2">
                       <Phone className="w-4 h-4" />
                       {trainer.phone}
                     </p>
@@ -341,10 +341,10 @@ function TrainersAdminPage() {
                   <div className="flex items-center gap-4 mb-4">
                     <div className="flex items-center gap-2 text-sm">
                       <DeliveryIcon className="w-4 h-4 text-purple-400" />
-                      <span className="text-gray-300">{deliveryPref?.label}</span>
+                      <span className="text-white">{deliveryPref?.label}</span>
                     </div>
                     {trainer.workingRadius > 0 && (
-                      <div className="flex items-center gap-1 text-sm text-gray-300">
+                      <div className="flex items-center gap-1 text-sm text-white">
                         <MapPin className="w-4 h-4" />
                         {trainer.workingRadius}mi
                       </div>
@@ -353,7 +353,7 @@ function TrainersAdminPage() {
 
                   {/* Qualifications */}
                   <div className="mb-4">
-                    <p className="text-xs text-gray-300 mb-2">Qualifications ({trainer.qualifications?.length || 0})</p>
+                    <p className="text-xs text-white mb-2">Qualifications ({trainer.qualifications?.length || 0})</p>
                     <div className="flex flex-wrap gap-1">
                       {trainer.qualifications?.slice(0, 3).map((qual) => {
                         const qualType = qualificationTypes.find((q) => q.id === qual.typeId)
@@ -373,7 +373,7 @@ function TrainersAdminPage() {
                         )
                       })}
                       {trainer.qualifications?.length > 3 && (
-                        <span className="px-2 py-0.5 bg-gray-700 text-gray-300 rounded text-xs">
+                        <span className="px-2 py-0.5 bg-gray-700 text-white rounded text-xs">
                           +{trainer.qualifications.length - 3}
                         </span>
                       )}
@@ -391,7 +391,7 @@ function TrainersAdminPage() {
                     </button>
                     <button
                       onClick={() => setSelectedTrainer(trainer)}
-                      className="flex-1 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-lg transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 py-2 text-sm text-white hover:bg-gray-700 rounded-lg transition-colors flex items-center justify-center gap-2"
                     >
                       <Edit2 className="w-4 h-4" />
                       Edit

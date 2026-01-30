@@ -86,12 +86,12 @@ function AddVenueModal({ onClose, onSave }) {
             </div>
             <div>
               <h2 className="text-xl font-bold text-white">Add New Venue</h2>
-              <p className="text-sm text-gray-300 mt-1">Register a new training venue</p>
+              <p className="text-sm text-white mt-1">Register a new training venue</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-2 text-white hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -102,7 +102,7 @@ function AddVenueModal({ onClose, onSave }) {
           <div className="p-6 overflow-y-auto max-h-[calc(90vh-180px)] space-y-6">
             {/* Venue Name */}
             <div>
-              <label className="block text-sm text-gray-300 mb-1">Venue Name *</label>
+              <label className="block text-sm text-white mb-1">Venue Name *</label>
               <input
                 type="text"
                 name="name"
@@ -118,13 +118,13 @@ function AddVenueModal({ onClose, onSave }) {
 
             {/* Contact Details */}
             <div>
-              <h3 className="text-sm font-medium text-gray-300 mb-3 flex items-center gap-2">
+              <h3 className="text-sm font-medium text-white mb-3 flex items-center gap-2">
                 <Phone className="w-4 h-4 text-purple-400" />
                 Contact Details
               </h3>
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm text-gray-300 mb-1">Contact Name *</label>
+                  <label className="block text-sm text-white mb-1">Contact Name *</label>
                   <input
                     type="text"
                     name="contactName"
@@ -138,7 +138,7 @@ function AddVenueModal({ onClose, onSave }) {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm text-gray-300 mb-1">Email *</label>
+                    <label className="block text-sm text-white mb-1">Email *</label>
                     <input
                       type="email"
                       name="contactEmail"
@@ -151,7 +151,7 @@ function AddVenueModal({ onClose, onSave }) {
                     {errors.contactEmail && <p className="text-xs text-red-400 mt-1">{errors.contactEmail}</p>}
                   </div>
                   <div>
-                    <label className="block text-sm text-gray-300 mb-1">Phone *</label>
+                    <label className="block text-sm text-white mb-1">Phone *</label>
                     <input
                       type="tel"
                       name="contactPhone"
@@ -170,7 +170,7 @@ function AddVenueModal({ onClose, onSave }) {
             {/* Fee, Capacity, Expiry */}
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm text-gray-300 mb-1">Venue Fee (£)</label>
+                <label className="block text-sm text-white mb-1">Venue Fee (£)</label>
                 <input
                   type="number"
                   name="venueFee"
@@ -181,7 +181,7 @@ function AddVenueModal({ onClose, onSave }) {
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-300 mb-1">Max Capacity *</label>
+                <label className="block text-sm text-white mb-1">Max Capacity *</label>
                 <input
                   type="number"
                   name="maxCapacity"
@@ -195,7 +195,7 @@ function AddVenueModal({ onClose, onSave }) {
                 {errors.maxCapacity && <p className="text-xs text-red-400 mt-1">{errors.maxCapacity}</p>}
               </div>
               <div>
-                <label className="block text-sm text-gray-300 mb-1">Expiry Date *</label>
+                <label className="block text-sm text-white mb-1">Expiry Date *</label>
                 <input
                   type="date"
                   name="expiryDate"
@@ -211,7 +211,7 @@ function AddVenueModal({ onClose, onSave }) {
 
             {/* Address */}
             <div>
-              <h3 className="text-sm font-medium text-gray-300 mb-3 flex items-center gap-2">
+              <h3 className="text-sm font-medium text-white mb-3 flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-purple-400" />
                 Address
               </h3>
@@ -265,7 +265,7 @@ function AddVenueModal({ onClose, onSave }) {
 
             {/* Trainer Notes */}
             <div>
-              <label className="block text-sm text-gray-300 mb-1">Trainer Notes (optional)</label>
+              <label className="block text-sm text-white mb-1">Trainer Notes (optional)</label>
               <textarea
                 name="trainerNotes"
                 value={formData.trainerNotes}
@@ -282,7 +282,7 @@ function AddVenueModal({ onClose, onSave }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
+              className="px-4 py-2 text-white hover:text-white transition-colors"
             >
               Cancel
             </button>

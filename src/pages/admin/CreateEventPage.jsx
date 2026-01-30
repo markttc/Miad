@@ -178,7 +178,7 @@ function CreateEventPage() {
             <CheckCircle className="w-10 h-10 text-white" />
           </div>
           <h2 className="text-2xl font-bold text-white mb-2">Event Created!</h2>
-          <p className="text-gray-300">Redirecting to events list...</p>
+          <p className="text-white">Redirecting to events list...</p>
         </div>
       </div>
     )
@@ -194,7 +194,7 @@ function CreateEventPage() {
               <img src={MiadLogo} alt="Miad Healthcare" className="h-7" />
             </Link>
             <div className="border-l border-gray-700 pl-6">
-              <div className="flex items-center gap-2 text-sm text-gray-300 mb-1">
+              <div className="flex items-center gap-2 text-sm text-white mb-1">
                 <Link to="/admin" className="hover:text-white">Dashboard</Link>
                 <ChevronRight className="w-4 h-4" />
                 <Link to="/admin/events" className="hover:text-white">Events</Link>
@@ -218,7 +218,7 @@ function CreateEventPage() {
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Select Course <span className="text-red-400">*</span>
                 </label>
                 <select
@@ -249,11 +249,11 @@ function CreateEventPage() {
 
               {selectedCourse && (
                 <div className="p-4 bg-gray-900/50 rounded-lg">
-                  <p className="text-sm text-gray-300">{selectedCourse.description}</p>
+                  <p className="text-sm text-white">{selectedCourse.description}</p>
                   <div className="flex flex-wrap gap-4 mt-2 text-sm">
-                    <span className="text-gray-300">Duration: {selectedCourse.duration}</span>
-                    <span className="text-gray-300">Certification: {selectedCourse.certification}</span>
-                    <span className="text-gray-300">Valid: {selectedCourse.validityPeriod}</span>
+                    <span className="text-white">Duration: {selectedCourse.duration}</span>
+                    <span className="text-white">Certification: {selectedCourse.certification}</span>
+                    <span className="text-white">Valid: {selectedCourse.validityPeriod}</span>
                   </div>
                 </div>
               )}
@@ -266,7 +266,7 @@ function CreateEventPage() {
               Course Type
               <Tooltip
                 content={
-                  <div className="text-gray-300">
+                  <div className="text-white">
                     <p className="font-medium text-white mb-2">Open vs Closed Courses</p>
                     <p className="mb-2">
                       <span className="text-cyan-400 font-medium">Open courses</span> are publicly
@@ -281,7 +281,7 @@ function CreateEventPage() {
                   </div>
                 }
               >
-                <HelpCircle className="w-4 h-4 text-gray-300 hover:text-purple-400 transition-colors" />
+                <HelpCircle className="w-4 h-4 text-white hover:text-purple-400 transition-colors" />
               </Tooltip>
             </h2>
 
@@ -315,7 +315,7 @@ function CreateEventPage() {
                       </h3>
                       <Tooltip
                         content={
-                          <div className="text-gray-300">
+                          <div className="text-white">
                             <ul className="space-y-1 text-sm">
                               <li>• Listed on public website</li>
                               <li>• Anyone can book a place</li>
@@ -325,10 +325,10 @@ function CreateEventPage() {
                           </div>
                         }
                       >
-                        <HelpCircle className="w-3.5 h-3.5 text-gray-300" />
+                        <HelpCircle className="w-3.5 h-3.5 text-white" />
                       </Tooltip>
                     </div>
-                    <p className="text-sm text-gray-300 mt-1">
+                    <p className="text-sm text-white mt-1">
                       Publicly available for individual bookings
                     </p>
                   </div>
@@ -375,7 +375,7 @@ function CreateEventPage() {
                       </h3>
                       <Tooltip
                         content={
-                          <div className="text-gray-300">
+                          <div className="text-white">
                             <ul className="space-y-1 text-sm">
                               <li>• Private session for one client</li>
                               <li>• Not listed publicly</li>
@@ -386,10 +386,10 @@ function CreateEventPage() {
                           </div>
                         }
                       >
-                        <HelpCircle className="w-3.5 h-3.5 text-gray-300" />
+                        <HelpCircle className="w-3.5 h-3.5 text-white" />
                       </Tooltip>
                     </div>
-                    <p className="text-sm text-gray-300 mt-1">
+                    <p className="text-sm text-white mt-1">
                       Private session for a specific client
                     </p>
                   </div>
@@ -411,7 +411,7 @@ function CreateEventPage() {
             {/* Client Name field for closed courses */}
             {formData.courseType === 'closed' && (
               <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Client / Organisation Name <span className="text-red-400">*</span>
                 </label>
                 <input
@@ -440,7 +440,7 @@ function CreateEventPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Date <span className="text-red-400">*</span>
                 </label>
                 <input
@@ -459,7 +459,7 @@ function CreateEventPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Start Time
                 </label>
                 <input
@@ -472,7 +472,7 @@ function CreateEventPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   End Time
                 </label>
                 <input
@@ -495,7 +495,7 @@ function CreateEventPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Trainer <span className="text-red-400">*</span>
                 </label>
                 <select
@@ -524,7 +524,7 @@ function CreateEventPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Capacity
                 </label>
                 <input
@@ -549,11 +549,11 @@ function CreateEventPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Price per Delegate <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300">£</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white">£</span>
                   <input
                     type="number"
                     name="price"
@@ -573,7 +573,7 @@ function CreateEventPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Notes (Internal)
                 </label>
                 <input
@@ -592,7 +592,7 @@ function CreateEventPage() {
           <div className="flex items-center justify-between">
             <Link
               to="/admin/events"
-              className="text-gray-300 hover:text-white flex items-center gap-2"
+              className="text-white hover:text-white flex items-center gap-2"
             >
               <ArrowLeft className="w-4 h-4" />
               Cancel

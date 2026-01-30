@@ -42,7 +42,7 @@ function HomePage() {
               Made Simple
             </h1>
 
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
               Accredited courses delivered through live webinars and e-learning.
               Book instantly, learn flexibly, and receive your certificates digitally.
             </p>
@@ -58,7 +58,7 @@ function HomePage() {
             </div>
 
             {/* Trust Indicators */}
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-300">
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-white">
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-green-400" />
                 CPD Certified
@@ -89,7 +89,7 @@ function HomePage() {
                 <Video className="w-8 h-8 text-[#13d8a0]" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Live Webinars</h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-white mb-4">
                 Interactive sessions via Zoom with expert trainers. Ask questions in real-time.
               </p>
               <span className="text-[#13d8a0] font-medium flex items-center justify-center gap-1">
@@ -102,7 +102,7 @@ function HomePage() {
                 <Monitor className="w-8 h-8 text-green-400" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">E-Learning</h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-white mb-4">
                 Self-paced online courses. Start immediately and learn at your convenience.
               </p>
               <span className="text-green-400 font-medium flex items-center justify-center gap-1">
@@ -115,7 +115,7 @@ function HomePage() {
                 <GraduationCap className="w-8 h-8 text-purple-400" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Blended Learning</h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-white mb-4">
                 Combine e-learning modules with live practical sessions for comprehensive training.
               </p>
               <span className="text-purple-400 font-medium flex items-center justify-center gap-1">
@@ -130,7 +130,7 @@ function HomePage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="section-title text-center mb-4">Training Categories</h2>
-          <p className="text-center text-gray-300 mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-white mb-12 max-w-2xl mx-auto">
             Comprehensive training programmes covering all aspects of healthcare professional development
           </p>
 
@@ -179,7 +179,7 @@ function HomePage() {
 
                   <h3 className="text-lg font-semibold text-white mb-2">{course?.name}</h3>
 
-                  <div className="space-y-2 text-sm text-gray-300 mb-4">
+                  <div className="space-y-2 text-sm text-white mb-4">
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4" />
                       {new Date(session.date).toLocaleDateString('en-GB', {
@@ -244,9 +244,9 @@ function HomePage() {
                   {course.name}
                 </h3>
 
-                <p className="text-sm text-gray-300 mb-4 line-clamp-2">{course.description}</p>
+                <p className="text-sm text-white mb-4 line-clamp-2">{course.description}</p>
 
-                <div className="flex items-center gap-4 text-sm text-gray-300 mb-4">
+                <div className="flex items-center gap-4 text-sm text-white mb-4">
                   <span className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
                     {course.duration}
@@ -275,7 +275,7 @@ function HomePage() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Start Your Training?
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-white mb-8">
             Browse our full course catalogue and book your training today.
             Instant e-learning access available.
           </p>
@@ -296,19 +296,19 @@ function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-4xl font-bold text-[#13d8a0] mb-2">500+</div>
-              <div className="text-gray-300">NHS Trusts & Care Providers</div>
+              <div className="text-white">NHS Trusts & Care Providers</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-[#13d8a0] mb-2">50,000+</div>
-              <div className="text-gray-300">Healthcare Professionals Trained</div>
+              <div className="text-white">Healthcare Professionals Trained</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-[#13d8a0] mb-2">98%</div>
-              <div className="text-gray-300">Customer Satisfaction</div>
+              <div className="text-white">Customer Satisfaction</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-[#13d8a0] mb-2">4.9</div>
-              <div className="text-gray-300 flex items-center justify-center gap-1">
+              <div className="text-white flex items-center justify-center gap-1">
                 <Star className="w-4 h-4 text-amber-400 fill-current" /> Average Rating
               </div>
             </div>

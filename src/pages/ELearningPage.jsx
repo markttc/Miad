@@ -133,25 +133,25 @@ function ELearningPage() {
               </span>
             </h1>
 
-            <p className="text-xl text-gray-300 mb-6">
+            <p className="text-xl text-white mb-6">
               Complete your training at your own pace. Purchase, enroll, and start learning within minutes.
               Certificates issued automatically on completion.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
-              <div className="flex items-center gap-2 text-gray-300">
+              <div className="flex items-center gap-2 text-white">
                 <CheckCircle className="w-5 h-5 text-[#13d8a0]" />
                 Instant Access
               </div>
-              <div className="flex items-center gap-2 text-gray-300">
+              <div className="flex items-center gap-2 text-white">
                 <CheckCircle className="w-5 h-5 text-[#13d8a0]" />
                 Learn at Your Pace
               </div>
-              <div className="flex items-center gap-2 text-gray-300">
+              <div className="flex items-center gap-2 text-white">
                 <CheckCircle className="w-5 h-5 text-[#13d8a0]" />
                 Auto Certificates
               </div>
-              <div className="flex items-center gap-2 text-gray-300">
+              <div className="flex items-center gap-2 text-white">
                 <CheckCircle className="w-5 h-5 text-[#13d8a0]" />
                 Mobile Friendly
               </div>
@@ -166,22 +166,22 @@ function ELearningPage() {
           <div className="flex flex-wrap justify-center gap-8 text-center">
             <div>
               <p className="text-2xl font-bold text-white">{stats.total}</p>
-              <p className="text-xs text-gray-300">Courses Available</p>
+              <p className="text-xs text-white">Courses Available</p>
             </div>
             <div className="w-px bg-gray-700" />
             <div>
               <p className="text-2xl font-bold text-[#13d8a0]">{stats.categories}</p>
-              <p className="text-xs text-gray-300">Categories</p>
+              <p className="text-xs text-white">Categories</p>
             </div>
             <div className="w-px bg-gray-700" />
             <div>
               <p className="text-2xl font-bold text-[#13d8a0]">£{stats.avgPrice}</p>
-              <p className="text-xs text-gray-300">Average Price</p>
+              <p className="text-xs text-white">Average Price</p>
             </div>
             <div className="w-px bg-gray-700" />
             <div>
               <p className="text-2xl font-bold text-purple-400">12</p>
-              <p className="text-xs text-gray-300">Months Access</p>
+              <p className="text-xs text-white">Months Access</p>
             </div>
           </div>
         </div>
@@ -193,7 +193,7 @@ function ELearningPage() {
           <div className="flex flex-wrap items-center gap-4">
             {/* Search */}
             <div className="relative flex-1 min-w-[200px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
               <input
                 type="text"
                 placeholder="Search courses..."
@@ -233,7 +233,7 @@ function ELearningPage() {
             {hasActiveFilters && (
               <button
                 onClick={clearFilters}
-                className="px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors flex items-center gap-1"
+                className="px-3 py-2 text-sm text-white hover:text-white transition-colors flex items-center gap-1"
               >
                 <X className="w-4 h-4" />
                 Clear
@@ -242,13 +242,13 @@ function ELearningPage() {
 
             {/* View Toggle */}
             <div className="ml-auto flex items-center gap-2">
-              <span className="text-sm text-gray-300">{filteredCourses.length} courses</span>
+              <span className="text-sm text-white">{filteredCourses.length} courses</span>
               <button
                 onClick={() => setViewMode('grid')}
                 className={`px-3 py-2 rounded-lg text-sm transition-colors ${
                   viewMode === 'grid'
                     ? 'bg-[#13d8a0] text-white'
-                    : 'bg-gray-800 text-gray-300 hover:text-white'
+                    : 'bg-gray-800 text-white hover:text-white'
                 }`}
               >
                 <Grid className="w-4 h-4" />
@@ -258,7 +258,7 @@ function ELearningPage() {
                 className={`px-3 py-2 rounded-lg text-sm transition-colors ${
                   viewMode === 'list'
                     ? 'bg-[#13d8a0] text-white'
-                    : 'bg-gray-800 text-gray-300 hover:text-white'
+                    : 'bg-gray-800 text-white hover:text-white'
                 }`}
               >
                 <List className="w-4 h-4" />
@@ -291,7 +291,7 @@ function ELearningPage() {
                   </div>
                   <div>
                     <h3 className="font-medium text-white text-sm">{item.title}</h3>
-                    <p className="text-xs text-gray-300">{item.desc}</p>
+                    <p className="text-xs text-white">{item.desc}</p>
                   </div>
                 </div>
               </div>
@@ -306,7 +306,7 @@ function ELearningPage() {
           {filteredCourses.length === 0 ? (
             <div className="text-center py-16">
               <Monitor className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-300 text-lg mb-4">No courses found matching your filters</p>
+              <p className="text-white text-lg mb-4">No courses found matching your filters</p>
               <button onClick={clearFilters} className="btn-secondary">
                 Clear Filters
               </button>
@@ -344,11 +344,11 @@ function ELearningPage() {
                         {course.name}
                       </h3>
 
-                      <p className="text-sm text-gray-300 mb-4 line-clamp-2">
+                      <p className="text-sm text-white mb-4 line-clamp-2">
                         {course.description}
                       </p>
 
-                      <div className="flex flex-wrap items-center gap-3 text-sm text-gray-300 mb-4">
+                      <div className="flex flex-wrap items-center gap-3 text-sm text-white mb-4">
                         <span className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
                           {course.duration}
@@ -363,7 +363,7 @@ function ELearningPage() {
                       <div className="mb-4">
                         <ul className="space-y-1">
                           {course.learningObjectives.slice(0, 2).map((obj, i) => (
-                            <li key={i} className="text-xs text-gray-300 flex items-start gap-2">
+                            <li key={i} className="text-xs text-white flex items-start gap-2">
                               <CheckCircle className="w-3 h-3 text-[#13d8a0] mt-0.5 flex-shrink-0" />
                               <span className="line-clamp-1">{obj}</span>
                             </li>
@@ -425,11 +425,11 @@ function ELearningPage() {
                           {course.name}
                         </h3>
 
-                        <p className="text-sm text-gray-300 mb-3 line-clamp-1">
+                        <p className="text-sm text-white mb-3 line-clamp-1">
                           {course.description}
                         </p>
 
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-300">
+                        <div className="flex flex-wrap items-center gap-4 text-sm text-white">
                           <span className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
                             {course.duration}
@@ -472,7 +472,7 @@ function ELearningPage() {
           <div className="relative bg-gray-800 rounded-xl border border-[#13d8a0]/30 p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setSelectedCourse(null)}
-              className="absolute top-4 right-4 text-gray-300 hover:text-white"
+              className="absolute top-4 right-4 text-white hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
@@ -489,40 +489,40 @@ function ELearningPage() {
             </div>
 
             <h2 className="text-2xl font-bold text-white mb-2">{selectedCourse.name}</h2>
-            <p className="text-gray-300 mb-6">{selectedCourse.description}</p>
+            <p className="text-white mb-6">{selectedCourse.description}</p>
 
             {/* Quick Info */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
               <div className="bg-gray-900/50 rounded-lg p-3 text-center">
                 <Clock className="w-5 h-5 text-[#13d8a0] mx-auto mb-1" />
-                <p className="text-xs text-gray-300">Duration</p>
+                <p className="text-xs text-white">Duration</p>
                 <p className="text-sm text-white font-medium">{selectedCourse.duration}</p>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3 text-center">
                 <Award className="w-5 h-5 text-[#13d8a0] mx-auto mb-1" />
-                <p className="text-xs text-gray-300">Valid For</p>
+                <p className="text-xs text-white">Valid For</p>
                 <p className="text-sm text-white font-medium">{selectedCourse.validityPeriod}</p>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3 text-center">
                 <Shield className="w-5 h-5 text-purple-400 mx-auto mb-1" />
-                <p className="text-xs text-gray-300">Certification</p>
+                <p className="text-xs text-white">Certification</p>
                 <p className="text-sm text-white font-medium">{selectedCourse.certification}</p>
               </div>
               <div className="bg-gray-900/50 rounded-lg p-3 text-center">
                 <Smartphone className="w-5 h-5 text-amber-400 mx-auto mb-1" />
-                <p className="text-xs text-gray-300">Access</p>
+                <p className="text-xs text-white">Access</p>
                 <p className="text-sm text-white font-medium">12 Months</p>
               </div>
             </div>
 
             {/* Learning Objectives */}
             <div className="mb-6">
-              <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+              <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
                 What You Will Learn
               </h3>
               <ul className="space-y-2">
                 {selectedCourse.learningObjectives.map((obj, i) => (
-                  <li key={i} className="text-sm text-gray-300 flex items-start gap-2">
+                  <li key={i} className="text-sm text-white flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-[#13d8a0] mt-0.5 flex-shrink-0" />
                     {obj}
                   </li>
@@ -538,7 +538,7 @@ function ELearningPage() {
             {/* Price & Action */}
             <div className="flex items-center justify-between pt-4 border-t border-gray-700">
               <div>
-                <p className="text-sm text-gray-300">Price</p>
+                <p className="text-sm text-white">Price</p>
                 <p className="text-3xl font-bold text-white">£{selectedCourse.price}</p>
               </div>
               <Link
@@ -578,7 +578,7 @@ function ELearningPage() {
             ].map((faq, i) => (
               <div key={i} className="bg-gray-800 rounded-xl border border-gray-700 p-5">
                 <h3 className="font-semibold text-white mb-2">{faq.q}</h3>
-                <p className="text-gray-300 text-sm">{faq.a}</p>
+                <p className="text-white text-sm">{faq.a}</p>
               </div>
             ))}
           </div>

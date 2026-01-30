@@ -116,13 +116,13 @@ function VenueDetailModal({ venue, onClose, onSave }) {
                 >
                   {expiryStatus.label}
                 </span>
-                <span className="text-sm text-gray-300">{venue.address?.city}</span>
+                <span className="text-sm text-white">{venue.address?.city}</span>
               </div>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-2 text-white hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -135,7 +135,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
             className={`px-6 py-3 text-sm font-medium transition-colors ${
               activeTab === 'details'
                 ? 'text-purple-400 border-b-2 border-purple-400'
-                : 'text-gray-300 hover:text-white'
+                : 'text-white hover:text-white'
             }`}
           >
             Details
@@ -145,7 +145,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
             className={`px-6 py-3 text-sm font-medium transition-colors ${
               activeTab === 'audit'
                 ? 'text-purple-400 border-b-2 border-purple-400'
-                : 'text-gray-300 hover:text-white'
+                : 'text-white hover:text-white'
             }`}
           >
             Audit
@@ -158,7 +158,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
             <div className="space-y-6">
               {/* Venue Name */}
               <div>
-                <label className="block text-sm text-gray-300 mb-1">Venue Name</label>
+                <label className="block text-sm text-white mb-1">Venue Name</label>
                 <input
                   type="text"
                   name="name"
@@ -170,13 +170,13 @@ function VenueDetailModal({ venue, onClose, onSave }) {
 
               {/* Contact Details */}
               <div>
-                <h3 className="text-sm font-medium text-gray-300 mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-medium text-white mb-3 flex items-center gap-2">
                   <Phone className="w-4 h-4 text-purple-400" />
                   Contact Details
                 </h3>
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-sm text-gray-300 mb-1">Contact Name</label>
+                    <label className="block text-sm text-white mb-1">Contact Name</label>
                     <input
                       type="text"
                       name="contactName"
@@ -187,7 +187,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm text-gray-300 mb-1">Email</label>
+                      <label className="block text-sm text-white mb-1">Email</label>
                       <input
                         type="email"
                         name="contactEmail"
@@ -197,7 +197,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm text-gray-300 mb-1">Phone</label>
+                      <label className="block text-sm text-white mb-1">Phone</label>
                       <input
                         type="tel"
                         name="contactPhone"
@@ -213,7 +213,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
               {/* Fee and Capacity */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-gray-300 mb-1">Venue Fee (£)</label>
+                  <label className="block text-sm text-white mb-1">Venue Fee (£)</label>
                   <input
                     type="number"
                     name="venueFee"
@@ -224,7 +224,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-300 mb-1">Max Capacity</label>
+                  <label className="block text-sm text-white mb-1">Max Capacity</label>
                   <input
                     type="number"
                     name="maxCapacity"
@@ -238,7 +238,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
 
               {/* Expiry Date */}
               <div>
-                <label className="block text-sm text-gray-300 mb-1">Contract Expiry Date</label>
+                <label className="block text-sm text-white mb-1">Contract Expiry Date</label>
                 <input
                   type="date"
                   name="expiryDate"
@@ -250,7 +250,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
 
               {/* Address */}
               <div>
-                <h3 className="text-sm font-medium text-gray-300 mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-medium text-white mb-3 flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-purple-400" />
                   Address
                 </h3>
@@ -294,7 +294,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
 
               {/* Trainer Notes */}
               <div>
-                <label className="block text-sm text-gray-300 mb-1">Trainer Notes</label>
+                <label className="block text-sm text-white mb-1">Trainer Notes</label>
                 <textarea
                   name="trainerNotes"
                   value={formData.trainerNotes || ''}
@@ -311,7 +311,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
             <div className="space-y-4">
               {/* Filters */}
               <div className="flex items-center gap-3 flex-wrap">
-                <div className="flex items-center gap-2 text-sm text-gray-300">
+                <div className="flex items-center gap-2 text-sm text-white">
                   <Filter className="w-4 h-4" />
                   <span>Filter by:</span>
                 </div>
@@ -320,7 +320,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                     auditFilter === 'all'
                       ? 'bg-purple-600 text-white'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      : 'bg-gray-700 text-white hover:bg-gray-600'
                   }`}
                 >
                   All Events
@@ -332,7 +332,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                       auditFilter === eventType.id
                         ? `bg-${eventType.color}-600 text-white`
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                        : 'bg-gray-700 text-white hover:bg-gray-600'
                     }`}
                   >
                     {eventType.label}
@@ -361,12 +361,12 @@ function VenueDetailModal({ venue, onClose, onSave }) {
                             <span className={`px-2 py-0.5 rounded text-xs font-medium bg-${color}-900/50 text-${color}-400`}>
                               {eventInfo?.label || entry.eventType}
                             </span>
-                            <span className="text-xs text-gray-300">
+                            <span className="text-xs text-white">
                               by {entry.user}
                             </span>
                           </div>
-                          <p className="text-sm text-gray-300 mt-1">{entry.details}</p>
-                          <p className="text-xs text-gray-300 mt-1">
+                          <p className="text-sm text-white mt-1">{entry.details}</p>
+                          <p className="text-xs text-white mt-1">
                             {new Date(entry.timestamp).toLocaleDateString('en-GB', {
                               day: '2-digit',
                               month: 'short',
@@ -381,7 +381,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
                   })}
                 </div>
               ) : (
-                <div className="text-center py-8 text-gray-300">
+                <div className="text-center py-8 text-white">
                   <History className="w-12 h-12 mx-auto mb-2 opacity-50" />
                   <p>No audit entries found</p>
                   {auditFilter !== 'all' && (
@@ -397,7 +397,7 @@ function VenueDetailModal({ venue, onClose, onSave }) {
         <div className="flex items-center justify-end gap-3 p-6 border-t border-purple-800/50">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
+            className="px-4 py-2 text-white hover:text-white transition-colors"
           >
             Cancel
           </button>

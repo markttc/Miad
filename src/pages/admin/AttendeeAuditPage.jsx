@@ -173,7 +173,7 @@ function AttendeeAuditPage() {
               <img src={MiadLogo} alt="Miad Healthcare" className="h-7" />
             </Link>
             <div className="border-l border-gray-700 pl-6">
-              <div className="flex items-center gap-2 text-sm text-gray-300 mb-1">
+              <div className="flex items-center gap-2 text-sm text-white mb-1">
                 <Link to="/admin" className="hover:text-white">Dashboard</Link>
                 <ChevronRight className="w-4 h-4" />
                 <Link to="/admin/bookings" className="hover:text-white">Bookings</Link>
@@ -190,19 +190,19 @@ function AttendeeAuditPage() {
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Total Entries</p>
+            <p className="text-sm text-white">Total Entries</p>
             <p className="text-2xl font-bold text-white">{stats.total}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Online Bookings</p>
+            <p className="text-sm text-white">Online Bookings</p>
             <p className="text-2xl font-bold text-green-400">{stats.bySource.online}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Offline Bookings</p>
+            <p className="text-sm text-white">Offline Bookings</p>
             <p className="text-2xl font-bold text-amber-400">{stats.bySource.offline}</p>
           </div>
           <div className="bg-gray-800 rounded-lg p-4 border border-purple-800/50">
-            <p className="text-sm text-gray-300">Self-bookings</p>
+            <p className="text-sm text-white">Self-bookings</p>
             <p className="text-2xl font-bold text-cyan-400">{stats.byBookerType.attendee_self}</p>
           </div>
         </div>
@@ -210,7 +210,7 @@ function AttendeeAuditPage() {
         {/* Filters */}
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white" />
             <input
               type="text"
               placeholder="Search by name, email, booking ref..."
@@ -267,7 +267,7 @@ function AttendeeAuditPage() {
         </div>
 
         {/* Results count */}
-        <div className="mb-4 text-sm text-gray-300">
+        <div className="mb-4 text-sm text-white">
           Showing {filteredEntries.length} of {auditEntries.length} entries
         </div>
 
@@ -280,13 +280,13 @@ function AttendeeAuditPage() {
           ) : filteredEntries.length === 0 ? (
             <div className="text-center py-12">
               <Users className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-300">No audit entries found</p>
+              <p className="text-white">No audit entries found</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="text-left text-sm text-gray-300 border-b border-gray-700">
+                  <tr className="text-left text-sm text-white border-b border-gray-700">
                     <th scope="col" className="px-4 py-3 font-medium">Timestamp</th>
                     <th scope="col" className="px-4 py-3 font-medium">Booking Ref</th>
                     <th scope="col" className="px-4 py-3 font-medium">Attendee</th>
@@ -301,14 +301,14 @@ function AttendeeAuditPage() {
                   {filteredEntries.map((entry) => (
                     <tr key={entry.id} className="hover:bg-gray-700/50 transition-colors">
                       <td className="px-4 py-3 text-sm">
-                        <div className="text-gray-300">
+                        <div className="text-white">
                           {new Date(entry.timestamp).toLocaleDateString('en-GB', {
                             day: '2-digit',
                             month: 'short',
                             year: 'numeric',
                           })}
                         </div>
-                        <div className="text-xs text-gray-300">
+                        <div className="text-xs text-white">
                           {new Date(entry.timestamp).toLocaleTimeString('en-GB', {
                             hour: '2-digit',
                             minute: '2-digit',
@@ -322,13 +322,13 @@ function AttendeeAuditPage() {
                         <div className="text-white font-medium">
                           {entry.attendee?.firstName} {entry.attendee?.lastName}
                         </div>
-                        <div className="text-xs text-gray-300">{entry.attendee?.email}</div>
+                        <div className="text-xs text-white">{entry.attendee?.email}</div>
                       </td>
                       <td className="px-4 py-3">
-                        <span className={`px-2 py-1 rounded text-xs font-medium ${bookerTypeBadgeColors[entry.bookedBy?.type] || 'bg-gray-700 text-gray-300'}`}>
+                        <span className={`px-2 py-1 rounded text-xs font-medium ${bookerTypeBadgeColors[entry.bookedBy?.type] || 'bg-gray-700 text-white'}`}>
                           {bookerTypeLabels[entry.bookedBy?.type] || entry.bookedBy?.type}
                         </span>
-                        <div className="text-xs text-gray-300 mt-1">{entry.bookedBy?.name}</div>
+                        <div className="text-xs text-white mt-1">{entry.bookedBy?.name}</div>
                       </td>
                       <td className="px-4 py-3">
                         {entry.source?.channel === 'online' ? (
@@ -349,7 +349,7 @@ function AttendeeAuditPage() {
                             <span className="text-green-400 font-medium">
                               £{entry.payment.amount}
                             </span>
-                            <div className="text-xs text-gray-300 capitalize">
+                            <div className="text-xs text-white capitalize">
                               {entry.payment.method === 'purchase_order' ? 'PO' : entry.payment.method}
                             </div>
                           </div>
@@ -360,7 +360,7 @@ function AttendeeAuditPage() {
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
                           {(entry.communications?.filter((c) => c.type === 'email').length || 0) > 0 && (
-                            <span className="flex items-center gap-1 text-gray-300" title="Emails sent">
+                            <span className="flex items-center gap-1 text-white" title="Emails sent">
                               <Mail className="w-4 h-4" />
                               <span className="text-xs">
                                 {entry.communications.filter((c) => c.type === 'email').length}
@@ -368,7 +368,7 @@ function AttendeeAuditPage() {
                             </span>
                           )}
                           {(entry.communications?.filter((c) => c.type === 'sms').length || 0) > 0 && (
-                            <span className="flex items-center gap-1 text-gray-300" title="SMS sent">
+                            <span className="flex items-center gap-1 text-white" title="SMS sent">
                               <MessageSquare className="w-4 h-4" />
                               <span className="text-xs">
                                 {entry.communications.filter((c) => c.type === 'sms').length}
@@ -376,14 +376,14 @@ function AttendeeAuditPage() {
                             </span>
                           )}
                           {(!entry.communications || entry.communications.length === 0) && (
-                            <span className="text-gray-300 text-xs">None</span>
+                            <span className="text-white text-xs">None</span>
                           )}
                         </div>
                       </td>
                       <td className="px-4 py-3">
                         <button
                           onClick={() => setSelectedEntry(entry)}
-                          className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded transition-colors"
+                          className="p-2 text-white hover:text-white hover:bg-gray-700 rounded transition-colors"
                           title="View Details"
                           aria-label={`View details for ${entry.attendee?.firstName} ${entry.attendee?.lastName}`}
                         >
@@ -432,7 +432,7 @@ function AuditDetailModal({ entry, onClose }) {
           <h2 className="text-xl font-bold text-white">Audit Entry Details</h2>
           <button
             onClick={onClose}
-            className="text-gray-300 hover:text-white p-2"
+            className="text-white hover:text-white p-2"
             aria-label="Close modal"
           >
             <X className="w-6 h-6" />
@@ -441,44 +441,44 @@ function AuditDetailModal({ entry, onClose }) {
 
         {/* Booking Reference */}
         <div className="mb-6 p-4 bg-purple-900/30 rounded-lg border border-purple-800/50">
-          <p className="text-sm text-gray-300">Booking Reference</p>
+          <p className="text-sm text-white">Booking Reference</p>
           <p className="text-2xl font-mono font-bold text-purple-400">{entry.bookingRef}</p>
         </div>
 
         {/* Attendee Details */}
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+          <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
             Attendee Information
           </h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm text-gray-300">Name</p>
+              <p className="text-sm text-white">Name</p>
               <p className="text-white flex items-center gap-2">
-                <User className="w-4 h-4 text-gray-300" />
+                <User className="w-4 h-4 text-white" />
                 {entry.attendee?.firstName} {entry.attendee?.lastName}
               </p>
             </div>
             <div>
-              <p className="text-sm text-gray-300">Email</p>
+              <p className="text-sm text-white">Email</p>
               <p className="text-white flex items-center gap-2">
-                <Mail className="w-4 h-4 text-gray-300" />
+                <Mail className="w-4 h-4 text-white" />
                 {entry.attendee?.email}
               </p>
             </div>
             {entry.attendee?.phone && (
               <div>
-                <p className="text-sm text-gray-300">Phone</p>
+                <p className="text-sm text-white">Phone</p>
                 <p className="text-white flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-gray-300" />
+                  <Phone className="w-4 h-4 text-white" />
                   {entry.attendee.phone}
                 </p>
               </div>
             )}
             {entry.attendee?.organisation && (
               <div>
-                <p className="text-sm text-gray-300">Organisation</p>
+                <p className="text-sm text-white">Organisation</p>
                 <p className="text-white flex items-center gap-2">
-                  <Building className="w-4 h-4 text-gray-300" />
+                  <Building className="w-4 h-4 text-white" />
                   {entry.attendee.organisation}
                 </p>
               </div>
@@ -489,43 +489,43 @@ function AuditDetailModal({ entry, onClose }) {
         {/* Booking Details */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div>
-            <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+            <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
               Booked By
             </h3>
             <div className="bg-gray-900/50 rounded-lg p-4 space-y-2">
               <div className="flex justify-between">
-                <span className="text-gray-300">Type</span>
+                <span className="text-white">Type</span>
                 <span className="text-white">{bookerTypeLabels[entry.bookedBy?.type]}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-300">Name</span>
+                <span className="text-white">Name</span>
                 <span className="text-white">{entry.bookedBy?.name}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-300">Role</span>
+                <span className="text-white">Role</span>
                 <span className="text-white capitalize">{entry.bookedBy?.role}</span>
               </div>
             </div>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+            <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
               Booking Source
             </h3>
             <div className="bg-gray-900/50 rounded-lg p-4 space-y-2">
               <div className="flex justify-between">
-                <span className="text-gray-300">Channel</span>
+                <span className="text-white">Channel</span>
                 <span className="text-white capitalize">{entry.source?.channel}</span>
               </div>
               {entry.source?.ipAddress && (
                 <div className="flex justify-between">
-                  <span className="text-gray-300">IP Address</span>
+                  <span className="text-white">IP Address</span>
                   <span className="text-white font-mono text-sm">{entry.source.ipAddress}</span>
                 </div>
               )}
               {entry.source?.notes && (
                 <div className="flex justify-between">
-                  <span className="text-gray-300">Notes</span>
+                  <span className="text-white">Notes</span>
                   <span className="text-white text-sm">{entry.source.notes}</span>
                 </div>
               )}
@@ -535,23 +535,23 @@ function AuditDetailModal({ entry, onClose }) {
 
         {/* Payment Details */}
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+          <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
             Payment Details
           </h3>
           <div className="bg-gray-900/50 rounded-lg p-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-gray-300">Status</p>
+                <p className="text-sm text-white">Status</p>
                 <span className={`px-2 py-1 text-xs font-medium rounded ${entry.payment?.taken ? 'bg-green-900/50 text-green-400' : 'bg-amber-900/50 text-amber-400'}`}>
                   {entry.payment?.taken ? 'Paid' : 'Pending'}
                 </span>
               </div>
               <div>
-                <p className="text-sm text-gray-300">Amount</p>
+                <p className="text-sm text-white">Amount</p>
                 <p className="text-xl font-bold text-white">£{entry.payment?.amount}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-300">Method</p>
+                <p className="text-sm text-white">Method</p>
                 <span className="text-white flex items-center gap-2">
                   {entry.payment?.method === 'card' && <CreditCard className="w-4 h-4" />}
                   {entry.payment?.method === 'purchase_order' && <FileText className="w-4 h-4" />}
@@ -562,13 +562,13 @@ function AuditDetailModal({ entry, onClose }) {
               </div>
               {entry.payment?.transactionRef && (
                 <div>
-                  <p className="text-sm text-gray-300">Transaction Ref</p>
+                  <p className="text-sm text-white">Transaction Ref</p>
                   <code className="text-white font-mono text-sm">{entry.payment.transactionRef}</code>
                 </div>
               )}
               {entry.payment?.poNumber && (
                 <div>
-                  <p className="text-sm text-gray-300">PO Number</p>
+                  <p className="text-sm text-white">PO Number</p>
                   <code className="text-white font-mono text-sm">{entry.payment.poNumber}</code>
                 </div>
               )}
@@ -578,12 +578,12 @@ function AuditDetailModal({ entry, onClose }) {
 
         {/* Course Details */}
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+          <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
             Course Details
           </h3>
           <div className="bg-gray-900/50 rounded-lg p-4">
             <p className="text-white font-medium mb-2">{entry.course?.name}</p>
-            <div className="flex flex-wrap gap-4 text-sm text-gray-300">
+            <div className="flex flex-wrap gap-4 text-sm text-white">
               <span className="flex items-center gap-1">
                 <Calendar className="w-4 h-4" />
                 {entry.course?.date && new Date(entry.course.date).toLocaleDateString('en-GB', {
@@ -603,11 +603,11 @@ function AuditDetailModal({ entry, onClose }) {
 
         {/* Communications */}
         <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide mb-3">
+          <h3 className="text-sm font-medium text-white uppercase tracking-wide mb-3">
             Communications ({entry.communications?.length || 0})
           </h3>
           {!entry.communications || entry.communications.length === 0 ? (
-            <div className="bg-gray-900/50 rounded-lg p-4 text-gray-300 text-center">
+            <div className="bg-gray-900/50 rounded-lg p-4 text-white text-center">
               No communications sent yet
             </div>
           ) : (
@@ -625,8 +625,8 @@ function AuditDetailModal({ entry, onClose }) {
                         <MessageSquare className="w-5 h-5 text-green-400" />
                       )}
                       <span className="text-white font-medium capitalize">{comm.type}</span>
-                      <span className="text-gray-300">-</span>
-                      <span className="text-gray-300">{comm.template?.replace(/_/g, ' ')}</span>
+                      <span className="text-white">-</span>
+                      <span className="text-white">{comm.template?.replace(/_/g, ' ')}</span>
                     </div>
                     <span className={`px-2 py-1 rounded text-xs ${
                       comm.status === 'delivered'
@@ -636,7 +636,7 @@ function AuditDetailModal({ entry, onClose }) {
                       {comm.status}
                     </span>
                   </div>
-                  <div className="mt-2 text-xs text-gray-300">
+                  <div className="mt-2 text-xs text-white">
                     Sent: {new Date(comm.sentAt).toLocaleString('en-GB')}
                   </div>
                 </div>
@@ -646,7 +646,7 @@ function AuditDetailModal({ entry, onClose }) {
         </div>
 
         {/* Timestamp */}
-        <div className="text-xs text-gray-300 pt-4 border-t border-gray-700">
+        <div className="text-xs text-white pt-4 border-t border-gray-700">
           Entry created: {new Date(entry.timestamp).toLocaleString('en-GB')}
         </div>
 

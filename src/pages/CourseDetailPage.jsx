@@ -29,7 +29,7 @@ function CourseDetailPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-300 text-lg mb-4">Course not found</p>
+          <p className="text-white text-lg mb-4">Course not found</p>
           <Link to="/courses" className="btn-primary">
             Browse Courses
           </Link>
@@ -77,7 +77,7 @@ function CourseDetailPage() {
         {/* Back Button */}
         <button
           onClick={() => navigate('/courses')}
-          className="text-gray-300 hover:text-white flex items-center gap-2 mb-6 transition-colors"
+          className="text-white hover:text-white flex items-center gap-2 mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Courses
@@ -111,17 +111,17 @@ function CourseDetailPage() {
 
               {/* Category */}
               {category && (
-                <span className="text-sm text-gray-300 mb-2 block">{category.name}</span>
+                <span className="text-sm text-white mb-2 block">{category.name}</span>
               )}
 
               {/* Title */}
               <h1 className="text-2xl md:text-3xl font-bold text-white mb-4">{course.name}</h1>
 
               {/* Description */}
-              <p className="text-gray-300 text-lg mb-6">{course.description}</p>
+              <p className="text-white text-lg mb-6">{course.description}</p>
 
               {/* Meta Info */}
-              <div className="flex flex-wrap gap-6 text-gray-300">
+              <div className="flex flex-wrap gap-6 text-white">
                 <div className="flex items-center gap-2">
                   <Clock className="w-5 h-5 text-[#13d8a0]" />
                   <span>{course.duration}</span>
@@ -147,7 +147,7 @@ function CourseDetailPage() {
                 {course.learningObjectives.map((objective, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-[#13d8a0] mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-300">{objective}</span>
+                    <span className="text-white">{objective}</span>
                   </li>
                 ))}
               </ul>
@@ -193,7 +193,7 @@ function CourseDetailPage() {
                               })}
                             </span>
                           </div>
-                          <div className="flex items-center gap-4 text-sm text-gray-300">
+                          <div className="flex items-center gap-4 text-sm text-white">
                             <span className="flex items-center gap-1">
                               <Clock className="w-3.5 h-3.5" />
                               {session.time}
@@ -206,7 +206,7 @@ function CourseDetailPage() {
                         </div>
                         <div className="text-right">
                           <div className="text-lg font-bold text-white">£{session.price}</div>
-                          <div className="text-sm text-gray-300">
+                          <div className="text-sm text-white">
                             {session.spotsRemaining} spots left
                           </div>
                         </div>
@@ -236,7 +236,7 @@ function CourseDetailPage() {
               <h3 className="text-lg font-semibold text-white mb-4">Book This Course</h3>
 
               <div className="mb-6">
-                <div className="text-sm text-gray-300">Starting from</div>
+                <div className="text-sm text-white">Starting from</div>
                 <div className="text-3xl font-bold text-white">£{course.price}</div>
               </div>
 
@@ -254,10 +254,10 @@ function CourseDetailPage() {
                           <div className="font-medium text-white group-hover:text-green-400 transition-colors">
                             E-Learning
                           </div>
-                          <div className="text-sm text-gray-300">Start immediately</div>
+                          <div className="text-sm text-white">Start immediately</div>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-green-400 transition-colors" />
+                      <ChevronRight className="w-5 h-5 text-white group-hover:text-green-400 transition-colors" />
                     </div>
                   </button>
                 )}
@@ -275,12 +275,12 @@ function CourseDetailPage() {
                           <div className="font-medium text-white group-hover:text-[#13d8a0] transition-colors">
                             Live Webinar
                           </div>
-                          <div className="text-sm text-gray-300">
+                          <div className="text-sm text-white">
                             {availableSessions.length} sessions available
                           </div>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-[#13d8a0] transition-colors" />
+                      <ChevronRight className="w-5 h-5 text-white group-hover:text-[#13d8a0] transition-colors" />
                     </div>
                   </button>
                 )}
@@ -298,10 +298,10 @@ function CourseDetailPage() {
                           <div className="font-medium text-white group-hover:text-purple-400 transition-colors">
                             Blended Learning
                           </div>
-                          <div className="text-sm text-gray-300">Online + practical</div>
+                          <div className="text-sm text-white">Online + practical</div>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-purple-400 transition-colors" />
+                      <ChevronRight className="w-5 h-5 text-white group-hover:text-purple-400 transition-colors" />
                     </div>
                   </button>
                 )}
@@ -319,10 +319,10 @@ function CourseDetailPage() {
                           <div className="font-medium text-white group-hover:text-amber-400 transition-colors">
                             Classroom
                           </div>
-                          <div className="text-sm text-gray-300">In-person training</div>
+                          <div className="text-sm text-white">In-person training</div>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-amber-400 transition-colors" />
+                      <ChevronRight className="w-5 h-5 text-white group-hover:text-amber-400 transition-colors" />
                     </div>
                   </button>
                 )}
@@ -330,7 +330,7 @@ function CourseDetailPage() {
 
               {/* Help Text */}
               <div className="mt-6 pt-6 border-t border-gray-700">
-                <p className="text-sm text-gray-300">
+                <p className="text-sm text-white">
                   Need help choosing? Contact us at{' '}
                   <a
                     href="mailto:training@miad.co.uk"
